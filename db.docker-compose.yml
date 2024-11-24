@@ -3,7 +3,7 @@ services:
   ajax_pg_14:
     image: postgres:${POSTGRES_VERSION}
     environment:
-      POSTGRES_USER: ${POSTGRES_USER:-$USER}
+      POSTGRES_USER: ${POSTGRES_USER:-${USER}}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - ${POSTGRES_VOLUME}:/var/lib/postgresql/data
