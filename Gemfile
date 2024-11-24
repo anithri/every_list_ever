@@ -63,3 +63,17 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+group :development, :test do
+  gem "annotate"
+  gem "rspec-rails"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "rubocop-rspec", require: false
+  gem "shoulda-matchers", "~> 6.3"
+end
+
+group :development do
+  gem "letter_opener"
+end
+gem "pundit", "~> 2.3"

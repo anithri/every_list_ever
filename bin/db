@@ -1,0 +1,53 @@
+#!/bin/bash -e
+
+fail_unless_env() {
+  if [[ -z ${!1} ]];then
+    echo "ERROR: $1 not present in ENV"
+    exit 1
+  fi
+}
+
+check_env() {
+  fail_unless_env POSTGRES_COMPOSE
+  fail_unless_env POSTGRES_PASSWORD
+}
+
+usage () {
+  echo "usage: `basename $0` start|stop|status|down"
+}
+
+do_start () {
+  docker compose -f $POSTGRES_COMPOSE up -d
+}
+
+do_stop () {
+  docker compose -f $POSTGRES_COMPOSE stop
+}
+
+do_down () {
+  docker compose -f $POSTGRES_COMPOSE down
+}
+
+do_status () {
+  docker compose -f $POSTGRES_COMPOSE ps
+}
+
+check_env
+
+case $1 in
+  start)
+    do_start
+  ;;
+  stop)
+    do_stop
+  ;;
+  status)
+    do_status
+  ;;
+  down)
+    do_down
+  ;;
+  *)
+    usage
+  ;;
+esac
