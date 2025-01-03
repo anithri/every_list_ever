@@ -14,28 +14,28 @@ env_credentials: &env_credentials
 development:
   <<: *default
   <<: *env_credentials
-  database: authority_development
+  database: every_list_ever_development
 
 test:
   <<: *default
   <<: *env_credentials
-  database: authority_test
+  database: every_list_ever_test
 
 production:
   primary: &primary_production
     <<: *default
-    database: authority_production
-    username: authority
-    password: <%= ENV["AUTHORITY_DATABASE_PASSWORD"] %>
+    database: every_list_ever_production
+    username: every_list_ever
+    password: <%= ENV["every_list_ever_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
-    database: authority_production_cache
+    database: every_list_ever_production_cache
     migrations_paths: db/cache_migrate
   queue:
     <<: *primary_production
-    database: authority_production_queue
+    database: every_list_ever_production_queue
     migrations_paths: db/queue_migrate
   cable:
     <<: *primary_production
-    database: authority_production_cable
+    database: every_list_ever_production_cable
     migrations_paths: db/cable_migrate

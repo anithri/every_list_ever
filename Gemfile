@@ -19,7 +19,7 @@ gem "tailwindcss-rails"
 gem "tailwindcss-ruby", "~> 4.0.0.beta.2"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
-
+gem "rename"
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.7"
 
@@ -57,6 +57,8 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "letter_opener"
+  gem "rails_live_reload"
 end
 
 group :test do
@@ -74,7 +76,4 @@ group :development, :test do
   gem "shoulda-matchers", "~> 6.3"
 end
 
-group :development do
-  gem "letter_opener"
-end
 gem "pundit", "~> 2.3"
