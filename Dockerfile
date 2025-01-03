@@ -2,8 +2,8 @@
 # check=error=true
 
 # This Dockerfile is designed for production, not development. Use with Kamal or build'n'run by hand:
-# docker build -t authority .
-# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name authority authority
+# docker build -t every_list_ever .
+# docker run -d -p 80:80 -e RAILS_MASTER_KEY=<value from config/master.key> --name every_list_ever every_list_ever
 
 # For a containerized dev environment, see Dev Containers: https://guides.rubyonrails.org/getting_started_with_devcontainer.html
 
