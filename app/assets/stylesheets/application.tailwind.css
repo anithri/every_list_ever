@@ -15,7 +15,12 @@
     --color-warning: var(--color-yellow-400);
     --color-warning-dark: var(--color-yellow-600);
 
-    --color-page: var(--color-violet-200);
+    --color-page: var(--color-indigo-300);
+
+    --color-reading-surface-dark: var(--color-neutral-800);
+    --color-reading-surface-light: var(--color-neutral-100);
+    --color-reading-type-dark: var(--color-neutral-800);
+    --color-reading-type-light: var(--color-neutral-100);
 }
 /*
 

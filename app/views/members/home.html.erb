@@ -1,4 +1,7 @@
-<div>
-  <h1 class="font-bold text-4xl">Members#home</h1>
-  <p>Find me in app/views/members/home.html.erb</p>
-</div>
+<main class="flex w-full h-full items-center justify-center">
+  <%= render PaneComponent.new title: "Members Home",
+                               subtitle: "Find me in app/views/members/home.html.erb",
+                               classes: "" do %>
+    <p>Members home page content goes here.</p>
+  <% end %>
+</main>
