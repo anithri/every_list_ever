@@ -21,20 +21,17 @@
     <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <script src="https://kit.fontawesome.com/b40f58f1da.js" crossorigin="anonymous"></script>
   </head>
 
   <body class="bg-page m-0 p-0">
     <div class="navbar-page-grid h-screen">
-      <aside class="w-24 bg-indigo-500">
-        <nav>
-          <ul>
-            <li><%= link_to "Guest Home", root_path %></li>
-          </ul>
-        </nav>
+      <aside class="bg-indigo-500">
+        <%= render NavbarComponent.new(user: Current.user) %>
       </aside>
-      <main class="p-2">
+      <div class="p-2">
         <%= yield %>
-      </main>
+      </div>
     </div>
   </body>
 </html>

@@ -19,4 +19,5 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
+  alias_method :guest?, :new_record?
 end
