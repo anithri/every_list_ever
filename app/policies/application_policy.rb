@@ -36,6 +36,14 @@ class ApplicationPolicy
     false
   end
 
+  def guest?
+    user.nil? || user&.guest?
+  end
+
+  def member?
+    user.persisted? && !user.guest?
+  end
+
   class Scope
     def initialize(user, scope)
       @user = user

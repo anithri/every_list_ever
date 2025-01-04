@@ -15,7 +15,9 @@ Things you may want to cover:
     - [x] ViewComponent Setup
     - [X] Nav Panel
     - [X] Member Home Page
-    - [ ] Guest/Member policy
+    - [X] Guest/Member policy
+    - [ ] Routes constraints
+    - [ ] Admin Section
 
     #### User Model
       - [ ] Has One Profile with name, description, avatar (Next)</li>
