@@ -1,9 +1,10 @@
 # == Schema Information
+# Schema version: 20241124002558
 #
 # Table name: users
 #
 #  id              :integer          not null, primary key
-#  email_address   :string           not null
+#  email_address   :string           not null, indexed
 #  password_digest :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

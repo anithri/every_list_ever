@@ -1,9 +1,10 @@
 # == Schema Information
+# Schema version: 20241124002558
 #
 # Table name: sessions
 #
 #  id         :integer          not null, primary key
-#  user_id    :integer          not null
+#  user_id    :integer          not null, indexed
 #  ip_address :string
 #  user_agent :string
 #  created_at :datetime         not null
