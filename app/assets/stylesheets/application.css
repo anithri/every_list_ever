@@ -8,3 +8,8 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+.navbar-page-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+}

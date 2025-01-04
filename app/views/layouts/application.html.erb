@@ -24,8 +24,17 @@
   </head>
 
   <body class="bg-page m-0 p-0">
-    <main class="container mx-auto mt-28 px-5 flex bg-brand-light">
-      <%= yield %>
-    </main>
+    <div class="navbar-page-grid h-screen">
+      <aside class="w-24 bg-indigo-500">
+        <nav>
+          <ul>
+            <li><%= link_to "Guest Home", root_path %></li>
+          </ul>
+        </nav>
+      </aside>
+      <main class="p-2">
+        <%= yield %>
+      </main>
+    </div>
   </body>
 </html>
