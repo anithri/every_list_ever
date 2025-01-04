@@ -12,9 +12,9 @@ Things you may want to cover:
     - Later
   ### TODO
    #### Infrastructure
-    - [ ] ViewComponent Setup
-    - [ ] Nav Panel
-    - [ ] Member Home Page
+    - [x] ViewComponent Setup
+    - [X] Nav Panel
+    - [X] Member Home Page
     - [ ] Guest/Member policy
 
     #### User Model
