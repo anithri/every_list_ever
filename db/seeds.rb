@@ -1,9 +1,12 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+DEFAULT_RECORD_COUNT = 10
+RECORD_COUNTS = Hash.new(DEFAULT_RECORD_COUNT)
+RECORD_COUNTS[:users] = 20
+RECORD_COUNTS[:organizations] = 5
+RECORD_COUNTS[:organization_members] = 50
+
+ALL_RECORDS = Hash.new { |h, k| h[k] = [] }
+
+Dir[Rails.root.join("db/seeds/#{Rails.env}/*.rb")].sort.each do |file|
+  puts "Processing #{file.split('/').last}"
+  require file
+end
