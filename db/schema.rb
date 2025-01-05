@@ -15,15 +15,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_05_003251) do
   enable_extension "pg_catalog.plpgsql"
 
   create_table "profiles", force: :cascade do |t|
-    t.string "handle", null: false
     t.string "avatar"
     t.text "description"
     t.string "location"
-    t.boolean "visibility", default: false
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["handle"], name: "index_profiles_on_handle", unique: true
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -38,10 +35,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_05_003251) do
 
   create_table "users", force: :cascade do |t|
     t.string "email_address", null: false
+    t.string "name", null: false
     t.string "password_digest", null: false
+    t.boolean "visible", default: false
+    t.integer "membership", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
+    t.index ["name"], name: "index_users_on_name", unique: true
   end
 
   add_foreign_key "profiles", "users"

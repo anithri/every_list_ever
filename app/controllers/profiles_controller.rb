@@ -65,6 +65,6 @@ class ProfilesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def profile_params
-      params.expect(profile: [ :handle, :avatar, :description, :location, :visibility, :user_id ])
+      params.expect(profile: [ :avatar, :description, :location, :user_id ])
     end
 end

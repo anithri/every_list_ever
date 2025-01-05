@@ -3,11 +3,9 @@ require 'rails_helper'
 RSpec.describe "profiles/edit", type: :view do
   let(:profile) {
     Profile.create!(
-      handle: "MyString",
       avatar: "MyString",
       description: "MyText",
       location: "MyString",
-      visibility: false,
       user: nil
     )
   }
@@ -21,15 +19,11 @@ RSpec.describe "profiles/edit", type: :view do
 
     assert_select "form[action=?][method=?]", profile_path(profile), "post" do
 
-      assert_select "input[name=?]", "profile[handle]"
-
       assert_select "input[name=?]", "profile[avatar]"
 
       assert_select "textarea[name=?]", "profile[description]"
 
       assert_select "input[name=?]", "profile[location]"
-
-      assert_select "input[name=?]", "profile[visibility]"
 
       assert_select "input[name=?]", "profile[user_id]"
     end
