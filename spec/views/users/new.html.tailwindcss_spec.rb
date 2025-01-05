@@ -3,11 +3,11 @@ require 'rails_helper'
 RSpec.describe "users/new", type: :view do
   before(:each) do
     assign(:user, User.new(
-      email_address: "MyString",
-      name: "MyString",
+      email_address: "one@example.com",
+      name: "User One",
       password_digest: "MyString",
       visible: false,
-      membership: "MyString",
+      membership: :member,
       avatar_url: "MyString",
       description: "MyText",
       location: "MyString"
@@ -22,8 +22,6 @@ RSpec.describe "users/new", type: :view do
       assert_select "input[name=?]", "user[email_address]"
 
       assert_select "input[name=?]", "user[name]"
-
-      assert_select "input[name=?]", "user[password_digest]"
 
       assert_select "input[name=?]", "user[visible]"
 

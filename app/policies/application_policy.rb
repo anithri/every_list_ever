@@ -41,7 +41,15 @@ class ApplicationPolicy
   end
 
   def member?
-    user.persisted? && !user.guest?
+    user.persisted? && user&.member?
+  end
+
+  def admin?
+    user.admin?
+  end
+
+  def owner?
+    record.user == user
   end
 
   class Scope

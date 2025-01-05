@@ -11,7 +11,7 @@ Things you may want to cover:
     - Pending
     - Later
   ### TODO
-   #### Infrastructure
+    #### Infrastructure
     - [x] ViewComponent Setup
     - [X] Nav Panel
     - [X] Member Home Page
@@ -30,3 +30,7 @@ Things you may want to cover:
                    
     #### Organization Model
 
+  ### Testing TODO
+    - [ ] rails 8 authentication testing helpers to set session use Current.user/Current.session ?
+    - [ ] ViewComponent testing
+    - [ ] View Testing???
