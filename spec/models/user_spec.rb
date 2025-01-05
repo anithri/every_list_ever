@@ -1,11 +1,7 @@
-class User < ApplicationRecord
-  has_secure_password
-  enum :membership, [ :guest, :member, :admin ], default: :guest
+require 'rails_helper'
 
-  has_many :sessions, dependent: :destroy
-
-  normalizes :email_address, with: ->(e) { e.strip.downcase }
-
+RSpec.describe User, type: :model do
+  pending "add some examples to (or delete) #{__FILE__}"
 end
 
 # == Schema Information

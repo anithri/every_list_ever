@@ -6,6 +6,9 @@ class CreateUsers < ActiveRecord::Migration[8.0]
       t.string :password_digest, null: false
       t.boolean :visible, default: false
       t.integer :membership, default: 0
+      t.string :location
+      t.string :description
+      t.string :avatar_url
 
       t.timestamps
     end

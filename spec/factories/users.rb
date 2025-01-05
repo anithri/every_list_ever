@@ -1,11 +1,14 @@
-class User < ApplicationRecord
-  has_secure_password
-  enum :membership, [ :guest, :member, :admin ], default: :guest
-
-  has_many :sessions, dependent: :destroy
-
-  normalizes :email_address, with: ->(e) { e.strip.downcase }
-
+FactoryBot.define do
+  factory :user do
+    email_address { "MyString" }
+    name { "MyString" }
+    password_digest { "MyString" }
+    visible { false }
+    membership { "MyString" }
+    avatar_url { "MyString" }
+    description { "MyText" }
+    location { "MyString" }
+  end
 end
 
 # == Schema Information

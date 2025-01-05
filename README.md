@@ -21,7 +21,7 @@ Things you may want to cover:
     - [ ] authentication does not set session when allow_unauthenticated_access is true
 
     #### User Model
-      - [ ] Has One Profile with name, description, avatar (Next)</li>
+      - [ ]
       - [ ] Has roles in many organizations (soon)</li>
     #### User Controller
       - [ ] Sign Up (later)</li>
@@ -29,9 +29,4 @@ Things you may want to cover:
       - [ ] Sign Out (soon)</li>
                    
     #### Organization Model
-    #### Profile Model
-      - [ ] Display Name (soon
-      - [ ] avatar_url (soon)
-      - [ ] description (soon)
-      - [ ] location (soon)
-      - [ ] visibility (soon)
+

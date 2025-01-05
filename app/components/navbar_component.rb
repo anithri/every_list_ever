@@ -7,7 +7,7 @@ class NavbarComponent < ViewComponent::Base
   end
 
   def greeting
-    guest? ? 'Guest' : @user.email_address.split("@").first
+    guest? ? "Guest" : @user.name
   end
 
   def guest?
