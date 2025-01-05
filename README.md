@@ -18,6 +18,7 @@ Things you may want to cover:
     - [X] Guest/Member policy
     - [ ] Routes constraints
     - [ ] Admin Section
+    - [ ] authentication does not set session when allow_unauthenticated_access is true
 
     #### User Model
       - [ ] Has One Profile with name, description, avatar (Next)</li>
