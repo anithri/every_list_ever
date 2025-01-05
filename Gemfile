@@ -67,7 +67,7 @@ group :test do
 end
 
 group :development, :test do
-  gem "annotate"
+  gem "annotaterb"
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"
