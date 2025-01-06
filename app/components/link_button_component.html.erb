@@ -1,0 +1,11 @@
+<%= link_to @path, data: @data, title: @title, class: @button_classes do %>
+  <%- if @icon_left %>
+    <%= helpers.icon @icon_left %>
+  <% end %>
+  <%- if @label %>
+    <%= @label %>
+  <% end %>
+  <%- if @icon_right %>
+    <%= helpers.icon @icon_right %>
+  <% end %>
+<% end %>

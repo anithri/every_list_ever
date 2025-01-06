@@ -5,18 +5,8 @@
   </p>
 
   <p class="my-5">
-    <strong class="block font-medium mb-1">Name:</strong>
-    <%= user.name %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Password digest:</strong>
-    <%= user.password_digest %>
-  </p>
-
-  <p class="my-5">
     <strong class="block font-medium mb-1">Visible:</strong>
-    <%= user.visible %>
+    <%= user.visible ? 'Yes' : 'No' %>
   </p>
 
   <p class="my-5">

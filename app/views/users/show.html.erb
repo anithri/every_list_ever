@@ -1,15 +1,28 @@
-<div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
+<main class="pb-64 flex w-full h-full items-center justify-center">
+  <%= render PaneComponent.new title: "#{@user.name}'s Profile",
+                               subtitle: "Find me in app/views/users/show.html.erb" do %>
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
-
     <%= render @user %>
+    <%= render ToolbarUlComponent.new do %>
+      <li class="text-white">
+        <%= render LinkButtonComponent.new path: edit_user_path(@user), variant: 'info',
+                                           title: 'Show User', label: 'Show',
+                                           icon_left: 'eye' %>
+      </li>
+      <li>
+        <%= render LinkButtonComponent.new path: edit_user_path(@user), variant: 'success',                                         title: 'Edit User', label: 'Edit',
+                                           icon_left: "pen" %>
+      </li>
+      <li>
+        <%= render LinkButtonComponent.new path: user_path(@user), variant: 'danger',
+                                           data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                                           title: 'Delete User', label: 'Delete',
+                                           icon_left: 'eraser' %>
+        %>
+      </li>
+    <% end %>
+  <% end %>
+</main>
 
-    <%= link_to "Edit this user", edit_user_path(@user), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Back to users", users_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this user", @user, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-    </div>
-  </div>
-</div>

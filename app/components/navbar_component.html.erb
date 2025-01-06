@@ -2,7 +2,7 @@
   <nav>
     <ul class="flex flex-col items-center gap-1 text-xl">
       <li>
-        <%- if @user&.avatar_url%>
+        <%- if @user&.avatar_url %>
           <img class="w-10 h-10 rounded-full bg-white text-center"
                src="<%= @user.avatar_url %>"
                alt="Rounded avatar">
@@ -18,31 +18,32 @@
         <%= @greeting %>
       </li>
       <li>
-        <%= link_to root_url, title: 'Guest Home' do %>
-          <%= helpers.icon 'house' %>
-        <% end %>
+        <%= render LinkButtonComponent.new path: root_path,
+                                           title: 'Guest Home', label: '',
+                                           icon_left: "house" %>
       </li>
       <%- if @user.nil? || @user.guest? %>
         <li>
-          <%= link_to new_session_path, title: 'Login' do %>
-            <%= helpers.icon 'right-to-bracket' %>
-          <% end %>
+          <%= render LinkButtonComponent.new path: new_session_path,
+                                             title: 'Login', label: '',
+                                             icon_left: "right_to_bracket" %>
         </li>
       <%- else %>
         <li>
-          <%= link_to members_home_url, title: 'Member Home' do %>
-            <%= helpers.icon 'house-user' %>
-          <% end %>
+          <%= render LinkButtonComponent.new path: members_home_path,
+                                             title: 'Member Home', label: '',
+                                             icon_left: "house-user" %>
         </li>
         <li>
-          <%= link_to user_path(@user), title: 'User Profile' do %>
-            <%= helpers.icon 'user' %>
-          <% end %>
+          <%= render LinkButtonComponent.new path: user_path(@user),
+                                             title: 'User Profile', label: '',
+                                             icon_left: "user" %>
         </li>
         <li>
-          <%= link_to session_path, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' }, title: 'Logout' do %>
-            <%= helpers.icon 'right-from-bracket' %>
-          <% end %>
+          <%= render LinkButtonComponent.new path: session_path,
+                                             data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                                             title: 'Logout', label: '',
+                                             icon_left: 'right-from-bracket' %>
         </li>
       <% end %>
     </ul>
