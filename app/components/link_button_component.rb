@@ -17,19 +17,31 @@ class LinkButtonComponent < ViewComponent::Base
     warning: %w[bg-warning],
     primary: %w[bg-primary],
     secondary: %w[bg-secondary],
+    icon: [],
   }
   VARIANTS.default = [].freeze # return an empty array if the key is not found
 
-  attr_reader :variants, :path, :label, :classes, :icon_left, :icon_right
+  attr_reader :variants, :path, :label, :icon_left, :icon_right, :html_opts, :classes
   # todo - add pass through for remainder of options for link_to.
 
-  def initialize(path, variant = [], label = nil, html_opts: {})
+  def initialize(path:, variants: [], label: nil, **html_opts)
     @path = path
     @variants = normalize_variants(variants)
-    @icon_left, @icon_right = extract_icons.first(2) # must be after variants normalize_variants
     @label = normalize_label(label) # must be after both normalize_icons and normalize_variants
+    @icon_left, @icon_right = extract_icons # must be after variants normalize_variants
+
+    warn '+' * 20
+    warn extract_icons
+    warn '+' * 20
+    @html_opts = html_opts
+
 
     @classes = @html_opts.delete(:class)
+    html_opts[:class] = button_classes
+  end
+
+  def normalize_html_opts(opts)
+
   end
 
   # adjusts the variants from in incoming array to an array of variants to include
@@ -47,7 +59,7 @@ class LinkButtonComponent < ViewComponent::Base
   # returns and removes the values of :icon_left and :icon_right from the variants hash
   # @return [Array<nil,String,Symbol>] of the icons to use in UI
   def extract_icons()
-    @_extract_icons ||= [variants.delete(:icon_left), variants.delete(:icon_right)]
+    [variants.delete(:icon_left), variants.delete(:icon_right)]
   end
 
   # returns the label if it is set and the button is not an icon only button
@@ -61,12 +73,12 @@ class LinkButtonComponent < ViewComponent::Base
   # predicate to check the conditions for an icon only button
   # @return [Boolean] true if variants include :icon and at least one icon is set
   def icon_only?
-    @_icon_only ||= @variants.include(:icon) && [ @icon_right, @icon_left ].any?(String)
+   @variants.include?(:icon) && [ @icon_right, @icon_left ].any?(String)
   end
 
   # todo - could be dragons here - tailwindcss classes being in the wrong order
   # @return [String] the classes to apply to the button
   def button_classes
-    (BASE_CLASSES + VARIANTS.fetch_values(*variants)).compact.uniq.join(" ") + classes
+    (BASE_CLASSES + VARIANTS.fetch_values(*variants)).flatten.compact.uniq.join(" ") + classes.to_s
   end
 end

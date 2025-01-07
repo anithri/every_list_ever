@@ -7,16 +7,16 @@
     <%= render @user %>
     <%= render ToolbarUlComponent.new do %>
       <li class="text-white">
-        <%= render LinkButtonComponent.new path: edit_user_path(@user), variant: 'info',
+        <%= render LinkButtonComponent.new path: edit_user_path(@user), variants: :info,
                                            title: 'Show User', label: 'Show',
                                            icon_left: 'eye' %>
       </li>
       <li>
-        <%= render LinkButtonComponent.new path: edit_user_path(@user), variant: 'success',                                         title: 'Edit User', label: 'Edit',
-                                           icon_left: "pen" %>
+        <%= render LinkButtonComponent.new path: edit_user_path(@user), variants: [:success],                                         title: 'Edit User', label: 'Edit',
+                                           icon_right: "pen" %>
       </li>
       <li>
-        <%= render LinkButtonComponent.new path: user_path(@user), variant: 'danger',
+        <%= render LinkButtonComponent.new path: user_path(@user), variants: [:danger, :icon],
                                            data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
                                            title: 'Delete User', label: 'Delete',
                                            icon_left: 'eraser' %>
