@@ -18,30 +18,33 @@ class LinkButtonComponent < ViewComponent::Base
     primary: %w[bg-primary],
     secondary: %w[bg-secondary],
     icon: [],
+    nav: %w[bg-transparent text-gray-300 hover:text-white hover:bg-gray-700]
   }
   VARIANTS.default = [].freeze # return an empty array if the key is not found
 
-  attr_reader :variants, :path, :label, :icon_left, :icon_right, :html_opts, :classes
+  attr_reader :variants, :path, :label, :icon_left, :icon_right, :html_opts, :classes, :html_opts
   # todo - add pass through for remainder of options for link_to.
 
   def initialize(path:, variants: [], label: nil, **html_opts)
     @path = path
     @variants = normalize_variants(variants)
     @label = normalize_label(label) # must be after both normalize_icons and normalize_variants
-    @icon_left, @icon_right = extract_icons # must be after variants normalize_variants
-
-    warn '+' * 20
-    warn extract_icons
-    warn '+' * 20
-    @html_opts = html_opts
-
+    (@icon_left, @icon_right, @classes, @html_opts) = normalize_html_opts(html_opts)
+    warn '=' * 40
+    warn [@icon_left, @icon_right, @classes, @html_opts].inspect
+    warn '=' * 40
 
     @classes = @html_opts.delete(:class)
     html_opts[:class] = button_classes
   end
 
+  # extracts the icons and user defined classes from html_opts
+  # @param [Array<Symbol, String, Hash>] opts  the html_opts to normalize
+  # @return [<String, Symbol, NilClass>, <String, Symbol, NilClass>, <String>, Hash{[String,Symbol],}] [icon_left, icon_right, classes, html_opts] the icons and classes to use in the button
   def normalize_html_opts(opts)
+    (left, right, classes) = [ opts.delete(:icon_left), opts.delete(:icon_right), opts.delete(:class) ]
 
+    return [left, right, classes, opts]
   end
 
   # adjusts the variants from in incoming array to an array of variants to include
@@ -59,7 +62,7 @@ class LinkButtonComponent < ViewComponent::Base
   # returns and removes the values of :icon_left and :icon_right from the variants hash
   # @return [Array<nil,String,Symbol>] of the icons to use in UI
   def extract_icons()
-    [variants.delete(:icon_left), variants.delete(:icon_right)]
+    @_extracted ||= [html_opts.delete(:icon_left), html_opts.delete(:icon_right)]
   end
 
   # returns the label if it is set and the button is not an icon only button

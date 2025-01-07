@@ -27,7 +27,7 @@
   <body class="bg-page m-0 p-0">
     <div class="navbar-page-grid h-screen">
       <aside class="bg-violet-300">
-        <%= render NavbarComponent.new(user: Current.user) %>
+        <%= render NavbarComponent.new(current_user: Current.user) %>
       </aside>
       <div class="h-full w-full">
         <%= yield %>

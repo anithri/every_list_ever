@@ -17,32 +17,32 @@
       <li>
         <%= @greeting %>
       </li>
-      <li>
-        <%= render LinkButtonComponent.new path: root_path,
-                                           title: 'Guest Home', label: '',
-                                           icon_left: "house" %>
-      </li>
-      <%- if @user.nil? || @user.guest? %>
+      <%- if @user.blank? || @user.guest? %>
         <li>
-          <%= render LinkButtonComponent.new path: new_session_path,
-                                             title: 'Login', label: '',
-                                             icon_left: "right_to_bracket" %>
+          <%= render LinkButtonComponent.new path: root_path, variants: :nav,
+                                             title: 'Guest Home',
+                                             icon_left: "house" %>
+        </li>
+        <li>
+          <%= render LinkButtonComponent.new path: new_session_path, variants: :nav,
+                                             title: 'Login',
+                                             icon_left: "right-to-bracket" %>
         </li>
       <%- else %>
         <li>
-          <%= render LinkButtonComponent.new path: members_home_path,
-                                             title: 'Member Home', label: '',
+          <%= render LinkButtonComponent.new path: members_home_path, variants: :nav,
+                                             title: 'Member Home',
                                              icon_left: "house-user" %>
         </li>
         <li>
-          <%= render LinkButtonComponent.new path: user_path(@user),
-                                             title: 'User Profile', label: '',
+          <%= render LinkButtonComponent.new path: user_path(@user), variants: :nav,
+                                             title: 'User Profile',
                                              icon_left: "user" %>
         </li>
         <li>
-          <%= render LinkButtonComponent.new path: session_path,
+          <%= render LinkButtonComponent.new path: session_path, variants: :nav,
                                              data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-                                             title: 'Logout', label: '',
+                                             title: 'Logout',
                                              icon_left: 'right-from-bracket' %>
         </li>
       <% end %>
