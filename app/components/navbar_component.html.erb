@@ -2,9 +2,9 @@
   <nav>
     <ul class="flex flex-col items-center gap-1 text-xl">
       <li>
-        <%- if @user&.avatar_url %>
+        <%- if @current_user&.avatar_url %>
           <img class="w-10 h-10 rounded-full bg-white text-center"
-               src="<%= @user.avatar_url %>"
+               src="<%= @current_user.avatar_url %>"
                alt="Rounded avatar">
         <%- else %>
           <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
@@ -17,7 +17,7 @@
       <li>
         <%= @greeting %>
       </li>
-      <%- if @user.blank? || @user.guest? %>
+      <%- if @current_user.blank? || @current_user.guest? %>
         <li>
           <%= render LinkButtonComponent.new path: root_path, variants: :nav,
                                              title: 'Guest Home',
@@ -28,14 +28,14 @@
                                              title: 'Login',
                                              icon_left: "right-to-bracket" %>
         </li>
-      <%- else %>
+      <%- elsif @current_user.member? %>
         <li>
           <%= render LinkButtonComponent.new path: members_home_path, variants: :nav,
                                              title: 'Member Home',
                                              icon_left: "house-user" %>
         </li>
         <li>
-          <%= render LinkButtonComponent.new path: user_path(@user), variants: :nav,
+          <%= render LinkButtonComponent.new path: user_path(@current_user), variants: :nav,
                                              title: 'User Profile',
                                              icon_left: "user" %>
         </li>
@@ -45,6 +45,29 @@
                                              title: 'Logout',
                                              icon_left: 'right-from-bracket' %>
         </li>
+      <% elsif @current_user.admin? %>
+        <li>
+          <%= render LinkButtonComponent.new path: members_home_path, variants: :nav,
+                                             title: 'Member Home',
+                                             icon_left: "house-user" %>
+        </li>
+        <li>
+          <%= render LinkButtonComponent.new path: user_path(@current_user), variants: :nav,
+                                             title: 'User Profile',
+                                             icon_left: "user" %>
+        </li>
+        <li>
+          <%= render LinkButtonComponent.new path: users_path, variants: :nav,
+                                             title: "Users",
+                                             icon_left: "users" %>
+        </li>
+        <li>
+          <%= render LinkButtonComponent.new path: session_path, variants: :nav,
+                                             data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                                             title: 'Logout',
+                                             icon_left: 'right-from-bracket' %>
+        </li>
+
       <% end %>
     </ul>
   </nav>

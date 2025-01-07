@@ -19,7 +19,7 @@ class LinkButtonComponent < ViewComponent::Base
     secondary: %w[bg-secondary],
     icon: [],
     nav: %w[bg-transparent text-gray-300 hover:text-white hover:bg-gray-700]
-  }
+  }.with_indifferent_access
   VARIANTS.default = [].freeze # return an empty array if the key is not found
 
   attr_reader :variants, :path, :label, :icon_left, :icon_right, :html_opts, :classes, :html_opts
@@ -57,12 +57,6 @@ class LinkButtonComponent < ViewComponent::Base
     variants = Array(variants)
     variants.push(:normal) unless variants.include?(:condensed)
     variants
-  end
-
-  # returns and removes the values of :icon_left and :icon_right from the variants hash
-  # @return [Array<nil,String,Symbol>] of the icons to use in UI
-  def extract_icons()
-    @_extracted ||= [html_opts.delete(:icon_left), html_opts.delete(:icon_right)]
   end
 
   # returns the label if it is set and the button is not an icon only button
