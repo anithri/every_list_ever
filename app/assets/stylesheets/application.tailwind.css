@@ -9,6 +9,7 @@
 
     --color-danger-light: var(--color-red-200);
     --color-danger: var(--color-red-500);
+    --color-danger-inverse: var(--color-red-100);
     --color-danger-dark: var(--color-red-700);
 
     --color-warning-light: var(--color-yellow-200);

@@ -77,3 +77,4 @@ end
 
 gem "pundit", "~> 2.3"
 gem 'view_component'
+gem 'phlex-rails'
