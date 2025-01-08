@@ -1,4 +1,4 @@
-<main class="pb-64 flex w-full h-full items-center justify-center">
+<main class="flex w-full h-full items-center justify-center">
   <%= render PaneComponent.new title: "Edit #{@user.name}'s Profile",
                                subtitle: "Find me in app/views/users/edit.html.erb" do %>
     <% if notice.present? %>
@@ -8,4 +8,5 @@
 
     <%= link_to "Show this user", @user, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
     <%= link_to "Back to users", users_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+  <% end %>
 </main>

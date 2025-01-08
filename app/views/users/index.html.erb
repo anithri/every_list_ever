@@ -43,21 +43,25 @@
 
                   %>
                 </li>
-                <li>
-                  <%= render LinkButtonComponent.new path: edit_user_path(user),
-                                                     variants: [:success, :condensed],
-                                                     title: "Edit User", label: "Edit",
-                                                     icon_left: 'pen'
-                  %>
-                </li>
-                <li>
-                  <%= render LinkButtonComponent.new path: user,
-                                                     variants: [:danger, :condensed],
-                                                     data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-                                                     title: 'Delete User', label: 'Delete',
-                                                     icon_left: 'eraser'
-                  %>
-                </li>
+                <%- if Current.user.admin? || Current.user == user %>
+                  <li>
+                    <%= render LinkButtonComponent.new path: edit_user_path(user),
+                                                       variants: [:success, :condensed],
+                                                       title: "Edit User", label: "Edit",
+                                                       icon_left: 'pen'
+                    %>
+                  </li>
+                <% end %>
+                <%- if Current.user.admin? || Current.user == user %>
+                  <li>
+                    <%= render LinkButtonComponent.new path: user,
+                                                       variants: [:danger, :condensed],
+                                                       data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                                                       title: 'Delete User', label: 'Delete',
+                                                       icon_left: 'eraser'
+                    %>
+                  </li>
+                <% end %>
               <% end %>
             </td>
           </tr>
