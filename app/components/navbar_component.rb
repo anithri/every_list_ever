@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class NavbarComponent < ViewComponent::Base
-
+  include ComponentsHelper
   attr_reader :current_user, :greeting
 
   def initialize(current_user:)
@@ -14,6 +14,6 @@ class NavbarComponent < ViewComponent::Base
   end
 
   def guest?
-    @user.blank? || current_user.guest?
+    @current_user.blank? || current_user.guest?
   end
 end

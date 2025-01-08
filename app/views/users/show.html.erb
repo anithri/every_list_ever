@@ -7,20 +7,23 @@
     <%= render @user %>
     <%= render ToolbarUlComponent.new do %>
       <li class="text-white">
-        <%= render LinkButtonComponent.new path: edit_user_path(@user), variants: :info,
-                                           title: 'Show User', label: 'Show',
-                                           icon_left: 'eye' %>
+        <%= component 'link_button', edit_user_path(@user), variants: :info, title: 'Show User' do %>
+          <%= component 'icon', :eye %>
+        <% end %>
       </li>
       <li>
-        <%= render LinkButtonComponent.new path: edit_user_path(@user), variants: [:success],                                         title: 'Edit User', label: 'Edit',
-                                           icon_right: "pen" %>
+        <%= component :link_button, edit_user_path(@user), :success do %>
+          <%= component :icon, :pen %>
+          Edit User
+        <% end %>
       </li>
       <li>
-        <%= render LinkButtonComponent.new path: user_path(@user), variants: [:danger, :icon],
-                                           data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-                                           title: 'Delete User', label: 'Delete',
-                                           icon_left: 'eraser' %>
-        %>
+        <%= component :link_button, user_path(@user), :danger,
+                      data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                      title: 'Delete User' do %>
+          <%= component :icon, :eraser %>
+          Delete User
+        <% end %>
       </li>
     <% end %>
   <% end %>

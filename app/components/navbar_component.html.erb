@@ -19,55 +19,38 @@
       </li>
       <%- if @current_user.blank? || @current_user.guest? %>
         <li>
-          <%= render LinkButtonComponent.new path: root_path, variants: :nav,
-                                             title: 'Guest Home',
-                                             icon_left: "house" %>
+          <%= component :link_button, root_path, :nav, title: 'Guest Home' do %>
+            <%= component :icon, :house %>
+          <% end %>
         </li>
         <li>
-          <%= render LinkButtonComponent.new path: new_session_path, variants: :nav,
-                                             title: 'Login',
-                                             icon_left: "right-to-bracket" %>
+          <%= component :link_button, new_session_path, :nav, title: 'Login' do %>
+            <%= component :icon, :right_to_bracket %>
+          <% end %>
         </li>
-      <%- elsif @current_user.member? %>
+      <%- else %>
         <li>
-          <%= render LinkButtonComponent.new path: members_home_path, variants: :nav,
-                                             title: 'Member Home',
-                                             icon_left: "house-user" %>
-        </li>
-        <li>
-          <%= render LinkButtonComponent.new path: user_path(@current_user), variants: :nav,
-                                             title: 'User Profile',
-                                             icon_left: "user" %>
+          <%= component :link_button, members_home_path, :nav, title: "Member Home" do %>
+            <%= component :icon, :house                                                   %>
+          <% end %>
         </li>
         <li>
-          <%= render LinkButtonComponent.new path: session_path, variants: :nav,
-                                             data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-                                             title: 'Logout',
-                                             icon_left: 'right-from-bracket' %>
-        </li>
-      <% elsif @current_user.admin? %>
-        <li>
-          <%= render LinkButtonComponent.new path: members_home_path, variants: :nav,
-                                             title: 'Member Home',
-                                             icon_left: "house-user" %>
+          <%= component :link_button, user_path(@current_user), :nav, title: 'User Profile' do %>
+            <%= component :icon, :user %>
+          <% end %>
         </li>
         <li>
-          <%= render LinkButtonComponent.new path: user_path(@current_user), variants: :nav,
-                                             title: 'User Profile',
-                                             icon_left: "user" %>
+          <%= component :link_button, session_path, :nav,
+                        data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
+                        title: 'Logout' do %>
+            <%= component :icon, :right_from_bracket %>
+          <% end %>
         </li>
         <li>
-          <%= render LinkButtonComponent.new path: users_path, variants: :nav,
-                                             title: "Users",
-                                             icon_left: "users" %>
+          <%= component :link_button, users_path, :nav, title: 'Users' do %>
+            <%= component :icon, :users %>
+          <% end %>
         </li>
-        <li>
-          <%= render LinkButtonComponent.new path: session_path, variants: :nav,
-                                             data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' },
-                                             title: 'Logout',
-                                             icon_left: 'right-from-bracket' %>
-        </li>
-
       <% end %>
     </ul>
   </nav>

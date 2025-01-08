@@ -1,29 +1,9 @@
 # frozen_string_literal: true
 
 # A component to render a link styled as a button
-class LinkButtonComponent < ViewComponent::Base
-  # A list of base classes that are always applied to the button
-  # This also white-lists the TailwindCSS classes
-  BASE_CLASSES = %w[rounded-md text-white]
-
-  # A list of variants that can be used to style the button, alone or in concert.
-  # This also white-lists the TailwindCSS classes
-  VARIANTS = {
-    condensed: %w[py-1 px-1 text-sm],
-    normal: %w[py-2 px-2],
-    danger: %w[bg-danger],
-    info: %w[bg-info],
-    success: %w[bg-success],
-    warning: %w[bg-warning],
-    primary: %w[bg-primary],
-    secondary: %w[bg-secondary],
-    icon: [],
-    nav: %w[bg-transparent text-gray-300 hover:text-white hover:bg-gray-700]
-  }.with_indifferent_access
-  VARIANTS.default = [].freeze # return an empty array if the key is not found
+class LinkButton2Component < ViewComponent::Base
 
   attr_reader :variants, :path, :label, :icon_left, :icon_right, :html_opts, :classes, :html_opts
-  # todo - add pass through for remainder of options for link_to.
 
   def initialize(path:, variants: [], label: nil, **html_opts)
     @path = path
