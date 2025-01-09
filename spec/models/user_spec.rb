@@ -3,25 +3,27 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   describe 'class features & validations' do
     subject { build(:member_user) }
+
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:email_address) }
     it { is_expected.to validate_uniqueness_of(:name) }
     it { is_expected.to validate_uniqueness_of(:email_address).case_insensitive }
     it { is_expected.to validate_length_of(:name) }
     it { is_expected.to have_secure_password }
-    it { is_expected.to normalize(:email_address).from('BOB@example.com').to('bob@example.com')}
-    it { is_expected.to define_enum_for(:membership).with_values([:guest, :member, :admin]).with_default(:guest) }
+    it { is_expected.to normalize(:email_address).from('BOB@example.com').to('bob@example.com') }
+    it { is_expected.to define_enum_for(:membership).with_values([ :guest, :member, :admin ]).with_default(:guest) }
     it { is_expected.to have_many(:sessions).dependent(:destroy) }
   end
 
   describe 'class methods' do
     describe '.guest' do
-      let (:guest_user) { create(:guest_user) }
+      let(:guest_user) { create(:guest_user) }
       subject { guest_user; User.guest }
-    end
-    it { is_expected.to be_a(User) }
-    it 'should return a guest user' do
-      expect(subject.guest?).to be true
+
+      it { is_expected.to be_a(User) }
+      it 'should return a guest user' do
+        expect(subject.guest?).to be true
+      end
     end
   end
 end
