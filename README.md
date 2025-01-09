@@ -12,16 +12,21 @@ Things you may want to cover:
     - Later
   ### TODO
     #### Infrastructure
-    - [x] ViewComponent Setup
+    - [x] Phlex Setup
+    - [x] Figure out Phlex
+    - [ ] Phlex Component Setup
     - [X] Nav Panel
-    - [X] Member Home Page
-    - [X] Guest/Member policy
-    - [ ] Routes constraints
+    - [x] Member Home Page
+    - [x] Guest/Member policy
+    - [x] User Policy
+    - [x] Guest User
+    - [ ] Users views
+    - [ ] ~~Routes constraints~~
     - [ ] Admin Section
     - [ ] authentication does not set session when allow_unauthenticated_access is true
 
     #### User Model
-      - [ ]
+      - [x] rejoin with  
       - [ ] Has roles in many organizations (soon)</li>
     #### User Controller
       - [ ] Sign Up (later)</li>
