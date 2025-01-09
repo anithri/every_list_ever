@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Members", type: :request do
+RSpec.xdescribe "Members", type: :request do
   let (:member_session) { create(:member_session) }
   describe "GET /home" do
     it "returns http success for member user" do

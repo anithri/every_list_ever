@@ -12,9 +12,7 @@ class IconComponent < ApplicationComponent
   end
 
   def icon_classes
-    i = [ "fa", "fa-#{icon_name.to_s.dasherize}", klasses ].compact.join(" ")
-    warn i.inspect
-    i
+    [ "fa", "fa-#{icon_name.to_s.dasherize}", klasses ].compact.join(" ")
   end
 
   # renders the icon tag
