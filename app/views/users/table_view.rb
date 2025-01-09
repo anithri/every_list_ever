@@ -27,8 +27,5 @@ module Users
         end
       end
     end
-
-
-
   end
 end
