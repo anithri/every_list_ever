@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-
+require 'phlex/slotable'
 class ApplicationComponent < Phlex::HTML
   include Phlex::Rails::Helpers::Routes
   include ComponentsHelper

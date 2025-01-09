@@ -1,4 +1,17 @@
-puts "Seeding #{RECORD_COUNTS[:users]} users"
+puts "Seeding #{RECORD_COUNTS[:users] + 2} users"
+
+guest = User.find_or_create_by(name: 'Guest', email_address: 'guest@example.com')
+guest_pass = SecureRandom.base58(32) # random password for guest, not used anywhere else.
+guest.update(
+  password: guest_pass,
+  password_confirmation: guest_pass,
+  visible: false,
+  membership: :guest,
+  avatar_url: Faker::Avatar.image,
+  description: "A guest user",
+  location: "Anytown, Everywhere",
+)
+guest.update password_digest: guest.password_digest.first(4) # no logins ever for guest
 
 anithri = User.find_or_create_by(name: 'anithri', email_address: 'anithri@gmail.com')
 anithri.update(
@@ -10,7 +23,8 @@ anithri.update(
   description: "Just this geek, you know?",
   location: "Colorado, USA"
 )
-memberships = ([0] + Array.new(RECORD_COUNTS[:users] - 3) { 1 } + [2, 2]).shuffle
+
+memberships = (Array.new(RECORD_COUNTS[:users] - 2) { 1 } + [2, 2]).shuffle
 RECORD_COUNTS[:users].times do |n|
   pass = Faker::Internet.password
   User.create email_address: Faker::Internet.email,
@@ -20,7 +34,7 @@ RECORD_COUNTS[:users].times do |n|
               visible: rand(2).zero?,
               membership: memberships.pop,
               avatar_url: Faker::Avatar.image,
-              description: Faker::Lorem.paragraph,
+              description: "test/development password = #{pass}",
               location: rand(2).zero? ? Faker::Address.city(options: { with_state: true, with_country: true }) : Faker::University.name
 
 end

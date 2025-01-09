@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class FlashMessageComponent < ApplicationComponent
+class FlashMessagesComponent < ApplicationComponent
   MSG_TYPES = {
     alert: "bg-danger-light border border-danger-dark text-danger-dark",
     notice: "bg-info-light border border-info-dark text-info-dark",

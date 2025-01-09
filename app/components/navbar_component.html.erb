@@ -19,7 +19,7 @@
       </li>
       <%- if @current_user.blank? || @current_user.guest? %>
         <li>
-          <%= component :link_button, root_path, :nav, title: 'Guest Home' do %>
+          <%= component :link_button, root_path, :nav, title: 'Guest HomeComponent' do %>
             <%= component :icon, :house %>
           <% end %>
         </li>
@@ -30,7 +30,7 @@
         </li>
       <%- else %>
         <li>
-          <%= component :link_button, members_home_path, :nav, title: "Member Home" do %>
+          <%= component :link_button, members_home_path, :nav, title: "Member HomeComponent" do %>
             <%= component :icon, :house                                                   %>
           <% end %>
         </li>

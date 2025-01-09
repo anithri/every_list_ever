@@ -1,9 +1,6 @@
-<main class="pb-64 flex w-full h-full items-center justify-center">
-  <%= render PaneComponent.new title: "Members Home",
-                               subtitle: "Find me in app/views/members/home.html.erb",
-                               classes: "" do %>
-    <p>
-      Members home page content goes here.
-    </p>
+<%= component :main_flex_row do %>
+  <%= component :pane, "Members Home", "Find me in app/views/members/old_home.html.erb",
+                class: "mb-64" do %>
+    Members home page content goes here.
   <% end %>
-</main>
+<% end %>

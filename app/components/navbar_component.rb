@@ -9,6 +9,8 @@ class NavbarComponent < ViewComponent::Base
     @greeting = greeting
   end
 
+
+
   def greeting
     guest? ? "Guest" : current_user.name
   end

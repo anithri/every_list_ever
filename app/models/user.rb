@@ -6,6 +6,12 @@ class User < ApplicationRecord
 
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
+  validates :email_address, presence: true, uniqueness: true
+  # name will need additional validation for naughty words
+  validates :name, presence: true, uniqueness: true, length: { minimum: 3 }
+  def self.guest
+    @guest_user ||= find_by(email_address: "guest@abc.123.example.dev").freeze
+  end
 end
 
 # == Schema Information

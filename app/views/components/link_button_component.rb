@@ -33,6 +33,10 @@ class LinkButtonComponent < ApplicationComponent
     @html_opts = normalize_html_opts(html_opts)
   end
 
+  def view_template(&content)
+    link_to path, **html_opts, &content
+  end
+
   private
 
   # normalize variants and include :normal if :condensed is not included
@@ -61,7 +65,5 @@ class LinkButtonComponent < ApplicationComponent
     [ BASE_CLASSES, VARIANTS.fetch_values(*variants), klasses ].flatten.compact.uniq.join(" ")
   end
 
-  def view_template(&content)
-    link_to path, **html_opts, &content
-  end
+
 end

@@ -7,7 +7,7 @@ RSpec.describe MembersHomePolicy, type: :policy do
 
   subject { described_class }
 
-  permissions :home? do
+  permissions :home do
     it 'should allow admin users' do
       expect(subject).to permit(admin)
     end
