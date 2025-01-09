@@ -10,7 +10,7 @@ FactoryBot.define do
     location { "MyString" }
   end
   factory :guest_user, class: "User" do
-    email_address { "guest@example.com" }
+    email_address { "guest@abc.123.example.dev" }
     name { "Guest" }
     password_digest { "password" }
     visible { true }
