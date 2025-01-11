@@ -31,3 +31,9 @@ class PasswordsController < ApplicationController
       redirect_to new_password_path, alert: "Password reset link is invalid or has expired."
     end
 end
+# new_session  GET  /session/new(.:format)   sessions#new
+# edit_session GET  /session/edit(.:format)  essions#edit
+# session      GET  /session(.:format)       sessions#show
+#              PATH /session(.:format)       sessions#update PUT  /session(.:format)                                        sessions#update
+#              DELETE session(.:format)      sessions#destroy
+#              POST  session(.:format)       sessions#create

@@ -3,6 +3,7 @@ puts "Seeding #{RECORD_COUNTS[:users] + 2} users"
 guest = User.find_or_create_by(name: 'Guest', email_address: 'guest@example.com')
 guest_pass = SecureRandom.base58(32) # random password for guest, not used anywhere else.
 guest.update(
+  id: 13,
   password: guest_pass,
   password_confirmation: guest_pass,
   visible: false,
@@ -15,6 +16,7 @@ guest.update password_digest: guest.password_digest.first(4) # no logins ever fo
 
 anithri = User.find_or_create_by(name: 'anithri', email_address: 'anithri@gmail.com')
 anithri.update(
+  id: 42,
   password: 'artemis.',
   password_confirmation: 'artemis.',
   visible: true,

@@ -21,107 +21,111 @@ RSpec.xdescribe "/users", type: :request do
 
   let(:invalid_attributes) { attributes_for(:member_user).merge(membership: :invalid) }
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      User.create! valid_attributes
-      get users_url
-      expect(response).to be_successful
-    end
+  it "should have a way to set specific user" do
+    pending "trying to figure it out"
   end
 
-  describe "GET /show" do
-    it "renders a successful response" do
-      user = User.create! valid_attributes
-      get user_url(user)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_user_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "renders a successful response" do
-      user = User.create! valid_attributes
-      get edit_user_url(user)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new User" do
-        expect {
-          post users_url, params: { user: valid_attributes }
-        }.to change(User, :count).by(1)
-      end
-
-      it "redirects to the created user" do
-        post users_url, params: { user: valid_attributes }
-        expect(response).to redirect_to(user_url(User.last))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "does not create a new User" do
-        expect {
-          post users_url, params: { user: invalid_attributes }
-        }.to change(User, :count).by(0)
-      end
-
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post users_url, params: { user: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
-
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
-
-      it "updates the requested user" do
-        user = User.create! valid_attributes
-        patch user_url(user), params: { user: new_attributes }
-        user.reload
-        skip("Add assertions for updated state")
-      end
-
-      it "redirects to the user" do
-        user = User.create! valid_attributes
-        patch user_url(user), params: { user: new_attributes }
-        user.reload
-        expect(response).to redirect_to(user_url(user))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        user = User.create! valid_attributes
-        patch user_url(user), params: { user: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_entity)
-      end
-    end
-  end
-
-  describe "DELETE /destroy" do
-    it "destroys the requested user" do
-      user = User.create! valid_attributes
-      expect {
-        delete user_url(user)
-      }.to change(User, :count).by(-1)
-    end
-
-    it "redirects to the users list" do
-      user = User.create! valid_attributes
-      delete user_url(user)
-      expect(response).to redirect_to(users_url)
-    end
-  end
+  # xdescribe "GET /index" do
+  #   it"renders a successful response" do
+  #     User.create! valid_attributes
+  #     get users_url
+  #     expect(response).to be_successful
+  #   end
+  # end
+  #
+  # describe "GET /show" do
+  #   xit"renders a successful response" do
+  #     user = User.create! valid_attributes
+  #     get user_url(user)
+  #     expect(response).to be_successful
+  #   end
+  # end
+  #
+  # describe "GET /new" do
+  #   xit"renders a successful response" do
+  #     get new_user_url
+  #     expect(response).to be_successful
+  #   end
+  # end
+  #
+  # describe "GET /edit" do
+  #   xit"renders a successful response" do
+  #     user = User.create! valid_attributes
+  #     get edit_user_url(user)
+  #     expect(response).to be_successful
+  #   end
+  # end
+  #
+  # describe "POST /create" do
+  #   context "with valid parameters" do
+  #   xit"creates a new User" do
+  #       expect {
+  #         post users_url, params: { user: valid_attributes }
+  #       }.to change(User, :count).by(1)
+  #     end
+  #
+  #   xit"redirects to the created user" do
+  #       post users_url, params: { user: valid_attributes }
+  #       expect(response).to redirect_to(user_url(User.last))
+  #     end
+  #   end
+  #
+  #   context "with invalid parameters" do
+  #   xit"does not create a new User" do
+  #       expect {
+  #         post users_url, params: { user: invalid_attributes }
+  #       }.to change(User, :count).by(0)
+  #     end
+  #
+  #   xit"renders a response with 422 status (i.e. to display the 'new' template)" do
+  #       post users_url, params: { user: invalid_attributes }
+  #       expect(response).to have_http_status(:unprocessable_entity)
+  #     end
+  #   end
+  # end
+  #
+  # describe "PATCH /update" do
+  #   context "with valid parameters" do
+  #     let(:new_attributes) {
+  #       skip("Add a hash of attributes valid for your model")
+  #     }
+  #
+  #   xit"updates the requested user" do
+  #       user = User.create! valid_attributes
+  #       patch user_url(user), params: { user: new_attributes }
+  #       user.reload
+  #       skip("Add assertions for updated state")
+  #     end
+  #
+  #   xit"redirects to the user" do
+  #       user = User.create! valid_attributes
+  #       patch user_url(user), params: { user: new_attributes }
+  #       user.reload
+  #       expect(response).to redirect_to(user_url(user))
+  #     end
+  #   end
+  #
+  #   context "with invalid parameters" do
+  #   xit"renders a response with 422 status (i.e. to display the 'edit' template)" do
+  #       user = User.create! valid_attributes
+  #       patch user_url(user), params: { user: invalid_attributes }
+  #       expect(response).to have_http_status(:unprocessable_entity)
+  #     end
+  #   end
+  # end
+  #
+  # describe "DELETE /destroy" do
+  #   xit"destroys the requested user" do
+  #     user = User.create! valid_attributes
+  #     expect {
+  #       delete user_url(user)
+  #     }.to change(User, :count).by(-1)
+  #   end
+  #
+  #   xit"redirects to the users list" do
+  #     user = User.create! valid_attributes
+  #     delete user_url(user)
+  #     expect(response).to redirect_to(users_url)
+  #   end
+  # end
 end

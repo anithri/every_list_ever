@@ -12,5 +12,7 @@ class CreateUsers < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
+    execute "ALTER TABLE users ADD CONSTRAINT membership_check CHECK (membership IN (0, 1, 2));"
+    execute "ALTER SEQUENCE users_id_seq RESTART WITH 100;"
   end
 end
