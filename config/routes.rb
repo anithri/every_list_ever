@@ -2,6 +2,7 @@
 #
 
 Rails.application.routes.draw do
+  resources :organizations
   resources :users
   resource :session, only: %i[ new create destroy ]
   resources :passwords, param: :token, only: %i[ new create edit update ]
