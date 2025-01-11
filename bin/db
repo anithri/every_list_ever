@@ -32,6 +32,11 @@ do_status () {
   docker compose -f $POSTGRES_COMPOSE ps
 }
 
+do_reset () {
+  rm db/schema.rb
+  rails db:drop db:create db:migrate db:seed
+}
+
 check_env
 
 case $1 in
@@ -46,6 +51,9 @@ case $1 in
   ;;
   down)
     do_down
+  ;;
+  reset)
+    do_reset
   ;;
   *)
     usage

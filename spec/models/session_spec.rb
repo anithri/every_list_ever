@@ -10,22 +10,20 @@ end
 
 # == Schema Information
 #
-# Table name: users
+# Table name: sessions
 #
-#  id              :bigint           not null, primary key
-#  avatar_url      :string
-#  description     :string
-#  email_address   :string           not null
-#  location        :string
-#  membership      :integer          default("guest")
-#  name            :string           not null
-#  password_digest :string           not null
-#  visible         :boolean          default(FALSE)
-#  created_at      :datetime         not null
-#  updated_at      :datetime         not null
+#  id         :bigint           not null, primary key
+#  ip_address :string
+#  user_agent :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  user_id    :bigint           not null
 #
 # Indexes
 #
-#  index_users_on_email_address  (email_address) UNIQUE
-#  index_users_on_name           (name) UNIQUE
+#  index_sessions_on_user_id  (user_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
 #

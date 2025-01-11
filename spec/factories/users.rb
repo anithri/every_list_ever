@@ -1,43 +1,43 @@
 FactoryBot.define do
   factory :admin_user, class: "User" do
+    avatar_url { "MyString" }
+    description { "MyText" }
     email_address { "admin@example.com" }
+    location { "MyString" }
+    membership { :admin }
     name { "Admin" }
     password_digest { "password" }
     visible { true }
-    membership { :admin }
-    avatar_url { "MyString" }
-    description { "MyText" }
-    location { "MyString" }
   end
   factory :guest_user, class: "User" do
+    avatar_url { "MyString" }
+    description { "MyText" }
     email_address { "guest@abc.123.example.dev" }
+    location { "MyString" }
+    membership { :guest }
     name { "Guest" }
     password_digest { "password" }
     visible { true }
-    membership { :guest }
-    avatar_url { "MyString" }
-    description { "MyText" }
-    location { "MyString" }
   end
   factory :member_user, class: "User" do
+    avatar_url { "MyString" }
+    description { "MyText" }
     email_address { "member@example.com" }
+    location { "MyString" }
+    membership { :member }
     name { "Member" }
     password_digest { "password" }
     visible { true }
-    membership { :member }
-    avatar_url { "MyString" }
-    description { "MyText" }
-    location { "MyString" }
   end
   factory :invisible_user, class: "User" do
+    avatar_url { "MyString" }
+    description { "MyText" }
     email_address { "invisible@example.com" }
+    location { "MyString" }
+    membership { :member }
     name { "Invisible Member" }
     password_digest { "password" }
     visible { false }
-    membership { :member }
-    avatar_url { "MyString" }
-    description { "MyText" }
-    location { "MyString" }
   end
 end
 
