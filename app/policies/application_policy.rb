@@ -37,11 +37,11 @@ class ApplicationPolicy
   end
 
   def guest?
-    user.nil? || user&.guest?
+    user&.guest?
   end
 
   def member?
-    user.persisted? && user&.member?
+    user&.member?
   end
 
   def admin?
@@ -49,7 +49,7 @@ class ApplicationPolicy
   end
 
   def owner?
-    record.user == user
+    record.user_id == user.id
   end
 
   class Scope

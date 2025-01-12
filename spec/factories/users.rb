@@ -33,8 +33,8 @@ FactoryBot.define do
     avatar_url { "MyString" }
     description { "MyText" }
     email_address { "invisible@example.com" }
-    location { "MyString" }
     membership { :member }
+    location { "MyString" }
     name { "Invisible Member" }
     password_digest { "password" }
     visible { false }
