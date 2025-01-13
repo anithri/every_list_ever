@@ -26,6 +26,12 @@ module NavLinks
     end
   end
 
+  def organizations
+    component :link_button, organizations_path, :nav, title: "Organizations" do
+      component :icon, :sitemap
+    end
+  end
+
   def login
     component :link_button,
               new_session_path,

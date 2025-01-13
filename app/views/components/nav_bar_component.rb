@@ -28,7 +28,7 @@ class NavBarComponent < ApplicationComponent
   end
 
   def avatar
-    return guest_avatar if current_user&.blank? || current_user.guest? || current_user.avatar_url.blank?
+    return guest_avatar if (current_user&.blank? || current_user&.guest? || current_user&.avatar_url.blank?)
 
     user_avatar
   end

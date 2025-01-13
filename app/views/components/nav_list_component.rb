@@ -8,8 +8,8 @@ class NavListComponent < ApplicationComponent
     @links = []
     @types = {
       guest: %i[guest_home login],
-      member: %i[member_home show_user logout],
-      admin: %i[member_home show_user users logout]
+      member: %i[member_home show_user organizations logout],
+      admin: %i[member_home show_user users organizations logout]
     }
   end
 
