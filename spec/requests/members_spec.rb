@@ -2,27 +2,43 @@
 
 require 'rails_helper'
 
-verifier = ActiveSupport::MessageVerifier.new(Rails.application.secret_key_base)
-
 RSpec.describe "Members", type: :request do
-  let (:member_session) { create(:member_session) }
-
-  it "should have a way to set specific user" do
-    pending "trying to figure it out"
+  before do
   end
-
-  # TODO still struggling with setting a specific user for request specs
   describe "GET /" do
-    it "returns http success for member user" do
-      Current.session = member_session
-      cookies[:session_id] =  verifier.generate(Current.session.id)
-      get "/"
+    context "when user is member" do
+      let (:session) { create(:member_session) }
+      before do
+        allow_any_instance_of(Current).to receive(:session).and_return(session)
+      end
 
-      Current.session = member_session
+      it "returns a successful response" do
+        get root_path
+        warn [Current.session.id, Current.session.id, Current.user.id].inspect
+        expect(response).to have_http_status(:ok)
+      end
+    end
+    context "when user is member" do
+      let (:session) { create(:admin_session) }
+      before do
+        allow_any_instance_of(Current).to receive(:session).and_return(session)
+      end
 
-      expect(response).to have_http_status(:redirect)
-      expect(response).to redirect_to("/members/#{Current.session.user.id}")
+      it "returns a successful response" do
+        warn Current.session
+        get root_path
+        expect(response).to have_http_status(:ok)
+      end
+    end
+    context "when user is not authorized" do
+      before do
+        allow_any_instance_of(MembersController).to receive(:authorize).with(:members_home).and_raise(Pundit::NotAuthorizedError)
+      end
+
+      it "redirects to the login page" do
+        get root_path
+        expect(response).to redirect_to(new_session_path)
+      end
     end
   end
-
 end

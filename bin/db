@@ -13,7 +13,7 @@ check_env() {
 }
 
 usage () {
-  echo "usage: `basename $0` start|stop|status|down"
+  echo "usage: `basename $0` start|stop|status|down|reset"
 }
 
 do_start () {

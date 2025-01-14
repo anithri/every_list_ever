@@ -4,6 +4,17 @@ This README would normally document whatever steps are necessary to get the
 application up and running.
 
 Things you may want to cover:
+## Models
+User - people
+Session - logins
+Organization - groups of people
+Member - relationship between User and Organization
+RankedList - every list ever
+ListItem - A single entry of a RankedList
+ListRank - the ranking for a single ListItem of a RankedList
+ListRankHistory? - historical ranking of ListRank
+ListItemData? - Extra meta-data for ListItem.
+
 ## Development 
   ### Priorities
     - Next
