@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_11_220624) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_11_203614) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -40,7 +40,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_11_220624) do
     t.string "name", null: false
     t.string "password_digest", null: false
     t.boolean "visible", default: false
-    t.integer "membership", default: 0
+    t.integer "site_role", default: 0
     t.string "location"
     t.string "description"
     t.string "avatar_url"
@@ -48,7 +48,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_11_220624) do
     t.datetime "updated_at", null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
-    t.check_constraint "membership = ANY (ARRAY[0, 1, 2])", name: "membership_check"
+    t.check_constraint "site_role = ANY (ARRAY[0, 1, 2])", name: "site_role_check"
   end
 
   add_foreign_key "organizations", "users"

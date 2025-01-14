@@ -7,6 +7,6 @@ class PagesController < ApplicationController
   end
 
   def root
-    authenticated? ? redirect_to(members_home_path) : redirect_to(guest_home_path)
+    authenticated? ? redirect_to(registered_home_path) : redirect_to(guest_home_path)
   end
 end

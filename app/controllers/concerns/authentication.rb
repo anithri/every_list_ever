@@ -37,7 +37,7 @@ module Authentication
     end
 
     def after_authentication_url
-      members_home_path
+      registered_home_path
     end
 
 

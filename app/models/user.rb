@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   has_secure_password
-  enum :membership, [ :guest, :member, :admin ], default: :guest
+  enum :site_role, [ :guest, :registered, :admin ], default: :guest
 
   has_many :sessions, dependent: :destroy
 
@@ -12,10 +12,11 @@ class User < ApplicationRecord
   validates :name, presence: true, uniqueness: true, length: { in: 3..20 }
 
 
-  scope :members, -> { where("id >= 100", 200).where(membership: :member) }
+  scope :authenticated, -> { where("id >= 100", 200).where(site_role: :registered) }
   def self.guest
     @guest_user ||= find_by(email_address: "guest@abc.123.example.dev").freeze
   end
+
 end
 
 # == Schema Information
@@ -27,9 +28,9 @@ end
 #  description     :string
 #  email_address   :string           not null
 #  location        :string
-#  membership      :integer          default("guest")
 #  name            :string           not null
 #  password_digest :string           not null
+#  site_role       :integer          default("guest")
 #  visible         :boolean          default(FALSE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

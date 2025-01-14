@@ -15,7 +15,7 @@ class OrganizationPolicy < ApplicationPolicy
   end
 
   def create?
-    member? || admin?
+    registered? || admin?
   end
 
   def update?
@@ -39,14 +39,3 @@ class OrganizationPolicy < ApplicationPolicy
     end
   end
 end
-
-(admin, member, guest) = [
-  User.new(id: 10, membership: 'admin'),
-  User.new(id: 11, membership: 'member'),
-  User.new(id: 12, membership: 'guest'),
-]
-(visible_org, invisible_org, incomplete_org) = [
-  Organization.new(user_id: 11, visible: true),
-  Organization.new(user_id: 11, visible: false),
-  Organization.new
-]

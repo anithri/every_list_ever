@@ -8,8 +8,8 @@ module NavLinks
     end
   end
 
-  def member_home
-    component :link_button, members_home_path, :nav, title: "Member HomeComponent" do
+  def registered_home
+    component :link_button, registered_home_path, :nav, title: "Registered Users Home" do
       component :icon, :house
     end
   end

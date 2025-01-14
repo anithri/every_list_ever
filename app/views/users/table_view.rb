@@ -4,7 +4,7 @@ module Users
   class TableView < ApplicationView
     attr_reader :users, :current_user
 
-    HEADERS = %w[Email Name Membership Visibility Created Updated].push('').freeze
+    HEADERS = %w[Email Name SiteRole Visibility Created Updated].push('').freeze
     def initialize(users, **html_opts)
       @users = users
       @classes = html_opts.delete(:class) || ""

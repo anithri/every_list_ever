@@ -12,7 +12,7 @@ class Users::TableRowView < ApplicationView
     tr do
       td { user.email_address }
       td { user.name }
-      td { user.membership }
+      td { user.site_role }
       td { user.visible ? "Yes" : "No" }
       td { user.created_at.to_s }
       td { user.updated_at.to_s }

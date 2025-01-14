@@ -26,7 +26,7 @@ RSpec.describe "Pages", type: :request do
 
       it "redirects to the members home page" do
         get root_path
-        expect(response).to redirect_to(members_home_path)
+        expect(response).to redirect_to(registered_home_path)
       end
     end
 

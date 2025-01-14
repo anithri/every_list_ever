@@ -5,8 +5,8 @@ FactoryBot.define do
   factory :guest_session, class: "Session" do
     user { build :guest_user }
   end
-  factory :member_session, class: "Session" do
-    user { build :member_user }
+  factory :registered_session, class: "Session" do
+    user { build :registered_user }
   end
 end
 

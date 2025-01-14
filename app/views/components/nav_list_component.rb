@@ -8,8 +8,8 @@ class NavListComponent < ApplicationComponent
     @links = []
     @types = {
       guest: %i[guest_home login],
-      member: %i[member_home show_user organizations logout],
-      admin: %i[member_home show_user users organizations logout]
+      site_user: %i[registered_home show_user organizations logout],
+      admin: %i[registered_home show_user users organizations logout]
     }
   end
 
@@ -27,14 +27,14 @@ class NavListComponent < ApplicationComponent
     @links << content
   end
 
-  def link_names_for_membership
+  def link_names_for_site_role
     return @types[:admin] if admin?
-    return @types[:member] if member?
+    return @types[:registered] if registered?
 
     @types[:guest]
   end
 
   def links
-    link_names_for_membership.each_with_object([]) { |l, a| a.push(send(l)) }
+    link_names_for_site_role.each_with_object([]) { |l, a| a.push(send(l)) }
   end
 end

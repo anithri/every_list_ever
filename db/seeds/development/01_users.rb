@@ -1,7 +1,7 @@
 # Home many users in addition to Guest, Admin, and Developer
-USER_MEMBER_COUNT = 20
+USER_ROLE_COUNT = 20
 
-# what ratio of 1 admin to ADMIN_RATIO members, random generation so specific counts will vary
+# what ratio of 1 admin to ADMIN_RATIO registered users, random generation so specific counts will vary
 ADMIN_RATIO = 5
 
 # region Guest User
@@ -13,7 +13,7 @@ guest.update(
   password: guest_pass,
   password_confirmation: guest_pass,
   visible: false,
-  membership: :guest,
+  site_role: :guest,
   avatar_url: Faker::Avatar.image,
   description: "A guest user",
   location: "Anytown, Everywhere",
@@ -30,7 +30,7 @@ if ENV['DEVELOPER_NAME'].present? && ENV['DEVELOPER_EMAIL'].present?
     password: ENV['DEVELOPER_PASS'],
     password_confirmation: ENV['DEVELOPER_PASS'],
     visible: true,
-    membership: :admin,
+    site_role: :admin,
     avatar_url: Faker::Avatar.image,
     description: "I'm just zis developer, you know?",
     location: "Someplace, Somewhere"
@@ -47,7 +47,7 @@ admin.update(
   password: admin_pass,
   password_confirmation: admin_pass,
   visible: true,
-  membership: :admin,
+  site_role: :admin,
   avatar_url: Faker::Avatar.image,
   description: "Admin User\npass: #{admin_pass}",
   location: "Someplace, Somewhere"
@@ -59,20 +59,20 @@ User.connection.execute("ALTER SEQUENCE users_id_seq RESTART WITH 100;")
 
 # region Users
 all_users = []
-USER_MEMBER_COUNT.times do
+USER_ROLE_COUNT.times do
   pass = Faker::Internet.password
-  membership = rand(ADMIN_RATIO).zero? ? :admin : :member
+  site_role = rand(ADMIN_RATIO).zero? ? :admin : :registered
   location = rand(2).zero? ? Faker::Address.city(options: { with_state: true, with_country: true }) : Faker::University.name
   u = {
     email_address: Faker::Internet.email,
     password: pass,
     password_confirmation: pass,
-    membership: membership,
+    site_role: site_role,
     location: location,
     name: Faker::Name.name,
     visible: rand(2).zero?,
     avatar_url: Faker::Avatar.image,
-    description: "#{membership.to_s.titleize} User\npassword = #{pass}",
+    description: "#{site_role.to_s.titleize} User\npassword = #{pass}",
   }
   all_users.push u
 end

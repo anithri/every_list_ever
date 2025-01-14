@@ -32,7 +32,7 @@ RSpec.describe "Members", type: :request do
     end
     context "when user is not authorized" do
       before do
-        allow_any_instance_of(MembersController).to receive(:authorize).with(:members_home).and_raise(Pundit::NotAuthorizedError)
+        allow_any_instance_of(RegisteredUsersController).to receive(:authorize).with(:registered_home_path).and_raise(Pundit::NotAuthorizedError)
       end
 
       it "redirects to the login page" do

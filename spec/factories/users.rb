@@ -4,7 +4,7 @@ FactoryBot.define do
     description { "MyText" }
     email_address { "admin@example.com" }
     location { "MyString" }
-    membership { :admin }
+    site_role { :admin }
     name { "Admin" }
     password_digest { "password" }
     visible { true }
@@ -14,18 +14,18 @@ FactoryBot.define do
     description { "MyText" }
     email_address { "guest@abc.123.example.dev" }
     location { "MyString" }
-    membership { :guest }
+    site_role { :guest }
     name { "Guest" }
     password_digest { "password" }
     visible { true }
   end
-  factory :member_user, class: "User" do
+  factory :registered_user, class: "User" do
     avatar_url { "MyString" }
     description { "MyText" }
-    email_address { "member@example.com" }
+    email_address { "registrated_user@example.com" }
     location { "MyString" }
-    membership { :member }
-    name { "Member" }
+    site_role { :registered }
+    name { "Registered User" }
     password_digest { "password" }
     visible { true }
   end
@@ -33,7 +33,7 @@ FactoryBot.define do
     avatar_url { "MyString" }
     description { "MyText" }
     email_address { "invisible@example.com" }
-    membership { :member }
+    site_role { :registered }
     location { "MyString" }
     name { "Invisible Member" }
     password_digest { "password" }
@@ -50,9 +50,9 @@ end
 #  description     :string
 #  email_address   :string           not null
 #  location        :string
-#  membership      :integer          default("guest")
 #  name            :string           not null
 #  password_digest :string           not null
+#  site_role       :integer          default("guest")
 #  visible         :boolean          default(FALSE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

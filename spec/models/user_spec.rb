@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_length_of(:name) }
     it { is_expected.to have_secure_password }
     it { is_expected.to normalize(:email_address).from('BOB@example.com').to('bob@example.com') }
-    it { is_expected.to define_enum_for(:membership).with_values([ :guest, :member, :admin ]).with_default(:guest) }
+    it { is_expected.to define_enum_for(:site_role).with_values([ :guest, :registered, :admin ]).with_default(:guest) }
     it { is_expected.to have_many(:sessions).dependent(:destroy) }
   end
 
@@ -37,9 +37,9 @@ end
 #  description     :string
 #  email_address   :string           not null
 #  location        :string
-#  membership      :integer          default("guest")
 #  name            :string           not null
 #  password_digest :string           not null
+#  site_role       :integer          default("guest")
 #  visible         :boolean          default(FALSE)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null

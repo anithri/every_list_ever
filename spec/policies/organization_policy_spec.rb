@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe OrganizationPolicy, type: :policy, focus: true do
-  let(:admin) { User.new(id: 10, membership: :admin) }
-  let(:guest) { User.new(id: 20, membership: :guest) }
-  let(:member) { User.new(id: 30, membership: :member) }
-  let(:invisible_org) { Organization.new(user_id: member.id) }
-  let(:visible_org) { Organization.new(user_id: member.id, visible: true) }
+  let(:admin) { User.new(id: 10, site_role: :admin) }
+  let(:guest) { User.new(id: 20, site_role: :guest) }
+  let(:registered_user) { User.new(id: 30, site_role: :registered_user) }
+  let(:invisible_org) { Organization.new(user_id: registered_user.id) }
+  let(:visible_org) { Organization.new(user_id: registered_user.id, visible: true) }
   let(:admin_owned_org) { Organization.new(user_id: admin.id) }
   let(:incomplete_org) { Organization.new }
 
@@ -25,8 +25,8 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       it 'should deny guest users in all cases' do
         expect(subject).to permit(guest, Organization)
       end
-      it 'should allow member users in all cases' do
-        expect(subject).to permit(member, Organization)
+      it 'should allow registered_user users in all cases' do
+        expect(subject).to permit(registered_user, Organization)
       end
     end
     permissions :show? do
@@ -42,16 +42,16 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
         expect(subject).to permit(guest, visible_org)
       end
 
-      it 'it denies member to show invisible' do
+      it 'it denies registered_user to show invisible' do
         expect(subject).not_to permit(guest, invisible_org)
       end
-      it 'it allows members to show visible' do
-        expect(subject).to permit(member, visible_org)
+      it 'it allows registered_users to show visible' do
+        expect(subject).to permit(registered_user, visible_org)
       end
 
       it 'it allows owner to show own in all cases' do
-        expect(subject).to permit(member, invisible_org)
-        expect(subject).to permit(member, visible_org)
+        expect(subject).to permit(registered_user, invisible_org)
+        expect(subject).to permit(registered_user, visible_org)
       end
     end
 
@@ -63,7 +63,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
         expect(subject).not_to permit(guest, incomplete_org)
       end
       it 'should allow owner to create another' do
-        expect(subject).to permit(member, incomplete_org)
+        expect(subject).to permit(registered_user, incomplete_org)
       end
     end
 
@@ -74,11 +74,11 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       it 'should deny guest users in all cases' do
         expect(subject).not_to permit(guest, visible_org)
       end
-      it 'should allow member when owner' do
-        expect(subject).to permit(member, visible_org)
+      it 'should allow registered_user when owner' do
+        expect(subject).to permit(registered_user, visible_org)
       end
-      it 'should denies member when not owner' do
-        expect(subject).not_to permit(member, admin_owned_org)
+      it 'should denies registered_user when not owner' do
+        expect(subject).not_to permit(registered_user, admin_owned_org)
       end
     end
 
@@ -89,11 +89,11 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       it 'should deny guest users in all cases' do
         expect(subject).not_to permit(guest, visible_org)
       end
-      it 'should allow member when owner' do
-        expect(subject).to permit(member, visible_org)
+      it 'should allow registered_user when owner' do
+        expect(subject).to permit(registered_user, visible_org)
       end
-      it 'should denies member when not owner' do
-        expect(subject).not_to permit(member, admin_owned_org)
+      it 'should denies registered_user when not owner' do
+        expect(subject).not_to permit(registered_user, admin_owned_org)
       end
     end
   end

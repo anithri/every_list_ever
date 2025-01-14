@@ -3,7 +3,7 @@ FactoryBot.define do
     name { "MyString" }
     subtitle { "MyString" }
     description { "MyText" }
-    association :user, factory: :member_user
+    association :user, factory: :registered_user
     visible { false }
   end
 end

@@ -19,7 +19,7 @@ RSpec.xdescribe "/users", type: :request do
   # adjust the attributes here as well.
   let(:valid_attributes) { attributes_for(:member_user) }
 
-  let(:invalid_attributes) { attributes_for(:member_user).merge(membership: :invalid) }
+  let(:invalid_attributes) { attributes_for(:member_user).merge(site_role: :invalid) }
 
   it "should have a way to set specific user" do
     pending "trying to figure it out"

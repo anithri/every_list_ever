@@ -28,8 +28,8 @@
     </div>
     <div class="my-5 flex justify-between">
       <div>
-        <%= form.label :membership %>
-        <%= form.select :membership, User.memberships.keys, selected: user.membership, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
+        <%= form.label :site_role %>
+        <%= form.select :site_role, User.site_roles.keys, selected: user.site_role, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
       </div>
     </div>
   </div>
