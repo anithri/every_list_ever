@@ -1,9 +1,5 @@
 <%= component :main_flex_row do %>
   <%= component :pane, "Edit #{@user.name}'s Profile", "Find me in app/views/users/edit.html.erb" do %>
     <%= render "form", user: @user %>
-    <%= component :toolbar_ul, :col, class: :col do %>
-      <%= component :link_button, @user, title: "Show this user" %> { "Show this user" }
-      <%= component :link_button, users_path, title: "Back to users" %> { "Back to users" }
-    <% end %>
   <% end %>
 <% end %>

@@ -1,12 +1,8 @@
 <%= component :main_flex_row do %>
   <%= component :pane, "#{@user.name}'s Profile", "Find me in app/views/users/show.html.erb" do %>
     <%= render @user %>
-    <%= render ToolbarUlComponent.new do %>
-      <li class="text-white">
-        <%= component 'link_button', edit_user_path(@user), variants: :info, title: 'Show User' do %>
-          <%= component 'icon', :eye %>
-        <% end %>
-      </li>
+   <%# TODO ul not going full width and buttons not centering %>>
+    <%= component :toolbar_ul do %>
       <li>
         <%= component :link_button, edit_user_path(@user), :success do %>
           <%= component :icon, :pen %>

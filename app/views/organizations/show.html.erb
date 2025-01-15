@@ -5,9 +5,14 @@
     <% end %>
 
     <%= render @organization %>
-
-    <%= link_to "Edit this organization", edit_organization_path(@organization), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Back to organizations", organizations_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <%= component :toolbar_ul, :col, class: :col do %>
+      <li>
+        <%= link_to "Edit this organization", edit_organization_path(@organization), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      </li>
+      <li>
+        <%= link_to "Back to organizations", organizations_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+      </li>
+    <% end %>
     <div class="inline-block ml-2">
       <%= button_to "Destroy this organization", @organization, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
     </div>

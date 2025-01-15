@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
-    authorize :index?
+    authorize Current.user,:index?
     @users = policy_scope(User)
   end
 
