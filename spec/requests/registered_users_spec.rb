@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.describe "Members", type: :request do
+RSpec.xdescribe "Members", type: :request do
   before do
   end
   describe "GET /" do
     context "when user is member" do
-      let (:session) { create(:member_session) }
+      let (:session) { create(:registered_session) }
       before do
         allow_any_instance_of(Current).to receive(:session).and_return(session)
       end

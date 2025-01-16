@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe OrganizationPolicy, type: :policy, focus: true do
   let(:admin) { User.new(id: 10, site_role: :admin) }
   let(:guest) { User.new(id: 20, site_role: :guest) }
-  let(:registered_user) { User.new(id: 30, site_role: :registered_user) }
+  let(:registered_user) { User.new(id: 30, site_role: :registered) }
   let(:invisible_org) { Organization.new(user_id: registered_user.id) }
   let(:visible_org) { Organization.new(user_id: registered_user.id, visible: true) }
   let(:admin_owned_org) { Organization.new(user_id: admin.id) }

@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe RegisteredUsersPolicy, type: :policy do
   let(:admin) { create(:admin_user) }
   let(:guest) { create(:guest_user) }
-  let(:member) { create(:member_user) }
+  let(:registered) { create(:registered_user) }
 
   subject { described_class }
 
@@ -15,7 +15,7 @@ RSpec.describe RegisteredUsersPolicy, type: :policy do
       expect(subject).not_to permit(guest)
     end
     it 'should allow member users' do
-      expect(subject).to permit(member)
+      expect(subject).to permit(registered)
     end
   end
 end

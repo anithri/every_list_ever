@@ -8,9 +8,9 @@ RSpec.describe UserPolicy, type: :policy do
   end
   let(:admin) { create(:admin_user) }
   let(:guest) { create(:guest_user) }
-  let(:member) { create(:member_user) }
-  let(:invisible) { create(:member_user, visible: false, user: admin) }
-  let(:visible) { create(:member_user, visible: true, user: admin) }
+  let(:member) { create(:registered_user) }
+  let(:invisible) { create(:registered_user, visible: false, user: admin) }
+  let(:visible) { create(:registered_user, visible: true, user: admin) }
 
   subject { described_class }
 
