@@ -210,6 +210,8 @@ GEM
     phlex-rails (1.2.2)
       phlex (>= 1.10, < 2)
       railties (>= 6.1, < 9)
+    phlex-variants (0.2.0)
+      phlex (>= 1.9, < 3)
     propshaft (1.1.0)
       actionpack (>= 7.0.0)
       activesupport (>= 7.0.0)
@@ -413,6 +415,7 @@ DEPENDENCIES
   letter_opener
   pg (~> 1.1)
   phlex-rails
+  phlex-variants
   propshaft
   puma (>= 5.0)
   pundit (~> 2.3)

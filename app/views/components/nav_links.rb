@@ -1,57 +1,37 @@
 # frozen_string_literal: true
 
 module NavLinks
+  DELETE_DATA = { turbo_method: :delete, turbo_confirm: "Are you sure?" }
 
   def guest_home
-    component :link_button, root_path, :nav, title: "Guest HomeComponent" do
-      component :icon, :house
-    end
+    btn :nav, root_path, icon: :house, title: "Guest Home"
   end
 
   def registered_home
-    component :link_button, registered_home_path, :nav, title: "Registered Users Home" do
-      component :icon, :house
-    end
+    btn :nav, registered_home_path, icon: :house, title: "Registered Home"
   end
 
   def show_user
-    component :link_button, user_path(current_user), :nav, title: "User Profile" do
-      component :icon, :user
-    end
+    btn :nav, user_path(current_user), icon: :user, title: "User Profile"
   end
 
   def edit_user
-    component :link_button, edit_user_path(current_user), :nav, title: "Edit User Profile" do
-      component :icon, :pen
-    end
+    btn :nav, edit_user_path(current_user), icon: :pen, title: "Edit User Profile"
   end
 
   def organizations
-    component :link_button, organizations_path, :nav, title: "Organizations" do
-      component :icon, :sitemap
-    end
+    btn :nav, organizations_path, icon: :sitemap, title: "Organization"
   end
 
   def login
-    component :link_button,
-              new_session_path,
-              :nav,
-              title: "Login" do
-      component :icon, :right_to_bracket
-    end
+    btn :nav, new_session_path, icon: :right_to_bracket, title: "Login"
   end
 
   def logout
-    component :link_button, session_path, :nav, title: "Logout",
-              data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do
-      component :icon, :right_from_bracket
-    end
+    btn :nav, session_path, icon: :right_from_bracket, title: "Logout", data: DELETE_DATA
   end
 
   def users
-    component :link_button, users_path, :nav, title: "Users" do
-      component :icon, :users
-    end
+    btn :nav, users_path, icon: :users, title: "Users"
   end
 end
-

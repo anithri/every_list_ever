@@ -6,21 +6,22 @@ class LinkButtonComponent < ApplicationComponent
   # This also white-lists the TailwindCSS classes
   BASE_CLASSES = %w[rounded-md text-white]
 
-  # A list of variants that can be used to style the button, alone or in concert.
-  # This also white-lists the TailwindCSS classes
-  VARIANTS = {
-    condensed: %w[py-1 px-1 text-sm],
-    normal: %w[py-2 px-2],
-    danger: %w[bg-danger],
-    info: %w[bg-info],
-    success: %w[bg-success],
-    warning: %w[bg-warning],
-    primary: %w[bg-primary],
-    secondary: %w[bg-secondary],
-    icon: [],
-    nav: %w[bg-transparent text-gray-300 hover:text-white hover:bg-gray-700]
-  }.with_indifferent_access
-  VARIANTS.default = [].freeze # return an empty array if the key is not found
+  # # A list of variants that can be used to style the button, alone or in concert.
+  # # This also white-lists the TailwindCSS classes
+  # VARIANTS = {
+  #   condensed: %w[py-1 px-1 text-sm],
+  #   normal: %w[py-2 px-2],
+  #   expanded: %w[py-3 px-3 text-lg font-bold],
+  #   danger: %w[bg-danger],
+  #   info: %w[bg-info],
+  #   success: %w[bg-success],
+  #   warning: %w[bg-warning],
+  #   primary: %w[bg-primary],
+  #   secondary: %w[bg-secondary],
+  #   icon: [],
+  #   nav: %w[bg-transparent text-gray-300 hover:text-white hover:bg-gray-700]
+  # }.with_indifferent_access
+  # VARIANTS.default = [].freeze # return an empty array if the key is not found
 
   attr_reader :path, :variants, :html_opts
 
@@ -30,7 +31,7 @@ class LinkButtonComponent < ApplicationComponent
   def initialize(path, *variants, **html_opts)
     @path = path
     @variants = normalize_variants(variants)
-    @html_opts = normalize_html_opts(html_opts)
+    @html_opts = normalize_html_opts(**html_opts)
   end
 
   def view_template(&content)
