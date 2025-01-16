@@ -22,6 +22,8 @@ ListItemData? - Extra meta-data for ListItem.
     - Pending
     - Later
   ### TODO
+    #### Optimization
+    - [ ] Tailwind class ordering
     #### Infrastructure
     - [x] Phlex Setup
     - [x] Figure out Phlex

@@ -3,7 +3,7 @@ class OrganizationsController < ApplicationController
 
   # GET /organizations or /organizations.json
   def index
-    authorize :index?
+    authorize Current.user,:index?
     @organizations = policy_scope(Organization)
   end
 

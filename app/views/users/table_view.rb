@@ -4,8 +4,8 @@ module Users
   class TableView < ApplicationView
     attr_reader :users, :current_user
 
-    HEADERS = %w[Email Name SiteRole Visibility Created Updated].push('').freeze
-    def initialize(users, **html_opts)
+    HEADERS = %w[Email Name SiteRole Visibility].push('').freeze
+    def initialize(users, current_user,  **html_opts)
       @users = users
       @classes = html_opts.delete(:class) || ""
       @html_opts = html_opts
@@ -22,7 +22,7 @@ module Users
         end
         tbody do
           @users.each do |user|
-            view :users, :table_row, user
+            view :users, :table_row, user, current_user
           end
         end
       end

@@ -51,7 +51,7 @@ class LinkButtonComponent < ApplicationComponent
   # normalize the html_opts and update the classes to include classes from the variants
   # @param [Hash] html_opts the options to normalize
   # @return [Hash] the normalized html_opts
-  def normalize_html_opts(html_opts)
+  def normalize_html_opts(**html_opts)
     klasses = html_opts.delete(:class).to_s.split(/\s+/) || []
     html_opts[:class] = classes(klasses)
 
@@ -64,6 +64,4 @@ class LinkButtonComponent < ApplicationComponent
   def classes(klasses)
     [ BASE_CLASSES, VARIANTS.fetch_values(*variants), klasses ].flatten.compact.uniq.join(" ")
   end
-
-
 end

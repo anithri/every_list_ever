@@ -1,5 +1,5 @@
-<%= component :main_flex_row do %>
+<%= component :main_flex do %>
   <%= component :pane, "Users", "Find me in app/views/users/index.html.erb" do %>
-   <%=  render Users::TableView.new @users %>
+   <%=  render Users::TableView.new @users, Current.user %>
   <% end %>
 <% end %>
