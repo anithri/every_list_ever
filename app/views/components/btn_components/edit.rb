@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 module BtnComponents
-  class Show < BaseBtn
-    COLOR = :info
+  class Edit < BaseBtn
+    COLOR = :success
     ICON = :eye
-    LABEL = "Show"
+    LABEL = "Edit"
   end
 end
 

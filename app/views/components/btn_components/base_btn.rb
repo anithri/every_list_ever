@@ -8,7 +8,7 @@ module BtnComponents
     include Phlex::Rails::Helpers::LinkTo
 
     style do
-      base "text-white"
+      base "cursor-pointer"
       variants do
         color do
           danger "bg-danger text-white"
@@ -26,7 +26,7 @@ module BtnComponents
           lg "py-3 py-3 text-lg"
         end
         shape do
-          rounded ""
+          rounded "rounded-lg"
           bar ""
           round ""
         end
@@ -34,11 +34,12 @@ module BtnComponents
       defaults color: :primary, size: :md, shape: :rounded
     end
 
-    attr_reader :path, :name, :icon, :color, :size, :shape, :classes, :html_opts
+    attr_reader :path, :name, :label, :icon, :color, :size, :shape, :classes, :html_opts
 
     def initialize(path, name = nil, label: nil, icon: nil, color: nil, size: nil, shape: nil, **html_opts)
       @path = path
       @label = normalize_label(name, label)
+      warn @label
       @icon = normalize_icon(icon)
       @color = normalize_color(color)
       @size = normalize_size(size)
@@ -60,8 +61,9 @@ module BtnComponents
       return lbl if lbl.present?
 
       return name unless self.class.const_defined?(:LABEL)
+      warn [name, lbl].inspect
 
-      [ self.class.const_get(:LABEL), name ].compact.join(" ")
+      [ self.class.const_get(:LABEL), name.to_s ].compact.join(" ")
     end
 
     def normalize_icon(icon)

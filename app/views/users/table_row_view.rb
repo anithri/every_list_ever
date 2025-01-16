@@ -21,7 +21,7 @@ module Users
         td { user.created_at.to_s }
         td { user.updated_at.to_s }
         td do
-          component :toolbar_ul, :row, :condensed do
+          component :toolbar_ul, :row, :sm do
             li { show_button }
             li { edit_button } if owner?(user)
             li { delete_button } if owner?(user)
@@ -31,28 +31,15 @@ module Users
     end
 
     def show_button
-      component :link_button, user, :info, :condensed, title: "Show User" do
-        component :icon, :eye
-        whitespace
-        plain "Show"
-      end
+      btn :show, user, :user, size: :sm, title: "Show User"
     end
 
     def edit_button
-      component :link_button, edit_user_path(user), :success, :condensed, title: "Edit User" do
-        component :icon, :pen
-        whitespace
-        plain "Edit"
-      end
+      btn :edit, edit_user_path(user), :user,size: :sm, title: "Edit User"
     end
 
     def delete_button
-      component :link_button, user, :danger, :condensed, title: "Delete User",
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do
-        component :icon, :eraser
-        whitespace
-        plain "Delete"
-      end
+      btn :delete, user, :user, size: :sm, title: "Delete User"
     end
 
     def owner?(user)

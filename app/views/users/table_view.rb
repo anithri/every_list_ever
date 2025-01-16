@@ -9,6 +9,7 @@ module Users
       @users = users
       @classes = html_opts.delete(:class) || ""
       @html_opts = html_opts
+      @current_user = current_user
     end
 
     def view_template

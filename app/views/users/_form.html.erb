@@ -33,6 +33,7 @@
       </div>
     </div>
   </div>
+
   <div class="my-5">
     <%= form.label :avatar_url %>
     <%= form.text_field :avatar_url, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
@@ -50,11 +51,18 @@
 
 
   <%= component :toolbar_ul do %>
-    <%= component :link_button, @user, title: "Show this user" %> { "Show user" }
-    <div class="inline">
-      <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-    </div>
-    <%= component :link_button, users_path, title: "Back to users" %> { "Back to users" }
+    <li>
+      <%= form.submit class: submit_classes(color: :success, size: :sm) %>
+    </li>
+    <li>
+      <%= btn :show, @user, :user, size: :sm %>
+    </li>
+    <li>
+      <%= btn :delete, @user, :user, size: :sm %>
+    </li>
+    <li>
+      <%= btn :back_to, users_path, :users, size: :sm  %>
+    </li>
   <% end %>
 
 <% end %>

@@ -18,6 +18,9 @@
 
     --color-success: var(--color-emerald-500);
 
+    --color-primary: var(--color-indigo-500);
+    --color-secondary: var(--color-amber-300);
+
     --color-page: var(--color-indigo-300);
 
     --color-reading-surface-dark: var(--color-neutral-800);

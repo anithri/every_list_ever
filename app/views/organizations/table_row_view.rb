@@ -4,7 +4,7 @@ module Organizations
   class TableRowView < ApplicationView
     attr_reader :org, :current_user, :classes, :html_opts
 
-    def initialize(org, current_user,  **html_opts)
+    def initialize(org, current_user, **html_opts)
       @org = org
       @current_user = current_user
       @classes = html_opts.delete(:class) || ""
@@ -37,29 +37,15 @@ module Organizations
     end
 
     def show_button
-      component :link_button, org, :info, :condensed, title: "Show User" do
-        component :icon, :eye
-        whitespace
-        plain "Show"
-      end
+      btn :show, org, :organizationo, size: :sm, title: "Show Organizationr"
     end
 
     def edit_button
-      component :link_button, edit_organization_path(org), :success, :condensed, title: "Edit User" do
-        component :icon, :pen
-        whitespace
-        plain "Edit"
-      end
+      btn :edit, edit_organization_path(org), :organization, size: :sm, title: "Edit Organization"
     end
 
     def delete_button
-      component :link_button, org, :danger, :condensed, title: "Delete User",
-                data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } do
-        component :icon, :eraser
-        whitespace
-        plain "Delete"
-      end
+      btn :delete, org, :organization, size: :sm, title: "Delete Organization"
     end
-
   end
 end
