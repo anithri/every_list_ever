@@ -1,14 +1,10 @@
 <%= component :main_flex do %>
   <%= component :pane, "#{@user.name}'s Profile", "Find me in app/views/users/show.html.erb" do %>
     <%= render @user %>
-   <%# TODO ul not going full width and buttons not centering %>
-    <%= component :toolbar_ul do %>
-      <li>
-        <%= btn :edit, edit_user_path(@user), :user %>
-      </li>
-      <li>
-        <%= btn :delete, @user, :user, title: 'Delete USer' %>
-      </li>
+    <%# TODO ul not going full width and buttons not centering %>
+    <%= component :btn_bar do %>
+      <%= btn :edit, edit_user_path(@user), :user, size: :sm, shape: :bar, title: "Edit User" %>
+      <%= btn :delete, @user, :user, size: :sm, shape: :bar, title: 'Delete USer' %>
     <% end %>
   <% end %>
 <% end %>

@@ -27,7 +27,7 @@ module BtnComponents
         end
         shape do
           rounded "rounded-lg"
-          bar ""
+          bar "inline-flex items-center gap-x-2 first:rounded-s-lg first:ms-0 last:rounded-e-lg focus:z-10 border border-gray-400 shadow-sm focus:outline-none"
           round ""
         end
       end
@@ -60,10 +60,9 @@ module BtnComponents
     def normalize_label(name, lbl)
       return lbl if lbl.present?
 
-      return name unless self.class.const_defined?(:LABEL)
-      warn [name, lbl].inspect
+      return name.to_s.titleize unless self.class.const_defined?(:LABEL)
 
-      [ self.class.const_get(:LABEL), name.to_s ].compact.join(" ")
+      [ self.class.const_get(:LABEL), name.to_s.titleize ].compact.join(" ")
     end
 
     def normalize_icon(icon)

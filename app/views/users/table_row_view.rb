@@ -21,25 +21,25 @@ module Users
         td { user.created_at.to_s }
         td { user.updated_at.to_s }
         td do
-          component :toolbar_ul, :row, :sm do
-            li { show_button }
-            li { edit_button } if owner?(user)
-            li { delete_button } if owner?(user)
+          component :btn_bar do
+            show_button
+            edit_button if owner?(user)
+            delete_button if owner?(user)
           end
         end
       end
     end
 
     def show_button
-      btn :show, user, :user, size: :sm, title: "Show User"
+      btn :show, user, :user, size: :sm, shape: :bar, title: "Show User"
     end
 
     def edit_button
-      btn :edit, edit_user_path(user), :user,size: :sm, title: "Edit User"
+      btn :edit, edit_user_path(user), :user,size: :sm, shape: :bar, title: "Edit User"
     end
 
     def delete_button
-      btn :delete, user, :user, size: :sm, title: "Delete User"
+      btn :delete, user, :user, size: :sm, shape: :bar, title: "Delete User"
     end
 
     def owner?(user)

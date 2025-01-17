@@ -6,7 +6,7 @@
     <% end %>
 
     <%= render @organization %>
-    <%= component :toolbar_ul, :col, class: :col do %>
+    <%= component :btn_bar, :col, class: :col do %>
       <li>
         <%= link_to "Edit this organization", edit_organization_path(@organization), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
       </li>

@@ -19,10 +19,13 @@ module Organizations
         td { org.created_at.to_s }
         td { org.updated_at.to_s }
         td do
-          component :toolbar_ul, :row, :condensed do
-            li { show_button }
-            li { edit_button } if owner?(org)
-            li { delete_button } if owner?(org)
+          component :btn_bar, :row, :condensed do
+            show_button
+            edit_button if owner?(org)
+            delete_button if owner?(org)
+            # li { show_button }
+            # li { edit_button } if owner?(org)
+            # li { delete_button } if owner?(org)
           end
         end
       end
@@ -37,15 +40,15 @@ module Organizations
     end
 
     def show_button
-      btn :show, org, :organizationo, size: :sm, title: "Show Organizationr"
+      btn :show, org, :Org, size: :sm, shape: :bar, title: "Show Organizationr"
     end
 
     def edit_button
-      btn :edit, edit_organization_path(org), :organization, size: :sm, title: "Edit Organization"
+      btn :edit, edit_organization_path(org), :org, size: :sm, shape: :bar, title: "Edit Organization"
     end
 
     def delete_button
-      btn :delete, org, :organization, size: :sm, title: "Delete Organization"
+      btn :delete, org, :org, size: :sm, shape: :bar, title: "Delete Organization"
     end
   end
 end
