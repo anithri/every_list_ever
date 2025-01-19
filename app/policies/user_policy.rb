@@ -25,7 +25,8 @@ class UserPolicy < ApplicationPolicy
   end
 
   def owner?
-    user == record && ! guest?
+    return false if user.guest?
+    user == record
   end
 
   class Scope < ApplicationPolicy::Scope

@@ -1,6 +1,6 @@
-<div id="clearance" class="sign-in">
-  <h2><%= t(".title") %></h2>
+<%= component :main_flex do %>
+  <%= component :pane, "Sign In", "Find me in app/views/users/show.html.erb" do %>
 
-  <%= render partial: '/sessions/form' %>
-
-</div>
+    <%= render partial: '/sessions/form' %>
+  <% end %>
+<% end %>

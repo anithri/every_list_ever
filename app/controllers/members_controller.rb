@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-class MembersController < ApplicationController
+class MembersController < AuthenticationController
   before_action :require_login
   def home
-    authorize :registered_users
+    authorize :members_home, :home?
   end
 end

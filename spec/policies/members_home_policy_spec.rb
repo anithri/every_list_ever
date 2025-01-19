@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe RegisteredUsersPolicy, type: :policy do
+RSpec.describe MembersHomePolicy, type: :policy do
   let(:admin) { create(:admin_user) }
   let(:guest) { create(:guest_user) }
   let(:registered) { create(:registered_user) }

@@ -5,21 +5,19 @@ USER_ROLE_COUNT = 20
 ADMIN_RATIO = 5
 
 # region Guest User
-# guest = User.find_or_create_by(name: 'Guest')
-# guest_pass = SecureRandom.base58(32) # random password for guest, not used anywhere else.
-# guest.update(
-#   id: 1,
-#   email: 'guest@example.com',
-#   password: guest_pass,
-#   password_confirmation: guest_pass,
-#   visible: false,
-#   site_role: :guest,
-#   avatar_url: Faker::Avatar.image,
-#   description: "A guest user",
-#   location: "Anytown, Everywhere",
-# )
-# guest.update password_digest: guest.password_digest.first(4) # no logins ever for guest
-# endregion
+guest = User.find_or_create_by(name: 'Guest', email: "guest@nowhere.pop")
+guest_pass = SecureRandom.base58(32) # random password for guest, not used anywhere else.
+guest.update(
+  id: 1,
+  email: 'guest@example.com',
+  password: guest_pass,
+  visible: false,
+  site_role: :guest,
+  avatar_url: Faker::Avatar.image,
+  description: "A guest user",
+  location: "Anytown, Everywhere",
+)
+#endregion
 
 # region developer User
 if ENV['DEVELOPER_NAME'].present? && ENV['DEVELOPER_EMAIL'].present?

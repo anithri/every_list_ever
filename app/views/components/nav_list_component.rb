@@ -8,7 +8,7 @@ class NavListComponent < ApplicationComponent
     @links = []
     @types = {
       guest: %i[guest_home login],
-      site_user: %i[registered_home show_user organizations logout],
+      member: %i[registered_home show_user organizations logout],
       admin: %i[registered_home show_user users organizations logout]
     }
   end
@@ -29,7 +29,7 @@ class NavListComponent < ApplicationComponent
 
   def link_names_for_site_role
     return @types[:admin] if admin?
-    return @types[:registered] if registered?
+    return @types[:member] if member?
 
     @types[:guest]
   end

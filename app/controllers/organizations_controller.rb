@@ -1,5 +1,4 @@
-class OrganizationsController < ApplicationController
-  before_action :require_login
+class OrganizationsController < AuthenticationController
   before_action :set_organization, only: %i[ show edit update destroy ]
 
   # GET /organizations or /organizations.json

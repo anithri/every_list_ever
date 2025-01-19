@@ -16,7 +16,6 @@ if DEVELOPER.present?
   )
 end
 
-
 ALL_AUTHORS.each do |author|
   org = {
     name: Faker::Company.name,

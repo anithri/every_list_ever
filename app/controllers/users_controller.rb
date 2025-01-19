@@ -1,10 +1,11 @@
-class UsersController < ApplicationController
+class UsersController < AuthenticationController
   before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :require_login
+  before_action :require_login, except: %i[ new create ]
+  after_action :verify_authorized, except: %i[ new create ]
 
   # GET /users or /users.json
   def index
-    authorize :index?
+    authorize User
     @users = policy_scope(User)
   end
 

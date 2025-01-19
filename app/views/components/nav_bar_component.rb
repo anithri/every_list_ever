@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-
 class NavBarComponent < ApplicationComponent
   attr_reader :current_user, :is_guest
 
@@ -13,7 +12,9 @@ class NavBarComponent < ApplicationComponent
         header do
           ul(class: "flex flex-col items-center gap-6 text-xl") do
             li do
-              h1(class: "text-amber-400") { component(:icon, :scroll, class: 'fa-xl', title: 'EveryListEver') }
+              h1(class: "text-amber-400") do
+                component(:icon, :scroll, class: 'fa-xl', title: 'EveryListEver')
+              end
             end
             li do
               avatar

@@ -40,8 +40,8 @@ class ApplicationPolicy
     user&.guest?
   end
 
-  def registered?
-    user&.registered?
+  def member?
+    user&.member?
   end
 
   def admin?

@@ -4,11 +4,11 @@ module NavLinks
   DELETE_DATA = { turbo_method: :delete, turbo_confirm: "Are you sure?" }
 
   def guest_home
-    btn :nav, root_path, icon: :house, title: "Guest Home"
+    btn :nav, guests_home_path, icon: :house, title: "Guest Home"
   end
 
   def registered_home
-    btn :nav, registered_home_path, icon: :house, title: "Registered Home"
+    btn :nav, members_home_path, icon: :house, title: "Registered Home"
   end
 
   def show_user
@@ -24,11 +24,11 @@ module NavLinks
   end
 
   def login
-    btn :nav, new_session_path, icon: :right_to_bracket, title: "Login"
+    btn :nav, sign_in_path, icon: :right_to_bracket, title: "Login"
   end
 
   def logout
-    btn :nav, session_path, icon: :right_from_bracket, title: "Logout", data: DELETE_DATA
+    btn :nav, sign_out_path, icon: :right_from_bracket, title: "Logout", data: DELETE_DATA
   end
 
   def users
