@@ -1,41 +1,43 @@
 FactoryBot.define do
+  sequence(:email) { |n| "person#{n}@example.com" }
+  sequence(:name) { |n| "user#{n}@example.com" }
   factory :admin_user, class: "User" do
     avatar_url { "MyString" }
     description { "MyText" }
-    email { "admin@example.com" }
+    email
     location { "MyString" }
     site_role { :admin }
-    name { "Admin" }
+    name
     password { "password" }
     visible { true }
   end
   factory :guest_user, class: "User" do
     avatar_url { "MyString" }
     description { "MyText" }
-    email { "guest@abc.123.example.dev" }
+    email
     location { "MyString" }
     site_role { :guest }
-    name { "Guest" }
+    name
     password { "password" }
     visible { true }
   end
-  factory :registered_user, class: "User" do
+  factory :member_user, class: "User" do
     avatar_url { "MyString" }
     description { "MyText" }
-    email { "registrated_user@example.com" }
+    email
     location { "MyString" }
-    site_role { :registered }
-    name { "Registered User" }
+    site_role { :member }
+    name
     password { "password" }
     visible { true }
   end
   factory :invisible_user, class: "User" do
     avatar_url { "MyString" }
     description { "MyText" }
-    email { "invisible@example.com" }
+    email
     site_role { :registered }
     location { "MyString" }
-    name { "Invisible Member" }
+    name
     password { "password" }
     visible { false }
   end

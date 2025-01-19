@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :organization do
     name { |n| "Organization ##{n}" }
     description { "We do things" }
-    association :user, factory: :registered_user
+    association :user, factory: :member_user
     visible { false }
   end
 end

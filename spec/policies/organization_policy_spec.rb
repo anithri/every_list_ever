@@ -1,19 +1,38 @@
 require 'rails_helper'
 
 RSpec.describe OrganizationPolicy, type: :policy, focus: true do
-  let(:admin) { User.new(id: 10, site_role: :admin) }
-  let(:guest) { User.new(id: 20, site_role: :guest) }
-  let(:registered_user) { User.new(id: 30, site_role: :registered) }
-  let(:invisible_org) { Organization.new(user_id: registered_user.id) }
-  let(:visible_org) { Organization.new(user_id: registered_user.id, visible: true) }
-  let(:admin_owned_org) { Organization.new(user_id: admin.id) }
-  let(:incomplete_org) { Organization.new }
+  let(:admin) { create :admin_user }
+  let(:guest) { create :guest_user }
+  let(:member) { create :member_user }
+  let(:invisible_org) { build :organization, visible: false }
+  let(:visible_org) { build :organization, visible: true }
+  let(:admin_owned_org) { build :organization, user: admin }
+  let(:incomplete_org) { build :organization }
 
   subject { described_class }
 
   describe "OrganizationPolicy::Scope" do
+    let(:invisible_org) { create :organization, visible: false }
+    let(:visible_org) { create :organization, visible: true }
+    let(:admin_owned_org) { create :organization, user: admin }
+    let(:incomplete_org) { create :organization }
+    let(:owned_invisible_org) { create(:organization, user: member, visible: false) }
     permissions ".scope" do
-
+      it "should allow admin to return all organizations" do
+        expected_count = Organization.count
+        resolved = subject::Scope.new(admin, Organization).resolve
+        expect(resolved.count).to eq(expected_count)
+      end
+      it "should allow guest to return no organizations" do
+        expected_count = 0
+        resolved = subject::Scope.new(guest, Organization).resolve
+        expect(resolved.count).to eq(expected_count)
+      end
+      it "should allow member to return all visible plus themselves" do
+        expected_count = Organization.visible.count + Organization.where(user: member).count
+        resolved = subject::Scope.new(member, Organization).resolve
+        expect(resolved.count).to eq(expected_count)
+      end
     end
   end
 
@@ -23,10 +42,10 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
         expect(subject).to permit(admin, Organization)
       end
       it 'should deny guest users in all cases' do
-        expect(subject).to permit(guest, Organization)
+        expect(subject).not_to permit(guest, Organization)
       end
-      it 'should allow registered_user users in all cases' do
-        expect(subject).to permit(registered_user, Organization)
+      it 'should allow member users in all cases' do
+        expect(subject).to permit(member, Organization)
       end
     end
     permissions :show? do
@@ -38,20 +57,22 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       it 'it denies guest to show invisible' do
         expect(subject).not_to permit(guest, invisible_org)
       end
-      it 'it allows guest to show visible' do
-        expect(subject).to permit(guest, visible_org)
+      it 'it denies guest to show visible' do
+        expect(subject).not_to permit(guest, visible_org)
       end
 
-      it 'it denies registered_user to show invisible' do
+      it 'it denies member to show invisible' do
         expect(subject).not_to permit(guest, invisible_org)
       end
-      it 'it allows registered_users to show visible' do
-        expect(subject).to permit(registered_user, visible_org)
+      it 'it allows members to show visible' do
+        expect(subject).to permit(member, visible_org)
       end
 
       it 'it allows owner to show own in all cases' do
-        expect(subject).to permit(registered_user, invisible_org)
-        expect(subject).to permit(registered_user, visible_org)
+        invisible_org.user = member
+        visible_org.user = member
+        expect(subject).to permit(member, invisible_org)
+        expect(subject).to permit(member, visible_org)
       end
     end
 
@@ -63,7 +84,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
         expect(subject).not_to permit(guest, incomplete_org)
       end
       it 'should allow owner to create another' do
-        expect(subject).to permit(registered_user, incomplete_org)
+        expect(subject).to permit(member, incomplete_org)
       end
     end
 
@@ -74,11 +95,13 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       it 'should deny guest users in all cases' do
         expect(subject).not_to permit(guest, visible_org)
       end
-      it 'should allow registered_user when owner' do
-        expect(subject).to permit(registered_user, visible_org)
+      it 'should allow member when owner' do
+        visible_org.user = member
+        expect(subject).to permit(member, visible_org)
       end
-      it 'should denies registered_user when not owner' do
-        expect(subject).not_to permit(registered_user, admin_owned_org)
+      it 'should denies member when not owner' do
+        warn [member, admin_owned_org].inspect
+        expect(subject).not_to permit(member, admin_owned_org)
       end
     end
 
@@ -89,15 +112,13 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       it 'should deny guest users in all cases' do
         expect(subject).not_to permit(guest, visible_org)
       end
-      it 'should allow registered_user when owner' do
-        expect(subject).to permit(registered_user, visible_org)
+      it 'should allow member when owner' do
+        visible_org.user = member
+        expect(subject).to permit(member, visible_org)
       end
-      it 'should denies registered_user when not owner' do
-        expect(subject).not_to permit(registered_user, admin_owned_org)
+      it 'should denies member when not owner' do
+        expect(subject).not_to permit(member, admin_owned_org)
       end
     end
-  end
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
   end
 end

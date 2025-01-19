@@ -41,14 +41,17 @@ class ApplicationPolicy
   end
 
   def member?
+    return false if guest?
     user&.member?
   end
 
   def admin?
+    return false if guest?
     user.admin?
   end
 
   def owner?
+    return false if guest?
     record.user_id == user.id
   end
 

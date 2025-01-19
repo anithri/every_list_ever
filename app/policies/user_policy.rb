@@ -35,7 +35,7 @@ class UserPolicy < ApplicationPolicy
       return scope.none if user.guest?
       return scope.all if user.admin?
 
-      scope.where(visible: true).or(scope.where(user_id: user.id))
+      scope.visible.or(scope.where(id: user.id))
     end
   end
 end

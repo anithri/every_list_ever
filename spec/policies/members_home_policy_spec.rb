@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe MembersHomePolicy, type: :policy do
-  let(:admin) { create(:admin_user) }
-  let(:guest) { create(:guest_user) }
-  let(:registered) { create(:registered_user) }
+  let(:admin) { build(:admin_user) }
+  let(:guest) { build(:guest_user) }
+  let(:member) { build(:member_user) }
 
   subject { described_class }
 
@@ -15,7 +15,7 @@ RSpec.describe MembersHomePolicy, type: :policy do
       expect(subject).not_to permit(guest)
     end
     it 'should allow member users' do
-      expect(subject).to permit(registered)
+      expect(subject).to permit(member)
     end
   end
 end

@@ -6,23 +6,29 @@ class OrganizationPolicy < ApplicationPolicy
   # https://gist.github.com/Burgestrand/4b4bc22f31c8a95c425fc0e30d7ef1f5
 
   def index?
+    return false if guest?
     member? || admin?
   end
 
   def show?
-    return true if @record.visible?
+    return false if guest?
+    return true if member? && @record.visible?
+
     owner? || admin?
   end
 
   def create?
+    return false if guest?
     member? || admin?
   end
 
   def update?
+    return false if guest?
     owner? || admin?
   end
 
   def destroy?
+    return false if guest?
     owner? || admin?
   end
 

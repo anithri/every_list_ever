@@ -1,5 +1,7 @@
 class Organization < ApplicationRecord
   belongs_to :user
+
+  scope :visible, -> { where(visible: true) }
 end
 
 # == Schema Information
