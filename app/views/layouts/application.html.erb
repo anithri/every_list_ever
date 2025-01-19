@@ -5,7 +5,7 @@
   <body class="bg-page m-0 p-0">
     <div class="navbar-page-grid h-screen">
       <aside class="bg-violet-300">
-        <%= component :nav_bar, Current.user || User.guest %>
+        <%= component :nav_bar, current_user || User.guest %>
        </aside>
       <% component :flash_messages, flash %>
       <div class="h-full w-full">

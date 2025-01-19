@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :require_login
 
   # GET /users or /users.json
   def index
-    authorize Current.user,:index?
+    authorize :index?
     @users = policy_scope(User)
   end
 
@@ -64,13 +65,14 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.expect(user: [ :email_address, :name, :password_digest, :visible, :site_role, :avatar_url, :description, :location ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = policy_scope(User).find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.expect(user: [ :email_address, :name, :visible, :site_role, :avatar_url, :description, :location ])
+  end
 end

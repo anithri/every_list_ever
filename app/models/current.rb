@@ -1,6 +1,9 @@
 class Current < ActiveSupport::CurrentAttributes
-  attribute :session
-  delegate :user, to: :session, allow_nil: true
-  delegate :guest?, to: :user, allow_nil: true
-
+  attribute :user
+  def guest
+    @guest ||= User.guest
+  end
+  def guest?
+    !user
+  end
 end

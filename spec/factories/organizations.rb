@@ -1,8 +1,7 @@
 FactoryBot.define do
   factory :organization do
-    name { "MyString" }
-    subtitle { "MyString" }
-    description { "MyText" }
+    name { |n| "Organization ##{n}" }
+    description { "We do things" }
     association :user, factory: :registered_user
     visible { false }
   end

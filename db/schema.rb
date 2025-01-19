@@ -26,31 +26,33 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_11_203614) do
     t.index ["user_id"], name: "index_organizations_on_user_id"
   end
 
-  create_table "sessions", force: :cascade do |t|
-    t.bigint "user_id", null: false
-    t.string "ip_address"
-    t.string "user_agent"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_sessions_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
-    t.string "email_address", null: false
     t.string "name", null: false
-    t.string "password_digest", null: false
-    t.boolean "visible", default: false
-    t.integer "site_role", default: 0
+    t.string "email", null: false
+    t.string "visible", default: "false", null: false
+    t.integer "site_role", default: 0, null: false
     t.string "location"
-    t.string "description"
+    t.text "description"
     t.string "avatar_url"
+    t.json "settings", default: {"theme" => "light"}, null: false
+    t.string "encrypted_password", limit: 128, null: false
+    t.string "confirmation_token", limit: 128
+    t.string "remember_token", limit: 128, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["email_address"], name: "index_users_on_email_address", unique: true
+    t.datetime "confirmed_at"
+    t.datetime "deleted_at"
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
+    t.index ["confirmed_at"], name: "index_users_on_confirmed", where: "(deleted_at IS NULL)"
+    t.index ["confirmed_at"], name: "index_users_on_confirmed_at_null", where: "(deleted_at IS NULL)"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at", where: "(deleted_at IS NOT NULL)"
+    t.index ["deleted_at"], name: "index_users_on_deleted_at_null", where: "(deleted_at IS NULL)"
+    t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
-    t.check_constraint "site_role = ANY (ARRAY[0, 1, 2])", name: "site_role_check"
+    t.index ["remember_token"], name: "index_users_on_remember_token", unique: true
+    t.index ["site_role"], name: "index_users_on_site_role"
+    t.index ["visible"], name: "index_users_on_visible"
   end
 
   add_foreign_key "organizations", "users"
-  add_foreign_key "sessions", "users"
 end

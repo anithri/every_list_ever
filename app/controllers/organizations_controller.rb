@@ -1,9 +1,10 @@
 class OrganizationsController < ApplicationController
+  before_action :require_login
   before_action :set_organization, only: %i[ show edit update destroy ]
 
   # GET /organizations or /organizations.json
   def index
-    authorize Current.user,:index?
+    authorize current_user,:index?
     @organizations = policy_scope(Organization)
   end
 

@@ -78,4 +78,4 @@ end
 gem "pundit", "~> 2.3"
 gem 'phlex-rails'
 gem 'phlex-variants'
-
+gem "clearance", "~> 2.9"

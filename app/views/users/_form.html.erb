@@ -1,68 +1,9 @@
-<%= form_with(model: user, class: "contents") do |form| %>
-  <% if user.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="text-field">
+  <%= form.label :email %>
+  <%= form.email_field :email %>
+</div>
 
-      <ul>
-        <% user.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="my-5">
-    <%= form.label :email_address %>
-    <%= form.text_field :email_address, disabled: !user.admin?, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5 flex justify-between">
-    <div>
-      <%= form.label :visible %>
-      <%= form.checkbox :visible, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 mt-2 h-5 w-5" %>
-    </div>
-    <div class="my-5 flex justify-between">
-      <div>
-        <%= form.label :site_role %>
-        <%= form.select :site_role, User.site_roles.keys, selected: user.site_role, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-      </div>
-    </div>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :avatar_url %>
-    <%= form.text_field :avatar_url, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :description %>
-    <%= form.textarea :description, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :location %>
-    <%= form.text_field :location, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
-
-
-  <%= component :btn_bar do %>
-    <li>
-      <%= form.submit class: submit_classes(color: :success, size: :sm) %>
-    </li>
-    <li>
-      <%= btn :show, @user, :user, size: :sm %>
-    </li>
-    <li>
-      <%= btn :delete, @user, :user, size: :sm %>
-    </li>
-    <li>
-      <%= btn :back_to, users_path, :users, size: :sm  %>
-    </li>
-  <% end %>
-
-<% end %>
+<div class="password-field">
+  <%= form.label :password %>
+  <%= form.password_field :password %>
+</div>

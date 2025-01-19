@@ -5,30 +5,29 @@ USER_ROLE_COUNT = 20
 ADMIN_RATIO = 5
 
 # region Guest User
-guest = User.find_or_create_by(name: 'Guest')
-guest_pass = SecureRandom.base58(32) # random password for guest, not used anywhere else.
-guest.update(
-  id: 1,
-  email_address: 'guest@example.com',
-  password: guest_pass,
-  password_confirmation: guest_pass,
-  visible: false,
-  site_role: :guest,
-  avatar_url: Faker::Avatar.image,
-  description: "A guest user",
-  location: "Anytown, Everywhere",
-)
-guest.update password_digest: guest.password_digest.first(4) # no logins ever for guest
+# guest = User.find_or_create_by(name: 'Guest')
+# guest_pass = SecureRandom.base58(32) # random password for guest, not used anywhere else.
+# guest.update(
+#   id: 1,
+#   email: 'guest@example.com',
+#   password: guest_pass,
+#   password_confirmation: guest_pass,
+#   visible: false,
+#   site_role: :guest,
+#   avatar_url: Faker::Avatar.image,
+#   description: "A guest user",
+#   location: "Anytown, Everywhere",
+# )
+# guest.update password_digest: guest.password_digest.first(4) # no logins ever for guest
 # endregion
 
 # region developer User
 if ENV['DEVELOPER_NAME'].present? && ENV['DEVELOPER_EMAIL'].present?
-  developer = User.find_or_create_by(name: ENV['DEVELOPER_NAME'])
+  developer = User.find_or_initialize_by(name: ENV['DEVELOPER_NAME'], email: ENV['DEVELOPER_EMAIL'],
+  )
   developer.update(
     id: 42,
-    email_address: ENV['DEVELOPER_EMAIL'],
     password: ENV['DEVELOPER_PASS'],
-    password_confirmation: ENV['DEVELOPER_PASS'],
     visible: true,
     site_role: :admin,
     avatar_url: Faker::Avatar.image,
@@ -43,9 +42,8 @@ admin = User.find_or_create_by(name: 'admin')
 admin_pass = SecureRandom.base58(32) # random password for guest, not used anywhere else.
 admin.update(
   id: 99,
-  email_address: 'admin@example.com',
+  email: 'admin@example.com',
   password: admin_pass,
-  password_confirmation: admin_pass,
   visible: true,
   site_role: :admin,
   avatar_url: Faker::Avatar.image,
@@ -61,12 +59,11 @@ User.connection.execute("ALTER SEQUENCE users_id_seq RESTART WITH 100;")
 all_users = []
 USER_ROLE_COUNT.times do
   pass = Faker::Internet.password
-  site_role = rand(ADMIN_RATIO).zero? ? :admin : :registered
+  site_role = rand(ADMIN_RATIO).zero? ? :admin : :member
   location = rand(2).zero? ? Faker::Address.city(options: { with_state: true, with_country: true }) : Faker::University.name
   u = {
-    email_address: Faker::Internet.email,
+    email: Faker::Internet.email,
     password: pass,
-    password_confirmation: pass,
     site_role: site_role,
     location: location,
     name: Faker::Name.name,

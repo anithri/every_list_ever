@@ -1,17 +1,15 @@
-<div class="flex w-full h-full items-center justify-center">
-  <%= render PaneComponent.new title: "Edit #{@user.name}'s Profile",
-                               subtitle: "Find me in app/views/users/edit.html.erb" do %>
+<div id="clearance" class="sign-up">
+  <h2><%= t(".title") %></h2>
 
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice">
-        <%= notice %>
-      </p>
-    <% end %>
+  <%= form_for @user do |form| %>
+    <%= render partial: '/users/form', object: form %>
 
-    <h1 class="font-bold text-4xl">New user</h1>
+    <div class="submit-field">
+      <%= form.submit %>
+    </div>
 
-    <%= render "form", user: @user %>
-
-    <%= link_to "Back to users", users_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
+    <div class="other-links">
+      <%= link_to t(".sign_in"), sign_in_path %>
+    </div>
   <% end %>
 </div>
