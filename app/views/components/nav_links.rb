@@ -7,6 +7,10 @@ module NavLinks
     btn :nav, guests_home_path, icon: :house, title: "Guest Home"
   end
 
+  def sign_up
+    btn :nav, sign_up_path, icon: :user_plus, title: "Sign Up"
+  end
+
   def registered_home
     btn :nav, members_home_path, icon: :house, title: "Registered Home"
   end

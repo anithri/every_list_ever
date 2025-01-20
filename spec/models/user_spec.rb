@@ -2,17 +2,15 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe 'class features & validations' do
-    subject { build(:registered_user) }
+    subject { build(:member_user) }
 
     it { is_expected.to validate_presence_of(:name) }
-    it { is_expected.to validate_presence_of(:email_address) }
+    it { is_expected.to validate_presence_of(:email) }
     it { is_expected.to validate_uniqueness_of(:name) }
-    it { is_expected.to validate_uniqueness_of(:email_address).case_insensitive }
+    it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
     it { is_expected.to validate_length_of(:name) }
-    it { is_expected.to have_secure_password }
-    it { is_expected.to normalize(:email_address).from('BOB@example.com').to('bob@example.com') }
-    it { is_expected.to define_enum_for(:site_role).with_values([ :guest, :registered, :admin ]).with_default(:guest) }
-    it { is_expected.to have_many(:sessions).dependent(:destroy) }
+    it { is_expected.to normalize(:email).from('BOB@example.com').to('bob@example.com') }
+    it { is_expected.to define_enum_for(:site_role).with_values([ :guest, :member, :admin ]).with_default(:guest) }
   end
 
   describe 'class methods' do

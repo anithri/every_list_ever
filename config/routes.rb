@@ -1,31 +1,37 @@
 Rails.application.routes.draw do
-  resources :passwords, controller: "clearance/passwords", only: [ :create, :new ]
-  resource :session, controller: "clearance/sessions", only: [ :create ]
-  resources :users, controller: "clearance/users", only: [ :create ] do
-    resource :password,
-             controller: "clearance/passwords",
-             only: [ :edit, :update ]
+  constraints Clearance::Constraints::SignedOut.new do
+    resources :users, controller: "clearance/users", only: [ :create ] do
+      resource :password,
+               controller: "clearance/passwords",
+               only: [ :edit, :update ]
+    end
+    resource :session, controller: "clearance/sessions", only: [ :create ]
+
+    get "/sign_up" => "clearance/users#new", as: "sign_up"
+    get "/guest" => "guests#home", as: :guests_home
+    get "/sign_in" => "clearance/sessions#new", as: "sign_in"
+
+    get "/", to: redirect("/guest")
+    get "/*", to: redirect("/sign_in")
   end
 
-  get "/sign_in" => "clearance/sessions#new", as: "sign_in"
-  delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
-  get "/sign_up" => "clearance/users#new", as: "sign_up"
+  constraints Clearance::Constraints::SignedIn.new do
+    resources :passwords, controller: "clearance/passwords", only: [ :create, :new ]
+    resources :users, except: [ :new, :create ]
+    resources :organizations
+    delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
+    get "member" => "members#home", as: :members_home
+    get "/", to: redirect("/member")
+  end
 
-  resources :users
-  resources :organizations
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  get "up" => "rails/health#show", as: :rails_health_check
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  get "member" => "members#home", as: :members_home
-  get "guest" => "guests#home", as: :guests_home
-  # Defines the root path route ("/")
-  root "pages#root"
 end
 
 # == Route Map

@@ -2,10 +2,10 @@ class User < ApplicationRecord
   include Clearance::User
   enum :site_role, [ :guest, :member, :admin ], default: :guest
 
-  # has_many :sessions, dependent: :destroy
-  # accepts_nested_attributes_for :organizations, allow_destroy: true
+  has_many :organizations, dependent: :destroy
+  accepts_nested_attributes_for :organizations, allow_destroy: true
 
-  normalizes :email_address, with: ->(e) { e.strip.downcase }
+  normalizes :email, with: ->(e) { e.strip.downcase }
 
   validates :name, presence: true, uniqueness: true, length: { in: 4..32 }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP },

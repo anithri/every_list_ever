@@ -32,8 +32,8 @@ class UserPolicy < ApplicationPolicy
   class Scope < ApplicationPolicy::Scope
     # NOTE: Be explicit about which records you allow access to!
     def resolve
-      return scope.none if user.guest?
-      return scope.all if user.admin?
+      return scope.none if !user || user&.guest?
+      return scope.all if user&.admin?
 
       scope.visible.or(scope.where(id: user.id))
     end

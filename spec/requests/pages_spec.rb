@@ -1,43 +1,25 @@
 require 'rails_helper'
 
 RSpec.xdescribe "Pages", type: :request do
-  describe "GET /home" do
-    it "returns a successful response" do
-      get guests_home_path
-      expect(response).to have_http_status(:ok)
-    end
-
-    it "displays the welcome notice" do
-        get guests_home_path
-      expect(flash[:notice]).to eq("Welcome to the home page!")
-    end
-
-    it "displays the login alert" do
-      get guests_home_path
-      expect(flash[:alert]).to eq("Login or create a new user.")
-    end
-  end
-
-  describe "GET /root" do
-    context "when user is authenticated" do
-      before do
-        allow_any_instance_of(ApplicationController).to receive(:authenticated?).and_return(true)
-      end
-
+  describe "GET /" do
+    context "when user is an authenticated user" do
+      let (:admin) { create(:admin_user) }
+      let (:member) { create(:member_user) }
       it "redirects to the members home page" do
-        get root_path
-        expect(response).to redirect_to(registered_home_path)
+        get root_path(as: admin)
+        expect(response).to redirect_to members_home_path
+      end
+      it "redirects to the members home page" do
+        get root_path(as: admin)
+        expect(response).to redirect_to members_home_path
       end
     end
 
     context "when user is not authenticated" do
-      before do
-        allow_any_instance_of(ApplicationController).to receive(:authenticated?).and_return(false)
-      end
-
+      let (:guest) { create(:guest_user) }
       it "redirects to the guest home page" do
         get root_path
-        expect(response).to redirect_to(guest_home_path)
+        expect(response).to redirect_to guests_home_path
       end
     end
   end

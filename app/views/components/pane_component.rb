@@ -25,7 +25,6 @@ class PaneComponent < ApplicationComponent
   end
 
   def subtitle
-    warn '-' * 20 + subtitle_str + '-' * 20
     return '' unless subtitle_str
     div class: "w-full text-center" do
       span(class: "text-center") { subtitle_str }

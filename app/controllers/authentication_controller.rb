@@ -1,6 +1,5 @@
 class AuthenticationController < ApplicationController
   include Pundit::Authorization
-  before_action :require_login
   after_action :verify_authorized
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized

@@ -39,7 +39,6 @@ module BtnComponents
     def initialize(path, name = nil, label: nil, icon: nil, color: nil, size: nil, shape: nil, **html_opts)
       @path = path
       @label = normalize_label(name, label)
-      warn @label
       @icon = normalize_icon(icon)
       @color = normalize_color(color)
       @size = normalize_size(size)

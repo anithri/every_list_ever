@@ -13,7 +13,7 @@ check_env() {
 }
 
 usage () {
-  echo "usage: `basename $0` start|stop|status|down|reset"
+  echo "usage: `basename $0` start|stop|status|down|setup|migrate|seed|reset"
 }
 
 do_start () {
@@ -37,6 +37,19 @@ do_reset () {
   rails db:drop db:create db:migrate db:seed
 }
 
+do_setup() {
+  rm db/schema.rb
+  rails db:create db:migrate db:seed
+}
+
+do_migrate() {
+  rails db:migrate
+}
+
+do_seed() {
+  rails db:seed
+}
+
 check_env
 
 case $1 in
@@ -51,6 +64,15 @@ case $1 in
   ;;
   down)
     do_down
+  ;;
+  setup)
+    do_setup
+  ;;
+  migrate)
+    do_migrate
+  ;;
+  seed)
+    do_seed
   ;;
   reset)
     do_reset

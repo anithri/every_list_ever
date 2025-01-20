@@ -14,7 +14,7 @@ module Users
 
     def view_template
       tr class: @classes, **html_opts do
-        td { user.email_address }
+        td { user.email }
         td { user.name }
         td { user.site_role }
         td { user.visible ? "Yes" : "No" }

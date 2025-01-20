@@ -7,7 +7,7 @@ class NavListComponent < ApplicationComponent
     @current_user = current_user
     @links = []
     @types = {
-      guest: %i[guest_home login],
+      guest: %i[guest_home login sign_up],
       member: %i[registered_home show_user organizations logout],
       admin: %i[registered_home show_user users organizations logout]
     }

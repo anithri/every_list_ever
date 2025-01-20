@@ -100,7 +100,6 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
         expect(subject).to permit(member, visible_org)
       end
       it 'should denies member when not owner' do
-        warn [member, admin_owned_org].inspect
         expect(subject).not_to permit(member, admin_owned_org)
       end
     end
