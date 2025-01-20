@@ -7,7 +7,8 @@ RSpec.describe "GuestsController", type: :request do
     context "as guest" do
       describe "GET #home /guest" do
         it "returns http success" do
-          get guests_home_path(as: guest)
+          Current.user = guest
+          get guests_home_path
           expect(response).to have_http_status(:success)
         end
       end

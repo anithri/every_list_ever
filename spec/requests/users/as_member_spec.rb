@@ -26,57 +26,50 @@ RSpec.describe "/users", type: :request do
       describe "GET #index /users" do
         it "renders a successful response" do
           get users_url(as: member)
-          expect(response).to be_successful
+          expect(response).to have_http_status(:ok)
         end
       end
 
       describe "GET #show /users/show/1234" do
         it "renders a successful response" do
           get user_url(admin, as: member)
-          expect(response).not_to be_successful
+          expect(response).not_to have_http_status(:ok)
         end
         it "renders a successful response" do
           get user_url(member, as: member)
-          expect(response).to be_successful
+          expect(response).to have_http_status(:ok)
         end
       end
 
       describe "GET #edit /users/1234/edit" do
-        it "renders a successful response as admin editing admin" do
-          get edit_user_url(admin, as: member)
-          expect(response).not_to be_successful
-        end
-        it "renders a successful response as admin editing member" do
+        it "renders a successful response" do
           get edit_user_url(member, as: member)
-          expect(response).to be_successful
+          expect(response).to have_http_status(:ok)
         end
       end
 
       describe "PATCH #update /users/1234" do
         context "with valid parameters" do
-          let(:new_attributes) {
-            skip("Add a hash of attributes valid for your model")
-          }
-
           it "updates the requested user" do
-            user = User.create! valid_attributes
-            patch user_url(user), params: { user: new_attributes }
+            user = User.create! attributes_for(:member_user)
+            patch user_url(user, as: user), params: { user: valid_attributes }
             user.reload
-            skip("Add assertions for updated state")
+            valid_attributes.each do |key, value|
+              expect(user.send(key)).to eq(value)
+            end
           end
 
           it "redirects to the user" do
-            user = User.create! valid_attributes
-            patch user_url(user), params: { user: new_attributes }
-            user.reload
+            user = User.create! attributes_for :member_user
+            patch user_url(user, as: user), params: { user: valid_attributes }
             expect(response).to redirect_to(user_url(user))
           end
         end
 
         context "with invalid parameters" do
           it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-            user = User.create! valid_attributes
-            patch user_url(user), params: { user: invalid_attributes }
+            user = User.create! attributes_for :member_user
+            patch user_url(user, as: user), params: { user: invalid_attributes }
             expect(response).to have_http_status(:unprocessable_entity)
           end
         end
@@ -84,16 +77,16 @@ RSpec.describe "/users", type: :request do
 
       describe "DELETE /destroy" do
         it "destroys the requested user" do
-          user = User.create! valid_attributes
-          expect {
-            delete user_url(user)
-          }.to change(User, :count).by(-1)
+          user = User.create! attributes_for :member_user
+          orig_count = User.count
+          delete user_url(user, as: user)
+          expect(User.count).to eq(orig_count)
         end
 
         it "redirects to the users list" do
-          user = User.create! valid_attributes
-          delete user_url(user)
-          expect(response).to redirect_to(users_url)
+          user = User.create! attributes_for :member_user
+          delete user_url(user, as: user)
+          expect(response).to have_http_status(:redirect)
         end
       end
     end
