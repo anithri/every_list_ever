@@ -79,3 +79,5 @@ gem "pundit", "~> 2.3"
 gem 'phlex-rails'
 gem 'phlex-variants'
 gem "clearance", "~> 2.9"
+
+gem "hotwire-livereload", "~> 2.0", :group => :development
