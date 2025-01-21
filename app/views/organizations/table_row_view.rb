@@ -14,7 +14,7 @@ module Organizations
     def view_template
       tr class: @classes, **html_opts do
         td { org.name }
-        td { org.user.name }
+        td { org.owner.name }
         td { org.visible ? "Yes" : "No" }
         td { org.created_at.to_s }
         td { org.updated_at.to_s }
@@ -23,9 +23,6 @@ module Organizations
             show_button
             edit_button if owner?(org)
             delete_button if owner?(org)
-            # li { show_button }
-            # li { edit_button } if owner?(org)
-            # li { delete_button } if owner?(org)
           end
         end
       end

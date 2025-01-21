@@ -9,7 +9,8 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    is_public?
+    return false if guest? || !record.visible?
+    member? || admin?
   end
 
   def create?

@@ -24,7 +24,7 @@ module ComponentsHelper
     "BtnComponents::#{name.to_s.camelize}".constantize
   end
 
-  def submit_classes(color: nil, size: nil, shape: nil, extra_classes: nil)
+  def submit_classes(color: :success, size: :sm, shape: :bar, extra_classes: nil)
     BtnComponents::BaseBtn.build_style(color:, size:, shape:, extra_classes:)
   end
 end

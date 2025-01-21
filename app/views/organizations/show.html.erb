@@ -1,21 +1,14 @@
-<%= component :main_flex %>
-<div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
+<%= component :main_flex do %>
+  <%= component :pane, @organization.name do %>
     <% if notice.present? %>
       <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
     <% end %>
 
     <%= render @organization %>
-    <%= component :btn_bar, :col, class: :col do %>
-      <li>
-        <%= link_to "Edit this organization", edit_organization_path(@organization), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </li>
-      <li>
-        <%= link_to "Back to organizations", organizations_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </li>
+    <%= component :btn_bar do %>
+      <li><%= btn :edit, edit_organization_path(@organization), "Org",size: :sm, shape: :bar %></li>
+      <li><%= btn :back_to, organizations_path, "Orgs", size: :sm, shape: :bar %></li>
+      <li><%= btn :delete, edit_organization_path(@organization), "Org", size: :sm, shape: :bar %></li>
     <% end %>
-    <div class="inline-block ml-2">
-      <%= button_to "Destroy this organization", @organization, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
-    </div>
-  </div>
-</div>
+  <% end %>
+<% end %>

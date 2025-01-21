@@ -1,5 +1,5 @@
 <%= component :main_flex do %>
   <%= component :pane, "Organizations", "Find me in app/views/organizations/index.html.erb" do %>
-    <%= view :organizations, :table, @organizations, Current.user %>
+    <%= view :organizations, :table, @organizations, current_user %>
   <% end %>
 <% end %>

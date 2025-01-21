@@ -27,16 +27,13 @@
   </div>
 
   <div class="my-5">
-    <%= form.label :user %>
-    <%= form.text_field :user_id, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
     <%= form.label :visible %>
-    <%= form.checkbox :visible, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 mt-2 h-5 w-5" %>
+    <%= form.checkbox :visible, class: %>
   </div>
+  <%= component :btn_bar do %>
 
-  <div class="inline">
-    <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
-  </div>
+    <li><%= form.submit class: submit_classes %></li>
+    <li><%= btn :show, organization_path(organization), "Org", size: :sm, shape: :bar %></li>
+    <li><%= btn :back_to, organizations_path, "Orgs", size: :sm, shape: :bar %></li>
+  <% end %>
 <% end %>
