@@ -64,7 +64,7 @@ USER_ROLE_COUNT.times do
     password: pass,
     site_role: site_role,
     location: location,
-    name: Faker::Name.name,
+    name: Faker::Name.name.truncate(30),
     visible: rand(2).zero?,
     avatar_url: Faker::Avatar.image,
     description: "#{site_role.to_s.titleize} User\npassword = #{pass}",

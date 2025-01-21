@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe "/users", type: :request do
   let(:admin) { create(:admin_user) }
   let(:guest) { create(:guest_user) }
-  let(:member) { create(:member_user) }
   let(:valid_attributes) { { location: "Testing" } }
   let(:invalid_attributes) { { name: "" } }
 

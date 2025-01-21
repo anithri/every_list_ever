@@ -1,45 +1,31 @@
 FactoryBot.define do
   sequence(:email) { |n| "person#{n}@example.com" }
-  sequence(:name) { |n| "user#{n}@example.com" }
-  factory :admin_user, class: "User" do
+  sequence(:name) { |n| "User ##{n}" }
+  factory :base_user, class: "User" do
+    email
+    name
     avatar_url { "MyString" }
     description { "MyText" }
-    email
     location { "MyString" }
-    site_role { :admin }
-    name
     password { "password" }
-    visible { true }
-  end
-  factory :guest_user, class: "User" do
-    avatar_url { "MyString" }
-    description { "MyText" }
-    email
-    location { "MyString" }
-    site_role { :guest }
-    name
-    password { "password" }
-    visible { true }
-  end
-  factory :member_user, class: "User" do
-    avatar_url { "MyString" }
-    description { "MyText" }
-    email
-    location { "MyString" }
-    site_role { :member }
-    name
-    password { "password" }
-    visible { true }
-  end
-  factory :invisible_user, class: "User" do
-    avatar_url { "MyString" }
-    description { "MyText" }
-    email
-    site_role { :registered }
-    location { "MyString" }
-    name
-    password { "password" }
-    visible { false }
+    trait :admin do
+      site_role { :admin }
+    end
+    trait :guest do
+      site_role { :guest }
+    end
+    trait :member do
+      site_role { :member }
+    end
+    trait :invisible do
+      visible { false }
+    end
+    trait :visible do
+      visible { true }
+    end
+    factory :admin_user, traits: [:admin, :visible]
+    factory :guest_user, traits: [:guest, :visible]
+    factory :member_user, traits: [:member, :visible], aliases: [:user]
   end
 end
 

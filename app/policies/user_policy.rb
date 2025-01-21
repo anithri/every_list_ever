@@ -9,7 +9,7 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    admin? || owner?
+    is_public?
   end
 
   def create?

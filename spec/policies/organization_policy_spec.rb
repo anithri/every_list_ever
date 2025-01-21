@@ -4,8 +4,8 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
   let(:admin) { create :admin_user }
   let(:guest) { create :guest_user }
   let(:member) { create :member_user }
-  let(:invisible_org) { build :organization, visible: false }
-  let(:visible_org) { build :organization, visible: true }
+  let(:invisible_org) { build :organization, :invisible }
+  let(:visible_org) { build :organization, :visible }
   let(:admin_owned_org) { build :organization, user: admin }
   let(:incomplete_org) { build :organization }
 
@@ -29,7 +29,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
         expect(resolved.count).to eq(expected_count)
       end
       it "should allow member to return all visible plus themselves" do
-        expected_count = Organization.visible.count + Organization.where(user: member).count
+        expected_count = Organization.visible.count + Organization.where(owner: member).count
         resolved = subject::Scope.new(member, Organization).resolve
         expect(resolved.count).to eq(expected_count)
       end
@@ -69,8 +69,8 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       end
 
       it 'it allows owner to show own in all cases' do
-        invisible_org.user = member
-        visible_org.user = member
+        invisible_org.owner = member
+        visible_org.owner = member
         expect(subject).to permit(member, invisible_org)
         expect(subject).to permit(member, visible_org)
       end
@@ -96,7 +96,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
         expect(subject).not_to permit(guest, visible_org)
       end
       it 'should allow member when owner' do
-        visible_org.user = member
+        visible_org.owner = member
         expect(subject).to permit(member, visible_org)
       end
       it 'should denies member when not owner' do

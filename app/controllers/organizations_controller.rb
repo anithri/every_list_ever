@@ -72,6 +72,6 @@ class OrganizationsController < AuthenticationController
 
     # Only allow a list of trusted parameters through.
     def organization_params
-      params.expect(organization: [ :name, :subtitle, :description, :owner_id, :visible ])
+      params.expect(organization: [ :name, :subtitle, :description, :visible ])
     end
 end

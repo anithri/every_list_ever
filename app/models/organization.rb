@@ -1,6 +1,8 @@
 class Organization < ApplicationRecord
-  belongs_to :user
-
+  belongs_to :owner, foreign_key: :user_id, class_name: "User"
+  has_many :lists, dependent: :destroy
+  validates :name, presence: true, uniqueness: true
+  validates :owner, presence: true
   scope :visible, -> { where(visible: true) }
 end
 
@@ -26,3 +28,4 @@ end
 #
 #  fk_rails_...  (user_id => users.id)
 #
+

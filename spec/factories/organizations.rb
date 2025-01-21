@@ -1,9 +1,27 @@
 FactoryBot.define do
-  factory :organization do
-    name { |n| "Organization ##{n}" }
+  factory :base_organization, class: "User" do
+    sequence(:name) { |n| "Organization ##{n}" }
     description { "We do things" }
-    association :user, factory: :member_user
-    visible { false }
+    trait :visible do
+      visible { true }
+    end
+    trait :invisible do
+      visible { false }
+    end
+    trait :admin do
+      association :owner, factory: :admin_user
+    end
+    trait :guest do
+      association :owner, factory: :guest_user
+    end
+    trait :member do
+      association :user, factory: :member_user
+    end
+
+    factory :organization, traits: [ :visible, :member ]
+    factory :admin_organization, traits: [ :visible, :admin ]
+    factory :guest_organization, traits: [ :visible, :guest ]
+    factory :member_organization, traits: [ :visible, :member ]
   end
 end
 

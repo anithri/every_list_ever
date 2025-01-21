@@ -7,26 +7,26 @@ ORGANIZATIONS_COUNT = 12
 all_orgs = []
 
 if DEVELOPER.present?
-  d = Organization.create(
+  org = Organization.create(
     name: 'Wooticus Prime',
     subtitle: "'A developer's organization'",
     description: 'A place for developers to share their lists.',
-    user: DEVELOPER,
+    owner: DEVELOPER,
     visible: true
   )
+  all_orgs.push(org)
 end
 
 ALL_AUTHORS.each do |author|
   org = {
-    name: Faker::Company.name,
+    name: Faker::Company.name.truncate(30),
     subtitle: Faker::Company.catch_phrase,
     description: Faker::Company.catch_phrase,
-    user: author,
+    owner: author,
     visible: rand(5).zero?
   }
   all_orgs.push(org)
 end
 Organization.create(all_orgs)
-
 
 puts "Organizations Seeded: #{Organization.count}"
