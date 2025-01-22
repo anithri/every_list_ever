@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe "/organizations", type: :request do
   let(:valid_attributes) { { subtitle: "Testing" } }
   let(:invalid_attributes) { { owner: nil } }
-  let(:member) { User.create!(attributes_for :member_user) }
-  let(:org) { Organization.create!(attributes_for(:organization).merge(owner: member)) }
+  let(:member) { create :member_user }
+  let(:org) { create :organization, owner: member }
 
   describe "attribute types for use in Organizations" do
     it "are valid" do

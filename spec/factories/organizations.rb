@@ -1,10 +1,10 @@
 FactoryBot.define do
-  factory :base_organization, class: "Organization" do
+  factory :organization, class: "Organization" do
     name { |n| "Organization ##{n}" }
     subtitle { "Wooticus Prime!" }
     description { "We Do Things" }
     visible { false }
-    association :owner, factory: :member_user
+
     trait :visible do
       visible { true }
     end
@@ -21,10 +21,9 @@ FactoryBot.define do
       association :owner, factory: :member_user
     end
 
-    factory :organization, traits: [ :visible, :member ]
-    factory :admin_organization, traits: [ :visible, :admin ]
-    factory :guest_organization, traits: [ :visible, :guest ]
-    factory :member_organization, traits: [ :visible, :member ]
+    factory :admin_org, traits: [ :visible, :admin ]
+    factory :member_org, traits: [ :visible, :member ], aliases: [ :org]
+    factory :incomplete_org
   end
 end
 

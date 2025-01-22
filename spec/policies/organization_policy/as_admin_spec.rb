@@ -6,7 +6,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
     let(:admin) { create :admin_user }
     let(:guest) { create :guest_user }
     let(:member) { create :member_user }
-    let(:invisible_org) { create :organization, visible: false }
+    let(:invis_org) { create :organization, visible: false }
     let(:visible_org) { create :organization, visible: true }
     let(:admin_owned_org) { create :organization, owner: admin }
     let(:incomplete_org) { build :organization }
@@ -23,7 +23,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
 
         it 'it allows admins show any' do
           expect(subject).to permit(admin, visible_org)
-          expect(subject).to permit(admin, invisible_org)
+          expect(subject).to permit(admin, invis_org)
           expect(subject).to permit(admin, admin_owned_org)
           expect(subject).to permit(admin, owned_invisible_org)
           expect(subject).to permit(admin, owned_visible_org)
@@ -39,7 +39,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       permissions :update? do
         it 'should allow all' do
           expect(subject).to permit(admin, visible_org)
-          expect(subject).to permit(admin, invisible_org)
+          expect(subject).to permit(admin, invis_org)
           expect(subject).to permit(admin, admin_owned_org)
           expect(subject).to permit(admin, owned_invisible_org)
           expect(subject).to permit(admin, owned_visible_org)
@@ -49,7 +49,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       permissions :destroy? do
         it 'should denies member when not owner' do
           expect(subject).to permit(admin, visible_org)
-          expect(subject).to permit(admin, invisible_org)
+          expect(subject).to permit(admin, invis_org)
           expect(subject).to permit(admin, admin_owned_org)
           expect(subject).to permit(admin, owned_invisible_org)
           expect(subject).to permit(admin, owned_visible_org)

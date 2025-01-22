@@ -6,7 +6,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
     let(:admin) { create :admin_user }
     let(:guest) { create :guest_user }
     let(:member) { create :member_user }
-    let(:invisible_org) { create :organization, visible: false }
+    let(:invis_org) { create :organization, visible: false }
     let(:visible_org) { create :organization, visible: true }
     let(:admin_owned_org) { create :organization, owner: admin }
     let(:incomplete_org) { build :organization }
@@ -23,7 +23,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       permissions :show? do
         it 'it allows admins show any' do
           expect(subject).not_to permit(guest, visible_org)
-          expect(subject).not_to permit(guest, invisible_org)
+          expect(subject).not_to permit(guest, invis_org)
           expect(subject).not_to permit(guest, admin_owned_org)
           expect(subject).not_to permit(guest, owned_invisible_org)
           expect(subject).not_to permit(guest, owned_visible_org)
@@ -39,7 +39,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       permissions :update? do
         it 'should deny all' do
           expect(subject).not_to permit(guest, visible_org)
-          expect(subject).not_to permit(guest, invisible_org)
+          expect(subject).not_to permit(guest, invis_org)
           expect(subject).not_to permit(guest, admin_owned_org)
           expect(subject).not_to permit(guest, owned_invisible_org)
           expect(subject).not_to permit(guest, owned_visible_org)
@@ -49,7 +49,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       permissions :destroy? do
         it 'should denies member when not owner' do
           expect(subject).not_to permit(guest, visible_org)
-          expect(subject).not_to permit(guest, invisible_org)
+          expect(subject).not_to permit(guest, invis_org)
           expect(subject).not_to permit(guest, admin_owned_org)
           expect(subject).not_to permit(guest, owned_invisible_org)
           expect(subject).not_to permit(guest, owned_visible_org)

@@ -1,7 +1,7 @@
 FactoryBot.define do
-  sequence(:email) { |n| "person#{n}@example.com" }
   sequence(:name) { |n| "User ##{n}" }
-  factory :base_user, class: "User" do
+  sequence(:email) { |n| "person#{n}@example.com" }
+  factory :user, class: "User" do
     email
     name
     avatar_url { "MyString" }
@@ -17,16 +17,16 @@ FactoryBot.define do
     trait :member do
       site_role { :member }
     end
-    trait :invisible do
-      visible { false }
-    end
     trait :visible do
       visible { true }
+    end
+    trait :invisible do
+      visible { false }
     end
 
     factory :admin_user, traits: [ :admin, :visible ]
     factory :guest_user, traits: [ :guest, :visible ]
-    factory :member_user, traits: [ :member, :visible ], aliases: [ :user ]
+    factory :member_user, traits: [ :member, :visible ]
   end
 end
 

@@ -4,7 +4,7 @@ class OrganizationsController < AuthenticationController
 
   # GET /organizations or /organizations.json
   def index
-    authorize current_user,:index?
+    authorize current_user, :index?
     @organizations = policy_scope(Organization)
   end
 
@@ -65,13 +65,14 @@ class OrganizationsController < AuthenticationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_organization
-      @organization = Organization.find(params.expect(:id))
-    end
 
-    # Only allow a list of trusted parameters through.
-    def organization_params
-      params.expect(organization: [ :name, :subtitle, :description, :visible ])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_organization
+    @organization = Organization.find(params.expect(:id))
+  end
+
+  # Only allow a list of trusted parameters through.
+  def organization_params
+    params.expect(organization: [ :name, :subtitle, :description, :visible ])
+  end
 end
