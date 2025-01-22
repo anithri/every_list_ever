@@ -1,7 +1,10 @@
 FactoryBot.define do
-  factory :base_organization, class: "User" do
-    sequence(:name) { |n| "Organization ##{n}" }
-    description { "We do things" }
+  factory :base_organization, class: "Organization" do
+    name { |n| "Organization ##{n}" }
+    subtitle { "Wooticus Prime!" }
+    description { "We Do Things" }
+    visible { false }
+    association :owner, factory: :member_user
     trait :visible do
       visible { true }
     end
@@ -15,7 +18,7 @@ FactoryBot.define do
       association :owner, factory: :guest_user
     end
     trait :member do
-      association :user, factory: :member_user
+      association :owner, factory: :member_user
     end
 
     factory :organization, traits: [ :visible, :member ]
@@ -33,17 +36,17 @@ end
 #  description :text
 #  name        :string           not null
 #  subtitle    :string
-#  visible     :boolean          default(FALSE)
+#  visible     :boolean          default(FALSE), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  user_id     :bigint           not null
+#  owner_id    :bigint           not null
 #
 # Indexes
 #
-#  index_organizations_on_name     (name) UNIQUE
-#  index_organizations_on_user_id  (user_id)
+#  index_organizations_on_name      (name) UNIQUE
+#  index_organizations_on_owner_id  (owner_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (owner_id => users.id)
 #

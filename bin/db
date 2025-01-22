@@ -25,7 +25,8 @@ do_stop () {
 }
 
 do_down () {
-  docker compose -f $POSTGRES_COMPOSE down
+  docker compose -f $POSTGRES_COMPOSE down --volumes
+  sudo rm -rf tmp/db
 }
 
 do_status () {

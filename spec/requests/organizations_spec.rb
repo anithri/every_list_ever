@@ -30,10 +30,6 @@ RSpec.describe "/organizations", type: :request do
 
       describe "GET #show /organizations/1234" do
         it "renders a successful response" do
-          warn "==================="
-          warn member.inspect
-          warn org.owner.inspect
-          warn "==================="
           get organization_path(org, as: member)
           expect(response).to have_http_status(200)
         end

@@ -52,13 +52,15 @@ class ApplicationPolicy
 
   def owner?
     return false if guest?
-    return record.user_id == user.id if record.respond_to?(:user)
-    record.owner == user if record.respond_to?(:owner)
-    false
+    record.owner == user
+  end
+
+  def same?
+    record == user
   end
 
   def public?
-    admin? || owner? || record.visible?
+    admin? || owner? || record&.visible?
   end
 
   class Scope

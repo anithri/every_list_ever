@@ -9,8 +9,10 @@ class UserPolicy < ApplicationPolicy
   end
 
   def show?
-    return false if guest? || !record.visible?
-    member? || admin?
+    return true if same?
+    return false if guest? || record.invisible?
+    return true if admin?
+    record.visible?
   end
 
   def create?

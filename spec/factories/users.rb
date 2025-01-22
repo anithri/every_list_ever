@@ -23,9 +23,10 @@ FactoryBot.define do
     trait :visible do
       visible { true }
     end
-    factory :admin_user, traits: [:admin, :visible]
-    factory :guest_user, traits: [:guest, :visible]
-    factory :member_user, traits: [:member, :visible], aliases: [:user]
+
+    factory :admin_user, traits: [ :admin, :visible ]
+    factory :guest_user, traits: [ :guest, :visible ]
+    factory :member_user, traits: [ :member, :visible ], aliases: [ :user ]
   end
 end
 

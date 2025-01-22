@@ -20,6 +20,14 @@ class User < ApplicationRecord
   def self.guest
     @@_guest ||= User.find_by(site_role: :guest)
   end
+
+  def visible?
+    visible == "t"
+  end
+
+  def invisible?
+    ! visible?
+  end
 end
 
 # == Schema Information

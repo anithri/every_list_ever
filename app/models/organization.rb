@@ -1,8 +1,10 @@
 class Organization < ApplicationRecord
-  belongs_to :owner, foreign_key: :user_id, class_name: "User"
-  has_many :lists, dependent: :destroy
-  validates :name, presence: true, uniqueness: true
+  belongs_to :owner, class_name: 'User'
+
+  # TODO , length: { in: 8..32 } removed for weird spect results
+  validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :owner, presence: true
+
   scope :visible, -> { where(visible: true) }
 end
 
@@ -14,18 +16,17 @@ end
 #  description :text
 #  name        :string           not null
 #  subtitle    :string
-#  visible     :boolean          default(FALSE)
+#  visible     :boolean          default(FALSE), not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-#  user_id     :bigint           not null
+#  owner_id    :bigint           not null
 #
 # Indexes
 #
-#  index_organizations_on_name     (name) UNIQUE
-#  index_organizations_on_user_id  (user_id)
+#  index_organizations_on_name      (name) UNIQUE
+#  index_organizations_on_owner_id  (owner_id)
 #
 # Foreign Keys
 #
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (owner_id => users.id)
 #
-
