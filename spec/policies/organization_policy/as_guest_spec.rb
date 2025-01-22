@@ -6,10 +6,10 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
     let(:admin) { create :admin_user }
     let(:guest) { create :guest_user }
     let(:member) { create :member_user }
-    let(:invis_org) { create :organization, visible: false }
-    let(:visible_org) { create :organization, visible: true }
+    let(:invis_org) { create :organization, :visible, :member }
+    let(:visible_org) { create :organization, :visible, :member }
     let(:admin_owned_org) { create :organization, owner: admin }
-    let(:incomplete_org) { build :organization }
+    let(:incomplete_org) { build :organization, :visible, :member }
     let(:owned_invisible_org) { create(:organization, :invisible, owner: member) }
     let(:owned_visible_org) { create(:organization, :visible, owner: member) }
 
@@ -21,7 +21,7 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
       end
 
       permissions :show? do
-        it 'it allows admins show any' do
+        it 'it denies guests' do
           expect(subject).not_to permit(guest, visible_org)
           expect(subject).not_to permit(guest, invis_org)
           expect(subject).not_to permit(guest, admin_owned_org)

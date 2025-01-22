@@ -11,9 +11,9 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
     let(:invis_org) { create :organization, :invisible, owner: member2 }
     let(:org) { create :organization, :visible, owner: member2 }
     let(:admin_org) { create :organization, owner: admin }
-    let(:incomplete_org) { build :organization }
+    let(:incomplete_org) { build :organization, :visible }
     let(:member_invis_org) { create(:organization, :invisible, owner: member) }
-    let(:owned_org) { create(:organization, owner: member) }
+    let(:member_org) { create(:organization, owner: member) }
 
     context "when user is a member" do
       permissions :index? do
@@ -30,10 +30,8 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
         end
 
         it 'it allows owner to show own in all cases' do
-          invis_org.owner = member
-          visible_org.owner = member
-          expect(subject).to permit(member, invis_org)
-          expect(subject).to permit(member, org)
+          expect(subject).to permit(member, member_invis_org)
+          expect(subject).to permit(member, member_org)
         end
       end
 
@@ -45,11 +43,12 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
 
       permissions :update? do
         it 'should allow member when owner' do
-          visible_org.owner = member
-          expect(subject).to permit(member, org)
+          expect(subject).to permit(member, member_org)
+          expect(subject).to permit(member, member_invis_org)
         end
         it 'should denies member when not owner' do
           expect(subject).not_to permit(member, org)
+          expect(subject).not_to permit(member, admin_org)
         end
       end
 
