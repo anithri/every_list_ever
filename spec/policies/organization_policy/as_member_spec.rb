@@ -7,8 +7,9 @@ RSpec.describe OrganizationPolicy, type: :policy, focus: true do
     let(:guest) { create :guest_user }
     let(:member) { create :member_user }
     let(:member2) { create :member_user }
-    let(:invis_org) { create :organization, :invisible, member2 }
-    let(:org) { create :organization, :visible, member2 }
+
+    let(:invis_org) { create :organization, :invisible, owner: member2 }
+    let(:org) { create :organization, :visible, owner: member2 }
     let(:admin_org) { create :organization, owner: admin }
     let(:incomplete_org) { build :organization }
     let(:member_invis_org) { create(:organization, :invisible, owner: member) }

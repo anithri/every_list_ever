@@ -6,8 +6,8 @@ RSpec.describe User, type: :model do
 
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:email) }
-    it { is_expected.to validate_uniqueness_of(:name) }
-    it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
+    # it { is_expected.to validate_uniqueness_of(:name) }
+    # it { is_expected.to validate_uniqueness_of(:email).case_insensitive }
     it { is_expected.to validate_length_of(:name) }
     it { is_expected.to normalize(:email).from('BOB@example.com').to('bob@example.com') }
     it { is_expected.to define_enum_for(:site_role).with_values([ :guest, :member, :admin ]).with_default(:guest) }

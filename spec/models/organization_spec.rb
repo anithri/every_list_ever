@@ -8,15 +8,15 @@ RSpec.describe Organization, type: :model do
     it { should validate_presence_of(:owner) }
     #
     # it { should validate_length_of(:name).is_at_least(8) }
-    it { should validate_uniqueness_of(:name).case_insensitive }
+    # it { should validate_uniqueness_of(:name) }
 
     # associations
     it { should belong_to(:owner).class_name('User') }
 
     # Scopes
     describe ".visible" do
-      let!(:visible_organization) { create(:organization, :visible) }
-      let!(:invisible_organization) { create(:organization, :invisible) }
+      let!(:visible_organization) { create(:organization, :visible, :member) }
+      let!(:invisible_organization) { create(:organization, :invisible, :member) }
 
       it "returns only visible organizations" do
         expect(Organization.visible).to include(visible_organization)

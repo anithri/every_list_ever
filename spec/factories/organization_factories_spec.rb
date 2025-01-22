@@ -1,4 +1,3 @@
-require "rails_helper"
 require_relative "../helper/factories_shared_examples"
 
 org_factories = %i[ admin_org member_org ]

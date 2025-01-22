@@ -12,9 +12,9 @@ class OrganizationPolicy < ApplicationPolicy
 
   def show?
     return false if guest?
-    return true if member? && @record.visible?
-
-    owner? || admin?
+    return true if admin?
+    return true if owner?
+    @record.visible?
   end
 
   def create?
