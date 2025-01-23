@@ -21,10 +21,6 @@ class User < ApplicationRecord
     @@_guest ||= User.find_by(site_role: :guest)
   end
 
-  def visible?
-    visible == "t"
-  end
-
   def invisible?
     ! visible?
   end
@@ -47,7 +43,7 @@ end
 #  remember_token     :string(128)      not null
 #  settings           :json             not null
 #  site_role          :integer          default("guest"), not null
-#  visible            :string           default("false"), not null
+#  visible            :boolean          default(FALSE), not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #

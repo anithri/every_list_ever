@@ -29,7 +29,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_22_012536) do
   create_table "users", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
-    t.string "visible", default: "false", null: false
+    t.boolean "visible", default: false, null: false
     t.integer "site_role", default: 0, null: false
     t.string "location"
     t.text "description"

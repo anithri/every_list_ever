@@ -1,37 +1,10 @@
-<%= form_with(model: organization, class: "contents") do |form| %>
-  <% if organization.errors.any? %>
-    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(organization.errors.count, "error") %> prohibited this organization from being saved:</h2>
-
-      <ul>
-        <% organization.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="my-5">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :subtitle %>
-    <%= form.text_field :subtitle, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :description %>
-    <%= form.textarea :description, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none focus:outline-blue-600 px-3 py-2 mt-2 w-full" %>
-  </div>
-
-  <div class="my-5">
-    <%= form.label :visible %>
-    <%= form.checkbox :visible, class: %>
-  </div>
+<%= simple_form_for organization, class: "contents" do |f| %>
+  <%= f.input :name %>
+  <%= f.input :subtitle %>
+  <%= f.input :description %>
+  <%= f.input :visible, type: :checkbox %>
   <%= component :btn_bar, :div do %>
-    <%= form.submit class: submit_classes %>
+    <%= f.submit class: submit_classes(size: :md, shape: :bar) %>
     <%= btn :show, organization_path(organization), "Org", size: :md, shape: :bar %>
     <%= btn :back_to, organizations_path, "Orgs", size: :md, shape: :bar %>
   <% end %>

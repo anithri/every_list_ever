@@ -4,7 +4,7 @@ class CreateUsers < ActiveRecord::Migration[8.0]
     create_table :users do |t|
       t.string :name, null: false, index: { unique: true }
       t.string :email, null: false, index: { unique: true }
-      t.string :visible, null: false, default: "false", index: true
+      t.boolean :visible, null: false, default: "false", index: true
       t.integer :site_role, null: false, default: 0, index: true
       t.string :location
       t.text :description

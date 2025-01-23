@@ -81,5 +81,6 @@ gem "pundit", "~> 2.3"
 gem 'phlex-rails'
 gem 'phlex-variants'
 gem "clearance", "~> 2.9"
-
+gem "simple_form"
+gem "simple_form-tailwind"
 gem "hotwire-livereload", "~> 2.0", :group => :development

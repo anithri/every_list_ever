@@ -1,6 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+    let(:invisible_user) { build(:user, :invisible, :member) }
+    let(:visible_user) { build(:user, :visible, :member) }
+
   describe 'class features & validations' do
     subject { build(:member_user) }
 
@@ -24,6 +27,17 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'instance methods' do
+    describe '#invisible?' do
+      it "should return true if user.visible is false" do
+        expect(invisible_user).to be_invisible
+      end
+      it "should return false if user.visible is true" do
+        expect(visible_user).not_to be_invisible
+      end
+    end
+  end
 end
 
 # == Schema Information
@@ -43,7 +57,7 @@ end
 #  remember_token     :string(128)      not null
 #  settings           :json             not null
 #  site_role          :integer          default("guest"), not null
-#  visible            :string           default("false"), not null
+#  visible            :boolean          default(FALSE), not null
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
 #

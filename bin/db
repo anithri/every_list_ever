@@ -1,5 +1,6 @@
 #!/bin/bash -e
 
+
 fail_unless_env() {
   if [[ -z ${!1} ]];then
     echo "ERROR: $1 not present in ENV"
@@ -10,6 +11,12 @@ fail_unless_env() {
 check_env() {
   fail_unless_env POSTGRES_COMPOSE
   fail_unless_env POSTGRES_PASSWORD
+}
+
+delete_schema() {
+  if [[ -e db/schema.rb ]]; then
+    rm db/schema.rb 2> /dev/null || true
+  fi
 }
 
 usage () {
@@ -34,12 +41,11 @@ do_status () {
 }
 
 do_reset () {
-  rm db/schema.rb
+  delete_schema
   rails db:drop db:create db:migrate db:seed
 }
 
 do_setup() {
-  rm db/schema.rb
   rails db:create db:migrate db:seed
 }
 
