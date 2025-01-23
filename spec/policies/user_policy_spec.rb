@@ -15,14 +15,8 @@ RSpec.describe UserPolicy, type: :policy do
 
   it 'should allow admin users to return all users' do
     expected_count = User.count
-    warn "==============="
-    warn User.all.inspect
-    warn User.count
-    warn expected_count
     resolved = subject::Scope.new(admin, User).resolve
     resolved_count = resolved.count
-    warn resolved_count.inspect
-    warn "==============="
     expect(resolved_count).to be(expected_count)
   end
   it 'should allow guest users to return no users' do

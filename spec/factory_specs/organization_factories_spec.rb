@@ -1,4 +1,4 @@
-require_relative "../helper/factories_shared_examples"
+require_relative "./factories_shared_examples"
 
 org_factories = %i[ admin_org member_org ]
 org_owners = %i[ admin member ]
