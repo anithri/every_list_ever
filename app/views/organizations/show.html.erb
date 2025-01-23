@@ -5,10 +5,10 @@
     <% end %>
 
     <%= render @organization %>
-    <%= component :btn_bar do %>
-      <li><%= btn :edit, edit_organization_path(@organization), "Org",size: :sm, shape: :bar %></li>
-      <li><%= btn :back_to, organizations_path, "Orgs", size: :sm, shape: :bar %></li>
-      <li><%= btn :delete, edit_organization_path(@organization), "Org", size: :sm, shape: :bar %></li>
+    <%= component :btn_bar, :div do %>
+      <%= btn :edit, edit_organization_path(@organization), "Org", size: :md, shape: :bar %>
+      <%= btn :back_to, organizations_path, "Orgs", size: :md, shape: :bar %>
+      <%= btn :delete, organization_path(@organization), "Org", size: :md, shape: :bar %>
     <% end %>
   <% end %>
 <% end %>

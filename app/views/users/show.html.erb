@@ -2,9 +2,10 @@
   <%= component :pane, "#{@user.name}'s Profile", "Find me in app/views/users/show.html.erb" do %>
     <%= render @user %>
     <%# TODO ul not going full width and buttons not centering %>
-    <%= component :btn_bar do %>
-      <%= btn :edit, edit_user_path(@user), :user, size: :sm, shape: :bar, title: "Edit User" %>
-      <%= btn :delete, @user, :user, size: :sm, shape: :bar, title: 'Delete USer' %>
+    <%= component :btn_bar, :div do %>
+      <%= btn :edit, edit_user_path(@user), :user, size: :md, shape: :bar, title: "Edit User" %>
+      <%= btn :back_to, users_path, "Users", size: :md, shape: :bar, title: "Users" %>
+      <%= btn :delete, @user, :user, size: :md, shape: :bar, title: 'Delete USer' %>
     <% end %>
   <% end %>
 <% end %>

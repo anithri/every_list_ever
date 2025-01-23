@@ -30,10 +30,9 @@
     <%= form.label :visible %>
     <%= form.checkbox :visible, class: %>
   </div>
-  <%= component :btn_bar do %>
-
-    <li><%= form.submit class: submit_classes %></li>
-    <li><%= btn :show, organization_path(organization), "Org", size: :sm, shape: :bar %></li>
-    <li><%= btn :back_to, organizations_path, "Orgs", size: :sm, shape: :bar %></li>
+  <%= component :btn_bar, :div do %>
+    <%= form.submit class: submit_classes %>
+    <%= btn :show, organization_path(organization), "Org", size: :md, shape: :bar %>
+    <%= btn :back_to, organizations_path, "Orgs", size: :md, shape: :bar %>
   <% end %>
 <% end %>
