@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_22_012536) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_23_030311) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -24,6 +24,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_22_012536) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_organizations_on_name", unique: true
     t.index ["owner_id"], name: "index_organizations_on_owner_id"
+  end
+
+  create_table "role_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "order", default: 0, null: false
+    t.index ["name"], name: "index_role_types_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
