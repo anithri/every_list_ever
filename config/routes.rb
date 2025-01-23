@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     get "/guest" => "guests#home", as: :guests_home
     get "/sign_in" => "clearance/sessions#new", as: "sign_in"
 
-    get "/", to: redirect("/guest")
     get "/*", to: redirect("/sign_in")
   end
 
@@ -21,10 +20,11 @@ Rails.application.routes.draw do
     resources :organizations
     delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
     get "member" => "members#home", as: :members_home
-    get "/", to: redirect("/member")
   end
 
+
   get "up" => "rails/health#show", as: :rails_health_check
+  root to: "pages#root"
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

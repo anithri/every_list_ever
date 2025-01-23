@@ -11,6 +11,10 @@ RSpec.describe "GuestsController", type: :request do
           get guests_home_path
           expect(response).to have_http_status(:success)
         end
+        it "redirects '/' to guests_home" do
+          get root_unauth_path
+          expect(response).to redirect_to(guests_home_path)
+        end
       end
     end
   end

@@ -12,6 +12,10 @@ RSpec.describe "Members", type: :request do
         get members_home_path(as: admin)
         expect(response).to have_http_status(:ok)
       end
+      it "redirects '/' to members_home" do
+        get root_path(as: admin)
+        expect(response).to redirect_to(members_home_path)
+      end
     end
     context "when user is guest" do
       it "redirects to login" do
@@ -23,6 +27,11 @@ RSpec.describe "Members", type: :request do
       it "returns a successful response" do
         get members_home_path(as: member)
         expect(response).to have_http_status(:ok)
+      end
+
+      it "redirects '/' to members_home" do
+        get root_path(as: member)
+        expect(response).to redirect_to(members_home_path)
       end
     end
   end

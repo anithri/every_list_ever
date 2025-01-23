@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "resources :organization as admin user", type: :request do
+RSpec.describe "resources :organizations as admin organization", type: :request do
   let(:admin) { create(:admin_user) }
   let(:guest) { create(:guest_user) }
   let(:member) { create(:member_user) }
@@ -22,61 +22,65 @@ RSpec.describe "resources :organization as admin user", type: :request do
 
   describe "actions" do
     context "when user is admin" do
-      describe "GET #index /users" do
+      describe "GET #index /organizations" do
         it "renders a successful response" do
-          get users_path(as: admin)
+          get organizations_url(as: admin)
           expect(response).to be_successful
         end
       end
 
       describe "GET #show /organizations/show/1234" do
         it "renders a successful response" do
-          get organization_path(admin, as: admin)
+          get organization_url(admin, as: admin)
+          expect(response).to be_successful
+        end
+        it "renders a successful response" do
+          get organization_url(member, as: admin)
           expect(response).to be_successful
         end
       end
 
       describe "GET #edit /organizations/1234/edit" do
         it "renders a successful response as admin editing admin" do
-          get edit_organization_path(admin, as: admin)
+          get edit_organization_url(admin, as: admin)
           expect(response).to have_http_status(:ok)
         end
         it "renders a successful response as admin editing member" do
-          get edit_organization_path(member, as: admin)
+          get edit_organization_url(member, as: admin)
           expect(response).to have_http_status(:ok)
         end
       end
 
       describe "PATCH #update /organizations/1234" do
         context "with valid parameters" do
-          it "updates the requested user" do
-            patch organization_path(admin, as: admin), params: { organization: valid_attributes }
+          it "updates the requested organization" do
+            patch organization_url(admin, as: admin), params: { organization: valid_attributes }
             admin.reload
-            expect(response).to redirect_to organization_path(admin)
+            expect(response).to redirect_to organization_url(admin)
           end
-          it "redirects to the user" do
-            patch organization_path(admin, as: admin), params: { organization: valid_attributes }
+          it "redirects to the organization" do
+            patch organization_url(admin, as: admin), params: { organization: valid_attributes }
             expect(response).to redirect_to(organization_path(admin))
           end
         end
 
         context "with invalid parameters" do
           it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-            patch organization_path(admin, as: :admin), params: { organization: invalid_attributes }
+            patch organization_url(admin, as: :admin), params: { organization: invalid_attributes }
             expect(response).to have_http_status(:not_found)
           end
         end
       end
 
       describe "DELETE /destroy /organizations/1234" do
-        it "destroys the requested user" do
+        it "destroys the requested organization" do
           # TODO
-          delete organization_path(admin, as: :admin)
+          delete organization_url(admin, as: :admin)
           expect(response).to have_http_status(:not_found)
         end
 
-        it "redirects to the users list" do
-          delete organization_path(admin, as: :admin)
+        it "redirects to the organizations list" do
+          delete organization_url(admin, as: :admin)
           expect(response).to have_http_status(:not_found)
         end
       end
