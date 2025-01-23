@@ -3,7 +3,7 @@ RSpec.describe Organization, type: :model do
   describe "class features & validations" do
     subject { build(:organization) }
 
-    00a    it { should validate_presence_of(:owner) }
+    it { should validate_presence_of(:owner) }
     #
     # it { should validate_length_of(:name).is_at_least(8) }
     # it { should validate_uniqueness_of(:name) }
@@ -13,12 +13,11 @@ RSpec.describe Organization, type: :model do
     it { should have_many(:organization_members) }
     it { should have_many(:users) }
 
-    it {should have_many :administrators}
-    it {should have_many :contributors}
-    it {should have_many :editors}
-    it {should have_many :voters}
-    it {should have_many :viewers}
-
+    it { should have_many :administrators }
+    it { should have_many :contributors }
+    it { should have_many :editors }
+    it { should have_many :voters }
+    it { should have_many :viewers }
 
     # Scopes
     describe ".visible" do

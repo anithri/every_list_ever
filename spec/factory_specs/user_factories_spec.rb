@@ -1,5 +1,4 @@
-require "rails_helper"
-require_relative "./shared_examples"
+require_relative "./factories_shared_examples"
 
 user_factories = %i[ admin_user guest_user member_user ]
 user_roles = %i[ admin guest member ]
