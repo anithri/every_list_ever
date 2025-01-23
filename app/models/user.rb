@@ -1,29 +1,47 @@
 class User < ApplicationRecord
-  include Clearance::User
+  # scopes
+  scope :visible, -> { where(visible: true) }
+  scope :active, -> { where(deleted_at: nil) }
+  scope :confirmed, -> { where.not(confirmed_at: nil) }
+
+  # constants
+
+  # accessors
+
+  # enum
   enum :site_role, [ :guest, :member, :admin ], default: :guest
 
-  has_many :organizations, dependent: :destroy
+  # associations
+  has_many :organizations, class_name: "Organization", foreign_key: :owner_id, dependent: :destroy
+  has_many :organization_members, dependent: :destroy
+  has_many :memberships, through: :organization_members, source: :organization
+
+
   accepts_nested_attributes_for :organizations, allow_destroy: true
-
+  # validations
   normalizes :email, with: ->(e) { e.strip.downcase }
-
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP },
             presence: true, uniqueness: { case_sensitive: false }
   validates :settings, presence: true
   validates :site_role, presence: true, inclusion: { in: site_roles.keys }
 
-  scope :visible, -> { where(visible: true) }
-  scope :active, -> { where(deleted_at: nil) }
-  scope :confirmed, -> { where.not(confirmed_at: nil) }
+  # callbacks
+
+  # other macros
+  include Clearance::User
+
+  # instance methods
+  def invisible?
+    !visible?
+  end
+
+  # class methods
 
   def self.guest
     @@_guest ||= User.find_by(site_role: :guest)
   end
 
-  def invisible?
-    ! visible?
-  end
 end
 
 # == Schema Information

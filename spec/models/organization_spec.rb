@@ -12,6 +12,9 @@ RSpec.describe Organization, type: :model do
 
     # associations
     it { should belong_to(:owner).class_name('User') }
+    it { should have_many(:organization_members) }
+    it { should have_many(:users) }
+
 
     # Scopes
     describe ".visible" do

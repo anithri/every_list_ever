@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_01_23_030311) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_23_200336) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
+
+  create_table "organization_members", force: :cascade do |t|
+    t.bigint "organization_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "role", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["organization_id", "user_id"], name: "index_organization_members_on_organization_id_and_user_id", unique: true
+    t.index ["organization_id"], name: "index_organization_members_on_organization_id"
+    t.index ["user_id"], name: "index_organization_members_on_user_id"
+    t.check_constraint "role = ANY (ARRAY[10, 20, 30, 40, 90])", name: "role_values_check"
+  end
 
   create_table "organizations", force: :cascade do |t|
     t.string "name", null: false
@@ -24,12 +36,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_23_030311) do
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_organizations_on_name", unique: true
     t.index ["owner_id"], name: "index_organizations_on_owner_id"
-  end
-
-  create_table "role_types", force: :cascade do |t|
-    t.string "name", null: false
-    t.integer "order", default: 0, null: false
-    t.index ["name"], name: "index_role_types_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -60,5 +66,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_01_23_030311) do
     t.index ["visible"], name: "index_users_on_visible"
   end
 
+  add_foreign_key "organization_members", "organizations"
+  add_foreign_key "organization_members", "users"
   add_foreign_key "organizations", "users", column: "owner_id"
 end

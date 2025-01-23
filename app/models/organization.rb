@@ -1,11 +1,22 @@
 class Organization < ApplicationRecord
-  belongs_to :owner, class_name: 'User'
+  # scopes
+  scope :visible, -> { where(visible: true) }
 
-  # TODO , length: { in: 8..32 } removed for weird spect results
+  # Constants
+  # accessors
+  # enums
+  # associations
+  belongs_to :owner, class_name: "User"
+  has_many :organization_members
+  has_many :users, through: :organization_members, class_name: "User"
+
+  # validations
+  # TODO , length: { in: 8..32 } removed for weird spect esults
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :owner, presence: true
 
-  scope :visible, -> { where(visible: true) }
+  # callbacks
+
 end
 
 # == Schema Information
