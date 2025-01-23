@@ -14,8 +14,11 @@ class User < ApplicationRecord
   # associations
   has_many :organizations, class_name: "Organization", foreign_key: :owner_id, dependent: :destroy
   has_many :organization_members, dependent: :destroy
-  has_many :memberships, through: :organization_members, source: :organization
-
+  has_many :administrator_orgs, -> { where(organization_members: { role: :administrator }) }, through: :organization_members, source: :organization
+  has_many :contributor_orgs, -> { where(organization_members: { role: :contributor }) }, through: :organization_members, source: :organization
+  has_many :editor_orgs, -> { where(organization_members: { role: :editor }) }, through: :organization_members, source: :organization
+  has_many :voter_orgs, -> { where(organization_members: { role: :voter }) }, through: :organization_members, source: :organization
+  has_many :viewer_orgs, -> { where(organization_members: { role: :viewer }) }, through: :organization_members, source: :organization
 
   accepts_nested_attributes_for :organizations, allow_destroy: true
   # validations

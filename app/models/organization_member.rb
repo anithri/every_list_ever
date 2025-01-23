@@ -1,6 +1,10 @@
 class OrganizationMember < ApplicationRecord
   # scopes
-
+  scope :administrators, -> { where(role: :administrator) }
+  scope :contributors, -> { where(role: :contributor) }
+  scope :editors, -> { where(role: :editor) }
+  scope :voters, -> { where(role: :voter) }
+  scope :viewers, -> { where(role: :viewer) }
   # accessors
   # enum
   enum :role, { administrator: 10, editor: 20, contributor: 30, voter: 40, viewer: 90 }, default: :viewer

@@ -10,6 +10,12 @@ class Organization < ApplicationRecord
   has_many :organization_members
   has_many :users, through: :organization_members, class_name: "User"
 
+  has_many :administrators, -> { where(organization_members: { role: :administrator }) }, through: :organization_members, source: :user
+  has_many :contributors, -> { where(organization_members: { role: :contributor }) }, through: :organization_members, source: :user
+  has_many :editors, -> { where(organization_members: { role: :editor }) }, through: :organization_members, source: :user
+  has_many :voters, -> { where(organization_members: { role: :voter }) }, through: :organization_members, source: :user
+  has_many :viewers, -> { where(organization_members: { role: :viewer }) }, through: :organization_members, source: :user
+
   # validations
   # TODO , length: { in: 8..32 } removed for weird spect esults
   validates :name, presence: true, uniqueness: { case_sensitive: false }

@@ -14,6 +14,13 @@ RSpec.describe User, type: :model do
     it { is_expected.to validate_length_of(:name) }
     it { is_expected.to normalize(:email).from('BOB@example.com').to('bob@example.com') }
     it { is_expected.to define_enum_for(:site_role).with_values([ :guest, :member, :admin ]).with_default(:guest) }
+    it { is_expected.to have_many(:organization_members) }
+    it { is_expected.to have_many(:administrator_orgs) }
+    it { is_expected.to have_many(:contributor_orgs) }
+    it { is_expected.to have_many(:editor_orgs) }
+    it { is_expected.to have_many(:voter_orgs) }
+    it { is_expected.to have_many(:viewer_orgs) }
+
   end
 
   describe 'class methods' do
