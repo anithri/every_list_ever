@@ -20,7 +20,7 @@ RSpec.describe "Members", type: :request do
     context "when user is guest" do
       it "redirects to login" do
         get members_home_path
-        expect(response).to redirect_to sign_in_path
+        expect(response).to redirect_to new_sign_in_path
       end
     end
     context "when user is member" do

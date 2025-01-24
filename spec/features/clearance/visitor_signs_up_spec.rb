@@ -3,7 +3,7 @@ require "support/features/clearance_helpers"
 
 RSpec.xfeature "Visitor signs up" do
   scenario "by navigating to the page" do
-    visit sign_in_path
+    visit new_sign_in_path
 
     click_link I18n.t("sessions.form.sign_up")
 

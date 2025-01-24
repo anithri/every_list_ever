@@ -1,4 +1,4 @@
-class UsersController < AuthenticationController
+class UsersController < Clearance::UsersController
   before_action :set_user, only: %i[ show edit update destroy ]
   before_action :require_login, except: %i[ new create ]
   after_action :verify_authorized

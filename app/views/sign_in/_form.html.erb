@@ -1,0 +1,9 @@
+<%= simple_form_for model: SignIn.new, url: sign_in_path  do |f| %>
+  <%= f.email %>
+  <%= f.password %>
+
+  <%= component :btn_bar %>
+    <%= f.submit class: submit_classes(size: :md, shape: :bar) %>
+    <%= btn(:success, sign_up_path, "Sign Up", title: "Sign Up") if Clearance.configuration.allow_sign_up? %>
+    <%= btn(:secondary, forgot_password_path, "Forgot Password", title: "Forgot Password") if Clearance.configuration.allow_password_reset? %>
+<% end %>

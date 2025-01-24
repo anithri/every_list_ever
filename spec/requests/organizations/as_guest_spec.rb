@@ -8,21 +8,21 @@ RSpec.describe "/users as guest", type: :request do
       describe "GET #index /users" do
         it "redirects to sign in page" do
           get users_path
-          expect(response).to redirect_to sign_in_path
+          expect(response).to redirect_to new_sign_in_path
         end
       end
 
       describe "GET #show /users/show/1234" do
         it "redirects to sign in page" do
           get user_path(member)
-          expect(response).to redirect_to sign_in_path
+          expect(response).to redirect_to new_sign_in_path
         end
       end
 
       describe "GET #edit /users/1234/edit" do
         it "redirects to sign in page" do
           get edit_user_path(member)
-          expect(response).to redirect_to sign_in_path
+          expect(response).to redirect_to new_sign_in_path
         end
       end
 

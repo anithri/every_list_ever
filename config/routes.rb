@@ -1,37 +1,55 @@
 Rails.application.routes.draw do
+  # get /password/new forgot password form
+  # post /password forgot password target redirects to /new
+  # get /password/new change_password form
+  # put /password target for change_password
+
+  get "/forgot_password" => "password#new", as: "forgot_password"
+  get "/change_password" => "password#edit", as: "change_password"
+  put "/change_password" => "password#update", as: "update_password"
+
+  # resource :password, controller: "password", except: [ :destroy, :show ], path_names: { new: "sign_in" }
+  # resolve("Password") { [ :password ] }
+
+  # get /sign_in/new "login form"
+  # post /sign_in # "sign_in action"
+  # delete /sign_in # sign_in logout
+  # get "/sign_in" => "sign_in#new"
+  # post "/sign_in" => "sign_in#create"
+  # delete "/sign_in" => "sign_in#destroy"
+  resolve("SignIn") { [ :sign_in ] }
+  resource :sign_in, only: [ :new, :create, :destroy ], controller: :sign_in
+
   constraints Clearance::Constraints::SignedOut.new do
     resources :users, controller: "clearance/users", only: [ :create ] do
       resource :password,
                controller: "clearance/passwords",
                only: [ :edit, :update ]
     end
-    resource :session, controller: "clearance/sessions", only: [ :create ]
 
-    get "/sign_up" => "clearance/users#new", as: "sign_up"
+    get "/sign_up" => "clearance/users#new", as: :sign_up
+
     get "/guest" => "guests#home", as: :guests_home
-    get "/sign_in" => "clearance/sessions#new", as: "sign_in"
-
     get "/*", to: redirect("/sign_in")
   end
 
   constraints Clearance::Constraints::SignedIn.new do
-    resources :passwords, controller: "clearance/passwords", only: [ :create, :new ]
     resources :users, except: [ :new, :create ]
     resources :organizations
-    delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
+    # delete "/sign_in" => "clearance/sessions#destroy", as: "sign_in"
     get "member" => "members#home", as: :members_home
   end
 
-
-  get "up" => "rails/health#show", as: :rails_health_check
-  root to: "pages#root"
-
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.
+  get "up" => "rails/health#show", as: :rails_health_check
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
+
+  # root is last
+  root to: "pages#root"
 end
 
 # == Route Map
@@ -40,13 +58,13 @@ end
 #                                                 /assets                                                                                           Propshaft::Server
 #                                passwords POST   /passwords(.:format)                                                                              clearance/passwords#create
 #                             new_password GET    /passwords/new(.:format)                                                                          clearance/passwords#new
-#                                  session POST   /session(.:format)                                                                                clearance/sessions#create
+#                                  sign_in POST   /sign_in(.:format)                                                                                clearance/sessions#create
 #                       edit_user_password GET    /users/:user_id/password/edit(.:format)                                                           clearance/passwords#edit
 #                            user_password PATCH  /users/:user_id/password(.:format)                                                                clearance/passwords#update
 #                                          PUT    /users/:user_id/password(.:format)                                                                clearance/passwords#update
 #                                    users POST   /users(.:format)                                                                                  clearance/users#create
 #                                  sign_in GET    /sign_in(.:format)                                                                                clearance/sessions#new
-#                                 sign_out DELETE /sign_out(.:format)                                                                               clearance/sessions#destroy
+#                                 sign_in DELETE /sign_in(.:format)                                                                               clearance/sessions#destroy
 #                                  sign_up GET    /sign_up(.:format)                                                                                clearance/users#new
 #                                          GET    /users(.:format)                                                                                  users#index
 #                                          POST   /users(.:format)                                                                                  users#create
