@@ -5,6 +5,15 @@ application up and running.
 
 Things you may want to cover:
 
+## setup
+1. clone the repository & bundle
+2. copy the .env.sample to .env
+3. execute `bin/randomize all` to replace sensitive values in .env
+4. edit .env to give values to the DEVELOPER_ vars and any other values you want to change
+5. execute `bin/db start` to build a docker container with the values in .env
+6. execute `bin/db setup` to run "rails db:create db:migrate db:seed"
+7. if you use direnv, copy .envrc.sample to .envrc
+7. execute `bin/dev`
 ## tools
 * rails 8.0
 * ruby 3.3.7

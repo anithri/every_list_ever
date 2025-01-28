@@ -1,0 +1,3 @@
+dotenv ./.env
+export PROJECT_DIR=$(pwd) # this oeverwrite the value in .env if this is used
+PATH_add "${PROJECT_DIR}/bin"

@@ -150,6 +150,8 @@ GEM
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
+    gli (2.22.1)
+      ostruct
     globalid (1.2.1)
       activesupport (>= 6.1)
     hotwire-livereload (2.0.0)
@@ -460,6 +462,7 @@ DEPENDENCIES
   debug
   factory_bot_rails
   faker
+  gli (~> 2.22.1)
   hotwire-livereload (~> 2.0)
   importmap-rails
   jbuilder
