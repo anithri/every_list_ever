@@ -9,7 +9,49 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-.navbar-page-grid {
+.main-page-grid {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    grid-template-rows: var(--navbar-height) 1fr;
+    grid-gap: 0;
+}
+.main-grid-content {
+    grid-column: 2;
+    grid-row: 2;
+}
+.main-grid-sidebar {
+    grid-column: 1;
+    grid-row: 2;
+}
+.main-grid-navbar {
+    grid-column: span 2;
+    grid-row: 1;
+    margin: 0;
+}
+
+.navbar-grid {
+    width: 100%;
+    display: inline-grid;
+    grid-template-columns: var(--sidebar-width) auto repeat(3, 1fr);
+    grid-template-rows: auto;
+}
+.navbar-grid-controls {
+    grid-column: 1;
+    grid-row: 1;
+}
+.navbar-grid-logo {
+    grid-column: 2;
+    grid-row: 1;
+}
+.navbar-grid-left {
+    grid-column: 3;
+    grid-row: 1;
+}
+.navbar-grid-center {
+    grid-column: 4;
+    grid-row: 1;
+}
+.navbar-grid-right {
+    grid-column: 5;
+    grid-row: 1;
 }

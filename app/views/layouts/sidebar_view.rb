@@ -1,5 +1,6 @@
 # frozen_string_literal: true
-class NavBarComponent < ApplicationComponent
+
+class SidebarView < ApplicationView
   attr_reader :current_user, :is_guest
 
   def initialize(current_user)
@@ -7,13 +8,12 @@ class NavBarComponent < ApplicationComponent
   end
 
   def view_template
-    div class: "h-screen w-24 m-0 pt-4 bg-indigo-900 text-white shadow-lg text-center" do
+    div class: "h-screen m-0 pt-4 bg-main-page-bar text-main-page-bar-text shadow-lg text-center" do
       nav do
         header do
           ul(class: "flex flex-col items-center gap-6 text-xl") do
             li do
               h1(class: "text-amber-400") do
-                component(:icon, :scroll, class: 'fa-xl', title: 'EveryListEver')
               end
             end
             li do

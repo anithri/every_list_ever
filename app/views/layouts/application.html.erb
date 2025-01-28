@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" class="h-full w-full">
   <%= render "layouts/head" %>
-
-  <body class="bg-page m-0 p-0">
-    <div class="navbar-page-grid h-screen">
-      <aside class="bg-violet-300">
-        <%= component :nav_bar, Current.user || Current.guest %>
-       </aside>
+  <body class="bg-page m-0 p-0 h-full w-full main-page-grid">
       <% component :flash_messages, flash %>
-      <div class="h-full w-full">
+      <div class="main-grid-navbar w-full">
+        <%= layouts :navbar, current_user do %>
+          <%= render_breadcrumbs separator: " › " %>
+        <% end %>
+      </div>
+      <aside class="main-grid-sidebar h-full">
+        <%= layouts :sidebar, current_user %>
+       </aside>
+      <div class="h-full w-full main-grid-content bg-page">
         <%= yield %>
       </div>
-    </div>
   </body>
 </html>
