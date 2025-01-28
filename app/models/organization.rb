@@ -17,7 +17,7 @@ class Organization < ApplicationRecord
   has_many :viewers, -> { where(organization_members: { role: :viewer }) }, through: :organization_members, source: :user
 
   # validations
-  # TODO , length: { in: 8..32 } removed for weird spect esults
+  # TODO , length: { in: 8..32 } removed for weird spec results
   validates :name, presence: true, uniqueness: { case_sensitive: false }
   validates :owner, presence: true
 
