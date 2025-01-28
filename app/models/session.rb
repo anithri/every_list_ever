@@ -1,8 +1,6 @@
 
-class Session < ApplicationRecord
-  belongs_to :user
-
-  validates :user, presence: true
+class Session < ApplicationForm
+  attr_accessor :email, :password
 end
 
 # == Schema Information

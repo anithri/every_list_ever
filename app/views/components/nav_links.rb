@@ -28,11 +28,11 @@ module NavLinks
   end
 
   def login
-    btn :nav, new_sign_in_path, icon: :right_to_bracket, title: "Login"
+    btn :nav, sign_in_path, icon: :right_to_bracket, title: "Login"
   end
 
   def logout
-    btn :nav, sign_in_path, icon: :right_from_bracket, title: "Logout", data: DELETE_DATA
+    btn :nav, sign_out_path, icon: :right_from_bracket, title: "Logout", data: DELETE_DATA
   end
 
   def users

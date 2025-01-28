@@ -40,7 +40,7 @@ en:
   layouts:
     application:
       sign_in: Sign in
-      sign_in: Sign out
+      sign_out: Sign out
   passwords:
     create:
       description: You will receive an email within the next few minutes. It

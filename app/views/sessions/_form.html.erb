@@ -1,0 +1,11 @@
+<%= simple_form_for :session, url: session_path, method: :post do |f| %>
+
+  <%= f.input :email %>
+  <%= f.input :password %>
+
+  <%= component :btn_bar do %>
+    <%= f.submit "Sign In", class: submit_classes(size: :md, shape: :bar) %>
+    <%= btn(:primary, sign_up_path, "Sign Up",size: :md, shape: :bar, title: "Sign Up") if Clearance.configuration.allow_sign_up? %>
+    <%= btn(:secondary, new_password_path, "Forgot Password", size: :md, shape: :bar, title: "Forgot Password") if Clearance.configuration.allow_password_reset? %>
+    <% end %>
+<% end %>

@@ -1,24 +1,16 @@
 Rails.application.routes.draw do
-  # get /password/new forgot password form
-  # post /password forgot password target redirects to /new
-  # get /password/new change_password form
-  # put /password target for change_password
+  resources :passwords, controller: "clearance/passwords", only: [ :create, :new ]
+  resource :session, controller: "clearance/sessions", only: [ :create ]
 
-  get "/forgot_password" => "password#new", as: "forgot_password"
-  get "/change_password" => "password#edit", as: "change_password"
-  put "/change_password" => "password#update", as: "update_password"
+  resources :users, controller: "clearance/users", only: [ :create ] do
+    resource :password,
+             controller: "clearance/passwords",
+             only: [ :edit, :update ]
+  end
 
-  # resource :password, controller: "password", except: [ :destroy, :show ], path_names: { new: "sign_in" }
-  # resolve("Password") { [ :password ] }
-
-  # get /sign_in/new "login form"
-  # post /sign_in # "sign_in action"
-  # delete /sign_in # sign_in logout
-  # get "/sign_in" => "sign_in#new"
-  # post "/sign_in" => "sign_in#create"
-  # delete "/sign_in" => "sign_in#destroy"
-  resolve("SignIn") { [ :sign_in ] }
-  resource :sign_in, only: [ :new, :create, :destroy ], controller: :sign_in
+  get "/sign_in" => "clearance/sessions#new", as: "sign_in"
+  delete "/sign_out" => "clearance/sessions#destroy", as: "sign_out"
+  get "/sign_up" => "clearance/users#new", as: "sign_up"
 
   constraints Clearance::Constraints::SignedOut.new do
     resources :users, controller: "clearance/users", only: [ :create ] do
@@ -26,17 +18,12 @@ Rails.application.routes.draw do
                controller: "clearance/passwords",
                only: [ :edit, :update ]
     end
-
-    get "/sign_up" => "clearance/users#new", as: :sign_up
-
-    get "/guest" => "guests#home", as: :guests_home
-    get "/*", to: redirect("/sign_in")
+    get "guest" => "guests#home", as: :guests_home
   end
 
   constraints Clearance::Constraints::SignedIn.new do
     resources :users, except: [ :new, :create ]
     resources :organizations
-    # delete "/sign_in" => "clearance/sessions#destroy", as: "sign_in"
     get "member" => "members#home", as: :members_home
   end
 

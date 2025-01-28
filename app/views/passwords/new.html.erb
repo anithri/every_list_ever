@@ -1,0 +1,16 @@
+
+<%= component :main_flex do %>
+  <%= component :pane, "Reset Your Password" do %>
+    <div id="clearance" class="password-reset">
+      <p class="pb-4"><%= t(".description") %></p>
+      <%= simple_form_for :password, url: passwords_path do |f| %>
+
+        <%= f.input :email, label: "Email" %>
+
+        <%= component :btn_bar, :div do %>
+             <%= f.submit "Reset Password", class: submit_classes(color: :primary) %>
+        <% end %>
+      <% end %>
+    </div>
+  <% end %>
+<% end %>

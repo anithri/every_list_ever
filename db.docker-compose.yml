@@ -1,6 +1,6 @@
 ---
 services:
-  every_list_ever_pg_14:
+  every_list_ever_pg_15:
     image: postgres:${POSTGRES_VERSION}
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-${USER}}

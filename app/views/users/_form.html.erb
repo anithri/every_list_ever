@@ -9,7 +9,5 @@
   <%= component :btn_bar, :div do %>
     <%= f.submit class: submit_classes(size: :md, shape: :bar) %>
     <%= btn :back_to, organizations_path, "Users", size: :md, shape: :bar %>
-    <%= btn :delete, organization_path(@user), size: :md, shape: :bar %>
-
   <% end %>
 <% end %>

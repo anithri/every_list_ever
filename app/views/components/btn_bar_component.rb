@@ -2,14 +2,14 @@
 
 class BtnBarComponent < ApplicationComponent
   attr_reader :element
-  def initialize(element = 'ul', *args, **kwargs)
+  def initialize(element = :ul, *args, **kwargs)
     @element = element
   end
   def view_template(&content)
-    if element == 'ul'
-      ul class: "p-0 m-0 inline-flex rounded-lg", &content
+    if element == 'ul' || element == :ul
+      ul class: "p-0 m-0 w-full justify-center flex rounded-lg", &content
     else
-      div class: "p-0 m-0 inline-flex rounded-lg", &content
+      div class: "p-0 m-0 w-full justify-center flex rounded-lg justify-center", &content
     end
   end
 end

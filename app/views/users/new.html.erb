@@ -1,15 +1,8 @@
-<div id="clearance" class="sign-up">
-  <h2><%= t(".title") %></h2>
-
-  <%= form_for @user do |form| %>
-    <%= render partial: '/users/form', object: form %>
-
-    <div class="submit-field">
-      <%= form.submit %>
-    </div>
-
-    <div class="other-links">
-      <%= link_to t(".sign_in"), new_sign_in_path %>
+<%= component :main_flex do %>
+  <%= component :pane, "Reset Your Password" do %>
+    <div id="clearance" class="password-reset">
+      <p class="pb-4"><%= t(".description") %></p>
+     <%= render partial: "users/form", locals: {user: @user} %>
     </div>
   <% end %>
-</div>
+<% end %>

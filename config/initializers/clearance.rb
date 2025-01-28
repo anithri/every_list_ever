@@ -9,7 +9,7 @@ Clearance.configure do |config|
   config.password_strategy = Clearance::PasswordStrategies::BCrypt
   config.redirect_url = "/member"
   config.url_after_destroy = "/guest"
-  config.url_after_denied_access_when_signed_out = "/sign_in"
+  config.url_after_denied_access_when_signed_out = "/sign_ins/new"
   config.rotate_csrf_on_sign_in = true
   config.same_site = nil
   config.secure_cookie = Rails.configuration.force_ssl
