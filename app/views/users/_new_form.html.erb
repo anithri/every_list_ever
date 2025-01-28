@@ -1,0 +1,10 @@
+<%= simple_form_for @user, class: "contents" do |f| %>
+  <%= f.input :name %>
+  <%= f.input :email %>
+  <%= f.input :password %>
+  <%= f.input :password_confirmation, required: true %>
+  <%= component :btn_bar, :div do %>
+    <%= f.submit class: submit_classes(size: :md, shape: :bar) %>
+    <%= btn :back_to, sign_in_path, "Sign In", size: :md, shape: :bar %>
+  <% end %>
+<% end %>
