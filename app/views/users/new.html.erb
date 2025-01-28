@@ -1,8 +1,5 @@
 <%= component :main_flex do %>
-  <%= component :pane, "Reset Your Password" do %>
-    <div id="clearance" class="password-reset">
-      <p class="pb-4"><%= t(".description") %></p>
-     <%= render partial: "users/form", locals: {user: @user} %>
-    </div>
+  <%= component :pane, "Sign Up User" do %>
+    <%= render 'users/new_form', locals: {user: @user} %>
   <% end %>
 <% end %>

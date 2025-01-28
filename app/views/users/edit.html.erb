@@ -1,5 +1,5 @@
 <%= component :main_flex do %>
   <%= component :pane, "Edit #{@user.name}'s Profile", "Find me in app/views/users/edit.html.erb" do %>
-    <%= render "form", user: @user %>
+    <%= render 'edit_form', locals: {user: @user} %>
   <% end %>
 <% end %>

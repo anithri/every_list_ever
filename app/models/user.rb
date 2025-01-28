@@ -9,7 +9,7 @@ class User < ApplicationRecord
   # accessors
 
   # enum
-  enum :site_role, [ :guest, :member, :admin ], default: :guest
+  enum :site_role, [ :guest, :unconfirmed, :member, :admin ], default: :guest
 
   # associations
   has_many :organizations, class_name: "Organization", foreign_key: :owner_id, dependent: :destroy
@@ -28,6 +28,7 @@ class User < ApplicationRecord
             presence: true, uniqueness: { case_sensitive: false }
   validates :settings, presence: true
   validates :site_role, presence: true, inclusion: { in: site_roles.keys }
+  validates_confirmation_of :password, if: :password_required?
 
   # callbacks
 
@@ -39,12 +40,16 @@ class User < ApplicationRecord
     !visible?
   end
 
+  def password_required?
+    return true if new_record?
+    password.present? || password_confirmation.present?
+  end
+
   # class methods
 
   def self.guest
     @@_guest ||= User.find_by(site_role: :guest)
   end
-
 end
 
 # == Schema Information

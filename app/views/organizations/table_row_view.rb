@@ -29,7 +29,7 @@ module Organizations
     end
 
     def owner?(org)
-      admin? || current_user == org.user
+      admin? || current_user == org.owner
     end
 
     def admin?
