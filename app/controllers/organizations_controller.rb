@@ -1,7 +1,9 @@
 class OrganizationsController < AuthenticationController
   before_action :require_login
   before_action :set_organization, only: %i[ show edit update destroy ]
+  add_breadcrumb "Every List Ever", :root_path
 
+  add_breadcrumb "Organizations", :organizations_path
   # GET /organizations or /organizations.json
   def index
     authorize current_user, :index?
@@ -11,17 +13,21 @@ class OrganizationsController < AuthenticationController
   # GET /organizations/1 or /organizations/1.json
   def show
     authorize @organization
+    add_breadcrumb @organization.name, @organization
   end
 
   # GET /organizations/new
   def new
     @organization = Organization.new
     authorize @organization
+    add_breadcrumb "New Org", :new_organization_path
   end
 
   # GET /organizations/1/edit
   def edit
     authorize @organization
+    add_breadcrumb @organization.name, @organization
+    add_breadcrumb "Edit", :edit_organization_path
   end
 
   # POST /organizations or /organizations.json

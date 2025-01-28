@@ -27,6 +27,9 @@
     --color-secondary-text: var(--color-neutral-800);
     --color-page: var(--color-stone-800);
 
+    --color-reading-surface: var(--color-neutral-100);
+    --color-reading-type: var(--color-neutral-800);
+
     --color-main-page-bar: var(--color-purple-950);
     --color-main-page-bar-text: var(--color-neutral-200);
 

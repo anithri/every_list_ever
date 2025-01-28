@@ -20,7 +20,6 @@ class NavbarView < ApplicationView
       end
       div(class: "navbar-grid-center text-center") { span { "woot" } }
       div(class: "navbar-grid-right text-right pr-2") { span { "prime" } }
-
     end
   end
 end

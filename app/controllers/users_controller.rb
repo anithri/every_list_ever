@@ -2,7 +2,8 @@ class UsersController < Clearance::UsersController
   include Pundit::Authorization
 
   before_action :set_user, only: %i[ show edit update destroy ]
-
+  add_breadcrumb "Every List Ever", :root_path
+  add_breadcrumb "Users", :users_path
   # GET /users or /users.json
   def index
     authorize User
@@ -12,11 +13,14 @@ class UsersController < Clearance::UsersController
   # GET /users/1 or /users/1.json
   def show
     authorize @user
+    add_breadcrumb @user.name, @user
   end
 
   # GET /users/1/edit
   def edit
     authorize @user
+    add_breadcrumb @user.name, @user
+    add_breadcrumb "Edit", edit_user_path(@user)
   end
 
   # PATCH/PUT /users/1 or /users/1.json

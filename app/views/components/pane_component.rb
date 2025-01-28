@@ -15,7 +15,7 @@ class PaneComponent < ApplicationComponent
       header(class: "px-1 py-1 bg-indigo-800 text-white rounded-t-sm") do
         title
         subtitle
-      div class: "h-full w-full p-2 bg-reading-surface-light text-reading-type-dark rounded-b-sm", &content
+        div class: "h-full w-full p-2 bg-reading-surface text-reading-type rounded-b-sm", &content
       end
     end
   end
@@ -31,8 +31,8 @@ class PaneComponent < ApplicationComponent
     end
   end
 
-
   private
+
   def article_classes
     klasses = "bg-indigo-200 border-1 border-indigo-900 flex-auto grow-0 rounded-md container-sm"
     if classes
