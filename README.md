@@ -7,13 +7,14 @@ Things you may want to cover:
 
 ## setup
 1. clone the repository & bundle
-2. copy the .env.sample to .env
-3. execute `bin/randomize all` to replace sensitive values in .env
-4. edit .env to give values to the DEVELOPER_ vars and any other values you want to change
+2. run bin/gen_env to generate .env
+3. edit .env for any other values you want to change
+4. run bin/gen_db_compose to generate the db.docker-compose.yml file
 5. execute `bin/db start` to build a docker container with the values in .env
 6. execute `bin/db setup` to run "rails db:create db:migrate db:seed"
 7. if you use direnv, copy .envrc.sample to .envrc
-7. execute `bin/dev`
+8. execute `bin/dev`
+
 ## tools
 * rails 8.0
 * ruby 3.3.7
@@ -23,14 +24,6 @@ Things you may want to cover:
 * pundit authorization
 * simple-form
 * tailwind
-
-## setup
-* clone and bundle
-* copy orig.env to .env and assign appropriate values
-  * If using your own database use those values, these are used in config/database.yml
-* use `bin/db start` to build and start a postgres container using values from .env
-* use  `bin/db setup` to create db, migrate tables, and seed data
-* use `dev` to start the server and tailwind processes 
 
 ## Models
 * User - people
@@ -64,6 +57,8 @@ Things you may want to cover:
     - [x] Organization model
     - [x] OrganizationMember model
     - [x] Update Organization Policy to account for organization roles
+    - [ ] Extend Member Home to show more information
+    - [ ] Extend Guest Home to show more information
     - [ ] Add list of members and roles in organization#show
     - [ ] Add list of organizations and roles in user#show
     - [ ] RankedList model

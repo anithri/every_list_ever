@@ -1,5 +1,0 @@
-#!/bin/env ruby
-# TODO is there a better way to do this?
-require_relative  '../lib/randomize_cli'
-
-exit RandomizeCli::App.run(ARGV)

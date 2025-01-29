@@ -1,7 +1,7 @@
 # frozen_string_literal: true
+require 'faker'
 
-module RandomizeCli
-  class Utility
+module RandomEnv
     TOKEN_CHARS = [ 2, 3, 4, 6, 7, 9, ("a".."z").to_a, ("A".."Z").to_a ].flatten.freeze
 
     def self.token(new_password = nil, length = 16)
@@ -27,4 +27,4 @@ module RandomizeCli
       `rails secret`.strip
     end
   end
-end
+

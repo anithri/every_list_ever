@@ -58,7 +58,7 @@ group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
   gem "letter_opener"
-  gem "gli", "~> 2.22.1", require: false
+  gem 'highline', require: false
 end
 
 group :test do
