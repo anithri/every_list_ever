@@ -6,6 +6,6 @@ class MembersController < AuthenticationController
   def home
     authorize :members_home, :home?
     add_breadcrumb "Members Dashboard", :members_home_path
-    @orgs = OrganizationMember.where(user: current_user).includes(:organization)
+    @memberships = OrganizationMember.where(user: current_user).includes(:organization)
   end
 end

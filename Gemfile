@@ -86,3 +86,4 @@ gem "simple_form"
 gem "simple_form-tailwind"
 gem "hotwire-livereload", "~> 2.0", :group => :development
 gem "breadcrumbs_on_rails", "~> 4.1.0"
+gem 'tailwind_merge', '~> 0.16.0'

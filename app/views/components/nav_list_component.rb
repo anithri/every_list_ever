@@ -2,6 +2,7 @@
 
 class NavListComponent < ApplicationComponent
   include NavLinks
+  include BtnHelper
 
   def initialize(current_user)
     @current_user = current_user
