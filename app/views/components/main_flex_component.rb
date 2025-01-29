@@ -3,8 +3,8 @@
 class MainFlexComponent < ApplicationComponent
   attr_reader :direction, :classes, :html_opts
 
-  def initialize(is_column: true, **html_opts)
-    @direction = is_column ? "flex-col" : "flex-row"
+  def initialize(is_row= false, **html_opts)
+    @direction = is_row ? "flex-row" : "flex-col"
     @classes = html_opts.delete(:class)
     @html_opts = html_opts
   end

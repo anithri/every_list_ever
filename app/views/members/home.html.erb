@@ -1,5 +1,5 @@
 <%= component :main_flex do %>
   <%= component :pane, "Organization Memberships" do %>
-     <%= membership :by_user, @orgs, current_user %>
+     <%= membership :by_org, @memberships, current_user %>
   <% end %>
 <% end %>

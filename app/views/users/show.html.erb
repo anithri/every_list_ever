@@ -1,5 +1,5 @@
-<%= component :main_flex do %>
-  <%= component :pane, "#{@user.name}'s Profile", "Find me in app/views/users/show.html.erb" do %>
+<%= component :main_flex, :col do %>
+  <%= component :pane, "#{@user.name}'s Profile" do %>
     <%= render @user %>
     <%# TODO ul not going full width and buttons not centering %>
     <%= component :btn_bar, :div do %>
@@ -7,5 +7,8 @@
       <%= btn :back_to, users_path, "Users", size: :md, shape: :bar, title: "Users" %>
       <%= btn :delete, @user, :user, size: :md, shape: :bar, title: 'Delete USer' %>
     <% end %>
+  <% end %>
+  <%= component :pane, "Organization Memberships" do %>
+    <%= membership :by_user, @memberships, current_user %>
   <% end %>
 <% end %>

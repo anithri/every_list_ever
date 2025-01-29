@@ -5,7 +5,7 @@ module MembershipComponents
     include Phlex::Rails::Helpers::Routes
     include CardHelper
     def view_template
-      div class: "" do
+      div class: "flex flex-col gap-2" do
         memberships.each do |membership|
           link_to organization_path(membership.organization) do
             card :info_aside, membership.user.name, membership.role do

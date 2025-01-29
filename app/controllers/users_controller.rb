@@ -14,6 +14,7 @@ class UsersController < Clearance::UsersController
   def show
     authorize @user
     add_breadcrumb @user.name, @user
+    @memberships = @user.organization_members.includes(:organization)
   end
 
   # GET /users/1/edit
